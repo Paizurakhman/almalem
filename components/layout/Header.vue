@@ -29,10 +29,16 @@
 <!--                <nuxt-link to="/auth/register">Регистрация</nuxt-link>-->
 <!--              </div>-->
             </div>
-            <div class="lang">
-              <img src="~/assets/icon/main/flag_ru.svg" alt="">
-              <span>Русский</span>
-              <img src="~/assets/icon/main/arrow.svg" alt="">
+            <div class="language">
+              <div
+                class="lang"
+                @click="languageNavAction"
+              >
+                <img :src="currentLanguage.src" alt="">
+                <span>{{currentLanguage.type}}</span>
+                <img src="~/assets/icon/main/arrow.svg" alt="">
+              </div>
+              <layout-language-nav @changeLang="changeLanguage" v-if="getLanguageNav" :language="lang"/>
             </div>
           </div>
         </div>
@@ -81,9 +87,15 @@
                   <!--                <nuxt-link to="/auth/register">Регистрация</nuxt-link>-->
                   <!--              </div>-->
                 </div>
-                <div class="lang">
-                  <img src="~/assets/icon/main/flag_ru.svg" alt="">
-                  <img src="~/assets/icon/main/arrow.svg" alt="">
+                <div class="language">
+                  <div
+                    class="lang"
+                    @click="languageNavAction"
+                  >
+                    <img :src="currentLanguage.src" alt="">
+                    <img src="~/assets/icon/main/arrow.svg" alt="">
+                  </div>
+                  <layout-language-nav @changeLang="changeLanguage" v-if="getLanguageNav" :language="lang"/>
                 </div>
               </div>
             </div>
@@ -101,7 +113,7 @@
             <div class="mobile_navbar">
                 <div class="col_6 w_mob_logo">
                   <div class="burger">
-                    <img src="~/assets/icon/burger_icon.svg" alt="">
+                    <img @click="mobileNavAction" src="~/assets/icon/burger_icon.svg" alt="">
                   </div>
                   <div class="logo">
                     <img src="~/assets/logo.svg" alt="">
@@ -120,6 +132,9 @@
                 </div>
             </div>
           </div>
+          <transition name="mob_nav">
+            <layout-mobile-nav v-if="getMobileNav"/>
+          </transition>
         </div>
       </div>
     </div>
@@ -132,9 +147,9 @@
               <nuxt-link to="/">ГЛАВНАЯ</nuxt-link>
             </li>
             <li>
-              <div class="drop_down" @click="categoryNav">
+              <div class="drop_down" @click="showAction">
                 <span>КАТАЛОГ ТОВАРОВ</span>
-                <img src="~/assets/icon/main/black_arrow.svg" alt="">
+                <img :class="{ active_dropdown: showNav}" src="~/assets/icon/main/black_arrow.svg" alt="">
               </div>
             </li>
             <li>
@@ -159,15 +174,57 @@
         </div>
       </div>
     </nav>
+    <div class="nav_category">
+      <transition name="category">
+        <layout-category-nav v-if="showNav" />
+      </transition>
+    </div>
   </header>
 </template>
 
 <script>
+import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: "Header",
-  methods: {
-    categoryNav () {
+  props: ['lang'],
+  data() {
+    return {
+      currentLang: this.lang[0]
+    }
+  },
+  watch: {
+    $route(to, from) {
 
+    }
+  },
+  methods: {
+    ...mapActions([
+      'showAction',
+      'languageNavAction',
+      'mobileNavAction'
+    ]),
+    changeLanguage (value) {
+      this.currentLang = value
+    }
+  },
+  computed: {
+    ...mapState([
+      'showNav'
+    ]),
+    ...mapGetters([
+      'getLanguageNav',
+      'getMobileNav'
+    ]),
+    currentLanguage() {
+      return this.currentLang
+    }
+  },
+  updated() {
+    if (this.getMobileNav) {
+      document.body.style.overflowY = 'hidden'
+    }
+    else  {
+      document.body.style.overflowY = 'auto'
     }
   }
 }

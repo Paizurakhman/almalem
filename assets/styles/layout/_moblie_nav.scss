@@ -1,0 +1,43 @@
+.mobile_nav {
+  background: #ffffff;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  max-height: 78vh;
+  height: 100%;
+  top: 26%;
+  left: 0;
+  padding: 10px 20px 30px;
+  overflow-y: scroll;
+  .catalog_title {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+  }
+  .nav_links {
+    .drop_down {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    ul {
+      list-style-type: none;
+      li {
+        margin: 20px 0;
+        a {
+          font-size: 14px;
+          font-weight: 500;
+          color: #000000;
+          &.nuxt-link-exact-active {
+            color: #58357B;
+          }
+        }
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: #000000;
+        }
+      }
+    }
+  }
+}

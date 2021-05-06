@@ -96,6 +96,7 @@ header {
     }
   }
   .mobile_header {
+    position: relative;
     .mobile_header_top {
       display: flex;
       justify-content: space-between;
@@ -154,11 +155,21 @@ nav {
         font-weight: 500;
         margin-right: 10px;
       }
-      .drop_down {
-        cursor: pointer;
-      }
     }
   }
+}
+.language {
+  position: relative;
+}
+.nav_category {
+  position: relative;
+}
+
+.mob_nav-enter, .mob_nav-leave-to {
+  transform: translateX(-100%);
+}
+.mob_nav-enter-active, .mob_nav-leave-active {
+  transition: all 0.5s ease;
 }
 @media screen and (max-width: 1024px) {
   nav {
