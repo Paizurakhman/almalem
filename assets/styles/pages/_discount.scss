@@ -1,0 +1,14 @@
+.product_card_item {
+  padding: 50px 0 0;
+  .product_item {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .product_card_item {
+    .product_card {
+      margin: 15px 0;
+    }
+  }
+}

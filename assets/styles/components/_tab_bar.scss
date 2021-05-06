@@ -1,0 +1,30 @@
+.tab_bar {
+  border: 1px solid #757575;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+  }
+  .view_action {
+    svg {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+  .tab_bar_text {
+    margin-left: 50px;
+  }
+  .tab_bar_filter {
+    margin-left: auto;
+    display: flex;
+    .sort_action {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+  }
+}
+.activeTab{
+  filter: invert(48%) sepia(16%) saturate(2282%) hue-rotate(192deg) brightness(86%) contrast(85%);
+}

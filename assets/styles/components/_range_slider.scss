@@ -1,0 +1,17 @@
+.slider-dot {
+  background: #59367C !important;
+  width: 20px !important;
+  height: 20px !important;
+  top: -7px !important;
+}
+.slider-dot::before {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  content: "";
+  width: 10px !important;
+  height: 10px !important;
+  display: block;
+  border-radius: 50%;
+  background: #ffffff;
+}

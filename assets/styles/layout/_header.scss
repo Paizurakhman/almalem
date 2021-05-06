@@ -1,0 +1,188 @@
+header {
+  .header {
+    padding: 20px 0 30px;
+    background: linear-gradient(90deg, #58357b 0%, #586dcd 100%);
+    .header_top {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      span, p {
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .social_networks {
+        img {
+          margin-right: 20px;
+          cursor: pointer;
+        }
+      }
+      .contact {
+        display: flex;
+        align-items: center;
+        margin-left: 10%;
+        color: #ffffff;
+        .city {
+          margin-right: 30px;
+          cursor: pointer;
+        }
+        .phone {
+          cursor: pointer;
+        }
+      }
+      .top_actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        color: #ffffff;
+        .my_account {
+          margin-right: 20px;
+          padding-right: 20px;
+          border-right: 2px solid #ffffff;
+          a {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+        .lang {
+          cursor: pointer;
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+    .header_center {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .logo {
+        margin-left: 40px;
+      }
+      .search {
+        display: flex;
+        input {
+          border: transparent;
+          border-radius: 5px;
+          padding: 18px 12px;
+          width: 490px;
+          outline: transparent;
+        }
+        button {
+          border: transparent;
+          background: #000000;
+          padding: 18px 24px;
+          border-radius: 5px;
+          margin-left: -10px;
+        }
+      }
+      .center_actions {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+        .like {
+          margin-right: 30px;
+          cursor: pointer;
+        }
+        .basket {
+          cursor: pointer;
+        }
+        p{
+          font-weight: 500;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .mobile_header {
+    .mobile_header_top {
+      display: flex;
+      justify-content: space-between;
+      .social_networks {
+        img {
+          margin-right: 15px;
+        }
+      }
+      .top_actions {
+        display: flex;
+        .lang {
+          margin-left: 20px;
+        }
+      }
+    }
+    .mobile_header_center {
+      margin: 20px 0;
+      .contact {
+        display: flex;
+        justify-content: space-between;
+        color: #ffffff;
+        padding: 10px 0;
+        border-bottom: 1px solid #ffffff;
+      }
+    }
+    .mobile_navbar{
+      display: flex;
+      justify-content: space-between;
+      .col_6 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+nav {
+  padding: 20px 0;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  .links ul{
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    li {
+      margin-right: auto;
+      a {
+        width: 100%;
+        color: #000000;
+        font-weight: 500;
+      }
+      span {
+        color: #000000;
+        font-weight: 500;
+        margin-right: 10px;
+      }
+      .drop_down {
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  nav {
+    .links ul {
+      justify-content: space-between;
+      li {
+        margin-right: 0;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px){
+  .w_mob {
+    width: 25%;
+  }
+  .w_mob_logo {
+    width: 20%;
+  }
+}
+@media screen and (max-width: 576px){
+  .w_mob {
+    width: 40%;
+  }
+  .w_mob_logo {
+    width: 35%;
+  }
+}

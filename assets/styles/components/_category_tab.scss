@@ -1,0 +1,37 @@
+.category_title {
+  margin: 20px 0;
+}
+.category_tab {
+  background: #F5F5F5;
+  padding: 0 20px 40px;
+  .category_content {
+    padding: 20px 0;
+    border-bottom: 1px solid #C9C9C9;
+  }
+}
+
+.catalog_main_top {
+  background: #F5F5F5;
+  position: relative;
+  margin-bottom: 50px;
+  .catalog_text {
+    padding: 40px 60px;
+    p{
+      &:nth-child(2) {
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+      &:nth-child(3) {
+        font-size: 18px;
+      }
+    }
+  }
+  img {
+    right: 30%;
+    position: absolute;
+    width: 120%;
+    height: 100%;
+    //object-fit: cover;
+  }
+
+}

@@ -1,0 +1,86 @@
+.slider_slick {
+  margin: 40px 0;
+}
+.card_carousel {
+  margin: 0 20px;
+}
+
+.product_card {
+  //margin: 0 20px;
+  border: 1px solid #878787;
+  border-radius: 5px;
+  padding: 10px 20px;
+  &:hover {
+    opacity: 1;
+  }
+  .product_title {
+    color: #586DCD;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .card_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main_img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .product_card_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      margin-bottom: 0;
+      color: #000000;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
+}
+
+.slider_component.slick-slider {
+  margin: 0 -20px;
+
+  .slick-arrow {
+    width: 25px;
+    height: 12px;
+    z-index: 10;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .slick-prev {
+    background-size: cover;
+    background-image: url("~/assets/icon/next.svg");
+    transform: rotate(180deg);
+  }
+
+  .slick-next {
+    background-size: cover;
+    background-image: url("~/assets/icon/next.svg");
+  }
+
+  .slick-disabled {
+
+  }
+}
+.company_name p {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 1024px) {
+  .product_card {
+    margin: 0 10px;
+  }
+  .slider_component.slick-slider {
+    margin: 0 -9px !important;
+  }
+}

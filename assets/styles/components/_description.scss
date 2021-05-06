@@ -1,0 +1,53 @@
+.description {
+  background: #ffffff;
+  padding: 0 20px;
+  .description_action {
+    text-align: center;
+    border-bottom: 1px solid #757575;
+  }
+  .description_text {
+    padding: 30px;
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      color: #757575;
+    }
+  }
+  .review1_text {
+    border: 1px solid #757575;
+    padding: 30px;
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      color: #757575;
+    }
+  }
+  .review_header {
+    background: #EFEFEF;
+    border: 1px solid #757575;
+    border-bottom: 0;
+    p {
+      color: #757575;
+      margin-bottom: 0;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 15px 40px;
+    }
+    .ta_right {
+      text-align: right;
+      border-left: 1px solid #757575;
+    }
+  }
+  .review_text {
+    margin: 30px 0;
+    padding-bottom: 20px;
+    .contacts_title {
+      border-bottom: 0;
+      p {
+        font-size: 27px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+

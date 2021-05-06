@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap');
+
+// pages
+@import "pages/index";
+@import "pages/contacts";
+@import "pages/discount";
+@import "pages/product_detail";
+@import "pages/brands";
+
+// layout
+@import "layout/header";
+@import "layout/footer";
+
+// base
+@import "base/typography";
+@import "base/base";
+
+// component
+@import "components/catalog_option";
+@import "components/slider";
+@import "components/other_categories";
+@import "components/modal";
+@import "components/tab_bar";
+@import "components/col_card";
+@import "components/category_tab";
+@import "components/description";
+@import "components/range_slider";
+@import "components/category_nav";
+
+// buttons
+@import "components/buttons";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+body {
+  background: #fff;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.container {
+  max-width: 1200px;
+}
