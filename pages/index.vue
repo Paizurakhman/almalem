@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data: () => ({
     companies: [
@@ -119,7 +120,12 @@ export default {
         src: require('~/assets/icon/companies/activeden.svg')
       },
     ]
-  })
+  }),
+  computed: {
+    ...mapState([
+      'showNav'
+    ])
+  }
 }
 </script>
 
