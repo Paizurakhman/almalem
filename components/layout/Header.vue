@@ -141,7 +141,7 @@
               <nuxt-link to="/oplata-i-dostavka">ОПЛАТА И ДОСТАВКА</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/novinki">НОВИНКИ</nuxt-link>
+              <nuxt-link to="/">НОВИНКИ</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/discounts">СКИДКИ</nuxt-link>

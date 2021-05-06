@@ -57,10 +57,10 @@
                         <nuxt-link to="/brands">Бренды</nuxt-link>
                       </li>
                       <li>
-                        <nuxt-link to="/novinki">Новинки</nuxt-link>
+                        <nuxt-link to="/">Новинки</nuxt-link>
                       </li>
                       <li>
-                        <nuxt-link to="/skidki">Скидки</nuxt-link>
+                        <nuxt-link to="/">Скидки</nuxt-link>
                       </li>
                     </ul>
                   </div>

@@ -1,24 +1,28 @@
 {
-  "name": "almalem",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
-  },
-  "dependencies": {
-    "@nuxtjs/axios": "^5.13.1",
-    "core-js": "^3.9.1",
-    "nuxt": "^2.15.3",
-    "vue-client-only": "^2.0.0",
-    "vue-no-ssr": "^1.1.1",
-    "vue-range-component": "^1.0.3",
-    "vue-slick-carousel": "^1.0.6",
-    "vue-star-rating": "^1.7.0",
-    "vue-the-mask": "^0.11.1",
-    "vuex": "^3.6.2"
-  },
-  "devDependencies": {}
+    "name": "almalem",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate"
+    },
+    "dependencies": {
+        "@nuxtjs/axios": "^5.13.1",
+        "core-js": "^3.9.1",
+        "nuxt": "^2.15.3",
+        "vue-client-only": "^2.0.0",
+        "vue-no-ssr": "^1.1.1",
+        "vue-range-component": "^1.0.3",
+        "vue-slick-carousel": "^1.0.6",
+        "vue-star-rating": "^1.7.0",
+        "vue-the-mask": "^0.11.1",
+        "vuex": "^3.6.2"
+    },
+    "devDependencies": {
+        "fibers": "^5.0.0",
+        "sass": "^1.32.12",
+        "sass-loader": "^10.1.1"
+    }
 }

@@ -67,12 +67,3 @@ export default {
   name: "order_card"
 }
 </script>
-
-<style lang="scss" scoped>
-  .column_title {
-    padding: 15px 0 0;
-  }
-  .column_text {
-    padding: 20px 0 50px;
-  }
-</style>
