@@ -4,8 +4,16 @@
         <div class="page_title">
           <p>{{ title }}</p>
         </div>
+        <div class="carousel_arrows">
+          <button class="prev_btn" @click="prevSlide">
+            <span><img src="~/assets/icon/prev_slider.svg" alt=""></span>
+          </button>
+          <button class="next_btn" @click="nextSlide">
+            <span><img src="~/assets/icon/next.svg" alt=""></span>
+          </button>
+        </div>
       </div>
-      <VueSlickCarousel class="slider_component" v-bind="settings">
+      <VueSlickCarousel class="slider_component" v-bind="settings" ref="carousel_products">
         <nuxt-link to="/" v-for="s in 6" :key="s">
           <product-card class="card_carousel" />
         </nuxt-link>
@@ -20,7 +28,7 @@ export default {
   data: () => ({
     settings: {
       "dots": false,
-      "arrows": true,
+      "arrows": false,
       "infinite": false,
       "speed": 500,
       "slidesToShow": 4,
@@ -54,7 +62,15 @@ export default {
         }
       ]
     }
-  })
+  }),
+  methods: {
+    prevSlide() {
+      this.$refs.carousel_products.prev()
+    },
+    nextSlide() {
+      this.$refs.carousel_products.next()
+    },
+  },
 }
 </script>
 

@@ -9,41 +9,41 @@
       <div class="p_title">
         <p>История заказов</p>
       </div>
-      <div class="history_content">
-        <order_card />
-      </div>
       <div class="table_wrapper">
         <table class="table table-bordered table-responsive-sm">
           <thead>
             <tr>
               <th scope="col" width="190px">Номер заказа</th>
               <th scope="col" width="440px">Клиент</th>
-              <th scope="col" width="190px">Lt</th>
-              <th scope="col" width="190px">Handle</th>
-              <th scope="col" width="190px">Handle</th>
+              <th scope="col" width="190px">Статус</th>
+              <th scope="col" width="190px">Цена</th>
+              <th scope="col" width="190px">Дата</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr height="100px">
               <th scope="row" width="190px">324234</th>
               <td width="440px">Имя Фамилия</td>
-              <td width="190px">Oto</td>
-              <td width="190px">@mdo</td>
-              <td width="190px">@mdo</td>
+              <td width="190px">Обрабатывается</td>
+              <td width="190px">1440 ₸</td>
+              <td width="190px">
+                <div class="data">
+                  <p>12/03/2021</p>
+                  <img src="~/assets/icon/show.svg" alt="">
+                </div>
+              </td>
             </tr>
-            <tr>
+            <tr height="100px">
               <th scope="row" width="190px">324234</th>
               <td width="440px">Имя Фамилия</td>
-              <td width="190px">Thn</td>
-              <td width="190px">@fat</td>
-              <td width="190px">@fat</td>
-            </tr>
-            <tr>
-              <th scope="row" width="190px">324234</th>
-              <td width="440px">Имя Фамилия</td>
-              <td width="190px">@tr</td>
-              <td width="190px">@twitter</td>
-              <td width="190px">@twitter</td>
+              <td width="190px">Доставлен</td>
+              <td width="190px">1440 ₸</td>
+              <td width="190px">
+                <div class="data">
+                  <p>31/10/2021</p>
+                  <img src="~/assets/icon/show.svg" alt="">
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -53,10 +53,8 @@
 </template>
 
 <script>
-import order_card from "@/components/order_card";
 export default {
   name: "history",
-  components: { order_card },
 };
 </script>
 

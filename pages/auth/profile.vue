@@ -38,11 +38,11 @@
                 <div class="row">
                   <div class="col-xl-6 col-lg-6">
                     <p class="silver_text">Активные заказы</p>
-                    <button class="w-100 btn btn_main b_r">Смотреть</button>
+                    <nuxt-link :to="{ name: 'status'}" class="w-100 btn btn_main b_r">Смотреть</nuxt-link>
                   </div>
                   <div class="col-xl-6 col-lg-6">
                     <p class="silver_text">История заказов</p>
-                    <button class="w-100 btn btn_silver">Смотреть</button>
+                    <nuxt-link :to="{ name: 'history'}" class="w-100 btn btn_silver">Смотреть</nuxt-link>
                   </div>
                   </div>
                 </div>

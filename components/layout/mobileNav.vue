@@ -23,7 +23,7 @@
           <nuxt-link to="/oplata-i-dostavka">ОПЛАТА И ДОСТАВКА</nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/novinki">НОВИНКИ</nuxt-link>
+          <nuxt-link to="/new-products">НОВИНКИ</nuxt-link>
         </li>
         <li>
           <nuxt-link to="/discounts">СКИДКИ</nuxt-link>

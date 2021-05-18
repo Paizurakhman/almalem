@@ -3,13 +3,10 @@
   padding: 40px 0;
   .other_categories_content {
     background: #ffffff;
-    //padding: 20px 15px;
     .border_color{
-      border-bottom: 1px solid #C4C4C4;
     }
     .categories_card {
       padding: 20px 15px;
-      border-right: 1px solid #C4C4C4;
       .category_name {
         p {
           font-size: 16px;
@@ -35,6 +32,7 @@
         justify-content: flex-end;
         align-items: center;
         margin-top: 20px;
+        cursor: pointer;
         p {
           font-weight: 700;
           margin-bottom: 0;

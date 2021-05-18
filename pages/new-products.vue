@@ -1,5 +1,5 @@
 <template>
-  <div class="discounts_content p_page">
+  <div class="new_products p_page">
     <div class="container">
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
@@ -7,15 +7,15 @@
         <nuxt-link to="/discounts">Скидки</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Скидки</p>
+        <p>Новинки</p>
       </div>
       <div class="tab_content">
         <layout-tabBar @viewMode="current = $event" :current="current"/>
       </div>
       <div class="product_card_item">
         <div class="row" v-if="current === 'grid'">
-          <nuxt-link class="col-xl-3 col-lg-3" to="/" v-for="s in 6" :key="s">
-              <product-card class="product_item"></product-card>
+          <nuxt-link class="col-xl-3 col-lg-3 col-md-4" to="/" v-for="s in 6" :key="s">
+            <product-card class="product_item"></product-card>
           </nuxt-link>
         </div>
 
@@ -31,10 +31,11 @@
 </template>
 
 <script>
-import Pagination from "@/components/layout/Pagination";
+import productCard from "@/components/productCard";
+import productColCard from "@/components/productColCard";
 export default {
-  name: "Discounts",
-  components: { Pagination },
+  name: "new-products",
+  components: { productCard, productColCard },
   data: () => ({
     current: 'grid'
   })

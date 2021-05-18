@@ -19,8 +19,12 @@
       </div>
       <div class="range_slider">
         <no-ssr>
-          <vue-range-slider :bg-style="bgStyle" :tooltip-style="tooltipStyle" :process-style="processStyle" v-model="value"></vue-range-slider>
+          <vue-range-slider v-bind="setting" :bg-style="bgStyle" :process-style="processStyle" v-model="value"></vue-range-slider>
         </no-ssr>
+      </div>
+      <div class="range_price">
+        <p>{{ value[0] }} ₸</p>
+        <p>{{ value[1] }} ₸</p>
       </div>
     </div>
     <div class="category_content">
@@ -28,12 +32,10 @@
         <p class="b_500_16_text">Фильтр</p>
       </div>
       <div class="checks">
-        <input type="checkbox">
-        <label>Фильтр</label>
-      </div>
-      <div class="checks">
-        <input type="checkbox">
-        <label>Фильтр</label>
+        <label class="checkbox_custom">
+          <input type="checkbox">
+          <span>Фильтр</span>
+        </label>
       </div>
     </div>
   </div>
@@ -48,24 +50,21 @@ export default {
   components: {VueRangeSlider},
   data() {
     return {
-      value: [0, 100],
-      tooltipStyle: '',
+      value: [0, 100000],
       processStyle: '',
-      min: 0,
-      max: 250,
-      bgStyle: ''
+      bgStyle: '',
+      setting: {
+        // tooltip: true,
+        dotSize: 25,
+        max: 100000,
+        step: 100
+      }
     }
   },
   created() {
-    this.min = 0
-    this.max = 250
     this.bgStyle = {
       backgroundColor: '#ffffff',
       boxShadow: 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.5)'
-    }
-    this.tooltipStyle = {
-      backgroundColor: 'red',
-      borderColor: 'red'
     }
     this.processStyle = {
       backgroundColor: '#59367C'

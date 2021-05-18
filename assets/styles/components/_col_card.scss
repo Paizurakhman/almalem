@@ -77,3 +77,11 @@
     }
   }
 }
+@media screen and (max-width: 576px){
+  .product_card_left {
+    flex-direction: column !important;
+    .add_to_card {
+      width: 100%;
+    }
+  }
+}

@@ -33,6 +33,7 @@ export default {
         '~/plugins/vue-the-mask',
         '~/plugins/vue-client-only',
         '~/plugins/vue-no-ssr',
+        '~/plugins/vue-cookies',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

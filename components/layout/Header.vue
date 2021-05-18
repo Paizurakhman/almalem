@@ -32,19 +32,20 @@
             <div class="language">
               <div
                 class="lang"
-                @click="languageNavAction"
+                ref="language"
+                @click="handleLanguage"
               >
                 <img :src="currentLanguage.src" alt="">
                 <span>{{currentLanguage.type}}</span>
                 <img src="~/assets/icon/main/arrow.svg" alt="">
               </div>
-              <layout-language-nav @changeLang="changeLanguage" v-if="getLanguageNav" :language="lang"/>
+              <layout-language-nav @changeLang="changeLanguage" v-if="getLanguage" :language="lang" />
             </div>
           </div>
         </div>
         <div class="header_center">
           <div class="logo">
-            <img src="~/assets/logo.svg" alt="">
+            <img src="~/assets/logo.svg" alt="" @click="createCookies">
           </div>
           <div class="search">
             <input type="text" placeholder="Поиск по товарам">
@@ -53,14 +54,18 @@
             </button>
           </div>
           <div class="center_actions">
-            <div class="like">
-              <img src="~/assets/icon/main/heart.svg" alt="">
-              <p>Избранное</p>
-            </div>
-            <div class="basket">
-              <img src="~/assets/icon/main/basket.svg" alt="">
-              <p>Корзина</p>
-            </div>
+            <nuxt-link :to="{ name: 'favorites'}">
+              <div class="like">
+                  <img src="~/assets/icon/main/heart.svg" alt="">
+                  <p>Избранное</p>
+              </div>
+            </nuxt-link>
+            <nuxt-link :to="{ name: 'cart'}">
+              <div class="basket">
+                  <img src="~/assets/icon/main/basket.svg" alt="">
+                  <p>Корзина</p>
+              </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -90,12 +95,13 @@
                 <div class="language">
                   <div
                     class="lang"
-                    @click="languageNavAction"
+                    ref="language"
+                    @click="handleLanguage"
                   >
                     <img :src="currentLanguage.src" alt="">
                     <img src="~/assets/icon/main/arrow.svg" alt="">
                   </div>
-                  <layout-language-nav @changeLang="changeLanguage" v-if="getLanguageNav" :language="lang"/>
+                  <layout-language-nav @changeLang="changeLanguage" v-if="getLanguage" :language="lang"/>
                 </div>
               </div>
             </div>
@@ -124,10 +130,14 @@
                       <img src="~/assets/icon/search.svg" alt="">
                     </div>
                     <div class="mobile_icon">
-                      <img src="~/assets/icon/main/heart.svg" alt="">
+                      <nuxt-link :to="{ name: 'favorites'}">
+                        <img src="~/assets/icon/main/heart.svg" alt="">
+                      </nuxt-link>
                     </div>
                     <div class="mobile_icon">
-                      <img src="~/assets/icon/main/basket.svg" alt="">
+                      <nuxt-link :to="{name: 'cart'}">
+                        <img src="~/assets/icon/main/basket.svg" alt="">
+                      </nuxt-link>
                     </div>
                 </div>
             </div>
@@ -156,7 +166,7 @@
               <nuxt-link to="/oplata-i-dostavka">ОПЛАТА И ДОСТАВКА</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/">НОВИНКИ</nuxt-link>
+              <nuxt-link to="/new-products">НОВИНКИ</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/discounts">СКИДКИ</nuxt-link>
@@ -184,12 +194,14 @@
 
 <script>
 import {mapActions, mapGetters, mapState} from 'vuex'
+import login from "@/pages/auth/login";
 export default {
   name: "Header",
   props: ['lang'],
   data() {
     return {
-      currentLang: this.lang[0]
+      currentLang: this.lang[0],
+      getLanguage: false
     }
   },
   watch: {
@@ -200,11 +212,18 @@ export default {
   methods: {
     ...mapActions([
       'showAction',
-      'languageNavAction',
       'mobileNavAction'
     ]),
     changeLanguage (value) {
       this.currentLang = value
+      this.getLanguage = false
+    },
+    createCookies() {
+      this.$cookies.set('token', 'XAfifmckmaciife8dw6ef896w8fw', 360)
+      this.$cookies.set('token_time', new Date(), 360)
+    },
+    handleLanguage () {
+      this.getLanguage = !this.getLanguage
     }
   },
   computed: {
@@ -212,7 +231,6 @@ export default {
       'showNav'
     ]),
     ...mapGetters([
-      'getLanguageNav',
       'getMobileNav'
     ]),
     currentLanguage() {
@@ -226,6 +244,21 @@ export default {
     else  {
       document.body.style.overflowY = 'auto'
     }
+  },
+  mounted() {
+    let vm = this
+
+    // document.addEventListener('click', function (e){
+    //   console.log(e.target)
+    //   console.log(vm.$refs['language'])
+    //   console.log(vm.getLanguage)
+    //   if (e.target !== vm.$refs['language']){
+    //     vm.getLanguage = false
+    //   }
+    //   else {
+    //     vm.getLanguage = true
+    //   }
+    // })
   }
 }
 </script>

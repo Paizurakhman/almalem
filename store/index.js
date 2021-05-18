@@ -1,17 +1,16 @@
 export const state = () => ({
     showNav: false,
-    languageNav: false,
     mobileNav: false,
-    mobileShowCatalog: false
+    mobileShowCatalog: false,
 })
 
 export const mutations = {
     setShowNav(state) {
         state.showNav = !state.showNav
     },
-    setLanguageNav(state) {
-        state.languageNav = !state.languageNav
-    },
+    // setLanguageNav(state) {
+    //     state.languageNav = !state.languageNav
+    // },
     setMobileNav(state) {
         state.mobileNav = !state.mobileNav
     },
@@ -24,9 +23,9 @@ export const actions = {
     showAction({ commit }) {
         commit('setShowNav')
     },
-    languageNavAction({ commit }) {
-        commit('setLanguageNav')
-    },
+    // languageNavAction({ commit }) {
+    //     commit('setLanguageNav')
+    // },
     mobileNavAction({ commit }) {
         commit('setMobileNav')
     },
@@ -36,9 +35,9 @@ export const actions = {
 }
 
 export const getters = {
-    getLanguageNav(state) {
-        return state.languageNav
-    },
+    // getLanguageNav(state) {
+    //     return state.languageNav
+    // },
     getMobileNav(state) {
         return state.mobileNav
     },

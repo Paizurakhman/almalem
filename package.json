@@ -13,6 +13,7 @@
         "core-js": "^3.9.1",
         "nuxt": "^2.15.3",
         "vue-client-only": "^2.0.0",
+        "vue-cookies": "^1.7.4",
         "vue-no-ssr": "^1.1.1",
         "vue-range-component": "^1.0.3",
         "vue-slick-carousel": "^1.0.6",

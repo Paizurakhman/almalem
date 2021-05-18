@@ -105,3 +105,19 @@
     display: none;
   }
 }
+
+.t_price {
+  color: black;
+  font-size: 14px !important;
+  font-weight: 500;
+  .old_price {
+    font-weight: 500;
+    margin: 0 10px;
+  }
+}
+
+.tab_content {
+  border: 1px solid #757575;
+  border-radius: 5px;
+  padding: 20px;
+}

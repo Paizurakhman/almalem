@@ -61,11 +61,13 @@ header {
       }
       .search {
         display: flex;
+        max-width: 550px;
+        width: 100%;
         input {
           border: transparent;
           border-radius: 5px;
           padding: 18px 12px;
-          width: 490px;
+          width: 100%;
           outline: transparent;
         }
         button {
@@ -80,9 +82,8 @@ header {
         display: flex;
         align-items: center;
         text-align: center;
-        color: #ffffff;
         .like {
-          margin-right: 30px;
+          margin: 0 20px;
           cursor: pointer;
         }
         .basket {
@@ -91,6 +92,9 @@ header {
         p{
           font-weight: 500;
           font-size: 14px;
+        }
+        a{
+          color: #ffffff;
         }
       }
     }

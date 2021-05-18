@@ -8,9 +8,16 @@
     </div>
     <div class="catalog_option_item">
       <div v-for="item in catalog" :key="item.id">
-        <div class="option_item">
-          <p>{{ item.title }}</p>
+        <div class="option_item" @mouseover="handleCategory(item.id)"
+             @mouseleave="handleLeave">
+          <p class="catalog_t">{{ item.title }}</p>
           <img src="~/assets/icon/main/black_arrow.svg" alt="">
+          <div
+            class="catalog_item"
+            v-if="showId === item.id"
+          >
+            <nuxt-link :to="{ name: 'Catalog' }">{{ item.title }}</nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -21,6 +28,7 @@
 export default {
   name: "CatalogOption",
   data: () => ({
+    showId: -1,
     catalog: [
       {
         id: 1,
@@ -70,12 +78,39 @@ export default {
         id: 12,
         title: 'Другие'
       },
-
     ]
-  })
+  }),
+  methods: {
+    handleCategory (id) {
+        this.showId = id
+    },
+    handleLeave () {
+      this.showId = -1
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .catalog_item {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    left: 100%;
+    background: #ffffff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
 
+    a {
+      padding: 16px;
+      display: block;
+      color: black;
+      font-size: 14px;
+
+      &:hover {
+        background: #000000;
+        color: #ffffff;
+      }
+    }
+  }
 </style>

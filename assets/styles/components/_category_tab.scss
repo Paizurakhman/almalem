@@ -35,3 +35,17 @@
   }
 
 }
+.range_price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  p {
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+.checks {
+
+}
