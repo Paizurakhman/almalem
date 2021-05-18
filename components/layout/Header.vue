@@ -33,7 +33,7 @@
               <div
                 class="lang"
                 ref="language"
-                @click="handleLanguage"
+                @click.stop="handleLanguage"
               >
                 <img :src="currentLanguage.src" alt="">
                 <span>{{currentLanguage.type}}</span>
@@ -92,10 +92,9 @@
                   <!--                <nuxt-link to="/auth/register">Регистрация</nuxt-link>-->
                   <!--              </div>-->
                 </div>
-                <div class="language">
+                <div class="language" ref="language">
                   <div
                     class="lang"
-                    ref="language"
                     @click="handleLanguage"
                   >
                     <img :src="currentLanguage.src" alt="">
@@ -248,17 +247,14 @@ export default {
   mounted() {
     let vm = this
 
-    // document.addEventListener('click', function (e){
-    //   console.log(e.target)
-    //   console.log(vm.$refs['language'])
-    //   console.log(vm.getLanguage)
-    //   if (e.target !== vm.$refs['language']){
-    //     vm.getLanguage = false
-    //   }
-    //   else {
-    //     vm.getLanguage = true
-    //   }
-    // })
+    document.addEventListener('click', function (e){
+      console.log(e.target)
+      console.log(vm.$refs['language'])
+      console.log(vm.getLanguage)
+      if (e.target !== vm.$refs['language']){
+        vm.getLanguage = false
+      }
+    })
   }
 }
 </script>
