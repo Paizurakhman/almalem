@@ -245,16 +245,29 @@ export default {
     }
   },
   mounted() {
+    this.$axios.get('get-header?lang=' + this.$store.state.lang)
+    .then(res => {
+      console.log(res.data)
+    })
+
     let vm = this
 
     document.addEventListener('click', function (e){
-      console.log(e.target)
-      console.log(vm.$refs['language'])
-      console.log(vm.getLanguage)
-      if (e.target !== vm.$refs['language']){
-        vm.getLanguage = false
-      }
+      const c = new hideAction(vm.$refs['language'], e.target)
+      vm.getLanguage = c.lan
     })
+  }
+}
+
+class hideAction {
+  constructor(ref, target) {
+    this.val = true
+    if (target !== ref) {
+      this.val = false
+    }
+  }
+  get lan() {
+    return this.val
   }
 }
 </script>

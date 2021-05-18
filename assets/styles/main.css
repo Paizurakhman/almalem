@@ -445,6 +445,10 @@ header .header .header_top .top_actions .my_account a {
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+}
+header .header .header_top .top_actions .my_account img {
+  margin-right: 5px;
 }
 header .header .header_top .top_actions .lang {
   cursor: pointer;
@@ -1301,9 +1305,8 @@ footer .copy_right p {
 }
 .tab_bar .tab_bar_filter_item .sort_action {
   margin: 0 10px;
-  cursor: pointer;
-}
-.tab_bar .tab_bar_filter_item p, .tab_bar .tab_bar_filter_item span {
+  border: transparent;
+  outline: none;
   color: #666666;
   font-weight: 500;
 }

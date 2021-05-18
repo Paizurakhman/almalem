@@ -17,9 +17,8 @@
     justify-content: flex-end;
     .sort_action {
       margin: 0 10px;
-      cursor: pointer;
-    }
-    p, span {
+      border: transparent;
+      outline: none;
       color: #666666;
       font-weight: 500;
     }

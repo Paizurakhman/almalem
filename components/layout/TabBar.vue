@@ -40,10 +40,11 @@
         <div class="tab_bar_filter">
           <div class="tab_bar_filter_item">
             <p>Сортировать:</p>
-            <div class="sort_action">
-              <span>Умолчанию</span>
-              <img src="~/assets/icon/main/black_arrow.svg" alt="">
-            </div>
+            <select name="sort" class="sort_action">
+              <option value="">По умолчанию</option>
+              <option value="ASC"> По возрастанию цены</option>
+              <option value="DESC"> По убыванию цены</option>
+            </select>
           </div>
           </div>
       </div>

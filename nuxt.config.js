@@ -31,7 +31,6 @@ export default {
     plugins: [
         '~/plugins/vue-slick-carousel',
         '~/plugins/vue-the-mask',
-        '~/plugins/vue-client-only',
         '~/plugins/vue-no-ssr',
         '~/plugins/vue-cookies',
     ],
@@ -49,7 +48,9 @@ export default {
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+      baseURL: 'https://backend.metodolog.kz/api/'
+    },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {}
