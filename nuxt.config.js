@@ -25,6 +25,7 @@ export default {
         '~/assets/styles/main.scss',
         'vue-slick-carousel/dist/vue-slick-carousel.css',
         'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
+        '@invisiburu/vue-picker/dist/vue-picker.min.css'
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -33,6 +34,7 @@ export default {
         '~/plugins/vue-the-mask',
         '~/plugins/vue-no-ssr',
         '~/plugins/vue-cookies',
+        '~/plugins/picker',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,7 +51,7 @@ export default {
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
-      baseURL: 'https://backend.metodolog.kz/api/'
+      baseURL: 'http://back.astudiodigital.ru/api/'
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

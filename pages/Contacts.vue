@@ -151,7 +151,13 @@ export default {
     showMap () {
       this.isShowMap = !this.isShowMap
     }
-  }
+  },
+  // async mounted() {
+  //   await this.$axios.get('address')
+  //   .then(res => {
+  //     // console.log(res.data);
+  //   })
+  // }
 }
 </script>
 

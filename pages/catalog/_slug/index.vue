@@ -73,11 +73,15 @@
 
 <script>
 export default {
-  name: "Catalog",
-  data: () => ({
-    current: 'grid',
-    mobileCategory: false
-  }),
+  name: "slug",
+  data(){
+    return {
+        current: 'grid',
+        mobileCategory: false,
+        slug: this.$route.params.slug
+    }
+
+  },
   methods: {
     showCategory () {
       this.mobileCategory = !this.mobileCategory

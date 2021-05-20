@@ -1,22 +1,23 @@
 <template>
-  <header>
+  <header v-if="headerData">
     <div class="header">
       <div class="container m_none">
         <div class="header_top">
           <div class="social_networks">
-            <span><img src="~/assets/icon/socials/facebook.svg" alt="social"></span>
-            <span><img src="~/assets/icon/socials/instagram.svg" alt="social"></span>
-            <span><img src="~/assets/icon/socials/youtube.svg" alt="social"></span>
-            <span><img src="~/assets/icon/socials/vk.svg" alt="social"></span>
-            <span><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></span>
+            <span><a href="#"><img src="~/assets/icon/socials/facebook.svg" alt="social"></a></span>
+            <span><a href="#"><img src="~/assets/icon/socials/instagram.svg" alt="social"></a></span>
+            <span><a href="#"><img src="~/assets/icon/socials/youtube.svg" alt="social"></a></span>
+            <span><a href="#"><img src="~/assets/icon/socials/vk.svg" alt="social"></a></span>
+            <span><a href="#"><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></a></span>
           </div>
           <div class="contact">
             <div class="city">
-              <span>Алматы</span>
-              <img src="~/assets/icon/main/arrow.svg" alt="">
+              <select name="city" v-model="city">
+                <option v-for="c in headerData.cities" :key="c.id" :value="c.id">{{ c.title}}</option>
+              </select>
             </div>
             <div class="phone">
-              <span>+7(777)777-77-77</span>
+              <span><a :href="'tel:' +headerData.contacts.phone_number">{{headerData.contacts.phone_number}}</a></span>
             </div>
           </div>
           <div class="top_actions">
@@ -185,7 +186,7 @@
     </nav>
     <div class="nav_category">
       <transition name="category">
-        <layout-category-nav v-if="showNav" />
+        <layout-category-nav v-if="showNav" :categories = "headerData.categories"/>
       </transition>
     </div>
   </header>
@@ -193,14 +194,15 @@
 
 <script>
 import {mapActions, mapGetters, mapState} from 'vuex'
-import login from "@/pages/auth/login";
 export default {
   name: "Header",
   props: ['lang'],
   data() {
     return {
+      headerData: null,
       currentLang: this.lang[0],
-      getLanguage: false
+      getLanguage: false,
+      city: null
     }
   },
   watch: {
@@ -247,7 +249,9 @@ export default {
   mounted() {
     this.$axios.get('get-header?lang=' + this.$store.state.lang)
     .then(res => {
-      console.log(res.data)
+      this.headerData = res.data;
+
+      this.city = res.data.cities[0].id
     })
 
     let vm = this

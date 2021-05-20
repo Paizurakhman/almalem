@@ -23,10 +23,22 @@ header {
         color: #ffffff;
         .city {
           margin-right: 30px;
-          cursor: pointer;
+          select {
+            outline: none;
+            border: transparent;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            margin: 0 10px;
+            option {
+              color: #000;
+            }
+          }
         }
         .phone {
-          cursor: pointer;
+          a {
+            color: #ffffff;
+          }
         }
       }
       .top_actions {

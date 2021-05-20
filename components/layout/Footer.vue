@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer v-if="footerData">
     <div class="container">
       <div class="footer">
         <div class="row">
@@ -8,7 +8,7 @@
               <img src="~/assets/icon/main/logo_footer.svg" alt="">
             </div>
             <div class="footer_title">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et, gravida enim arcu, amet semper.</p>
+              <p>{{ footerData.footer}}</p>
             </div>
             <div class="address">
               <div class="footer_info">
@@ -17,7 +17,7 @@
             </div>
             <div class="help">
               <div class="footer_info">
-                <p><span class="bolder_text">Нужна помощь?</span>+7(777)777-77-77</p>
+                <p><span class="bolder_text">Нужна помощь?</span><a :href="'tel:' + footerData.phone_number">{{footerData.phone_number}}</a></p>
               </div>
             </div>
           </div>
@@ -90,7 +90,18 @@
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
+  data() {
+    return {
+      footerData: null
+    }
+  },
+  mounted() {
+    this.$axios.get('get-footer?lang=' + this.$store.state.lang)
+    .then(res => {
+      this.footerData = res.data.contacts
+    })
+  }
 }
 </script>
 

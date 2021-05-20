@@ -3,7 +3,7 @@
     <div class="product_title">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </div>
-    <div class="card_header">
+    <div class="card_header overlay">
       <div class="company_name">
         <p>Company</p>
       </div>
@@ -17,14 +17,23 @@
       <div class="price">
         <p><span class="new_price">1400 ₸</span> <span class="old_price">1400₸</span></p>
       </div>
-      <img src="~/assets/icon/black_basket.svg" alt="">
+      <img class="overlay" src="~/assets/icon/black_basket.svg" alt="">
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
-  name: "productCard"
+  name: "productCard",
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+  }
+  
 }
 </script>
 

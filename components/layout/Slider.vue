@@ -15,13 +15,14 @@
       </div>
       <VueSlickCarousel class="slider_component" v-bind="settings" ref="carousel_products">
         <nuxt-link to="/" v-for="s in 6" :key="s">
-          <product-card class="card_carousel" />
+          <product-card class="card_carousel"/>
         </nuxt-link>
       </VueSlickCarousel>
     </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "Slider",
   props: ['title'],

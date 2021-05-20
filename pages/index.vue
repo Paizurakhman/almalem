@@ -1,12 +1,12 @@
 <template>
-  <div class="home_page">
+  <div class="home_page" v-if="homePageData">
     <div class="p_page">
     <div class="container">
       <div class="main_content">
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="catalog_option">
-              <CatalogOption />
+              <CatalogOption :catalog = "homePageData.header.categories"/>
             </div>
           </div>
           <div class="col-xl-9 col-lg-9">
@@ -97,34 +97,43 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  data: () => ({
-    companies: [
-      {
-        id: 1,
-        src: require('~/assets/icon/companies/codecanyon.svg')
-      },
-      {
-        id: 2,
-        src: require('~/assets/icon/companies/graphicriver.svg')
-      },
-      {
-        id: 3,
-        src: require('~/assets/icon/companies/themeforest.svg')
-      },
-      {
-        id: 4,
-        src: require('~/assets/icon/companies/audiojungle.svg')
-      },
-      {
-        id: 5,
-        src: require('~/assets/icon/companies/activeden.svg')
-      },
-    ]
-  }),
+  data() {
+    return {
+      companies: [
+        {
+          id: 1,
+          src: require('~/assets/icon/companies/codecanyon.svg')
+        },
+        {
+          id: 2,
+          src: require('~/assets/icon/companies/graphicriver.svg')
+        },
+        {
+          id: 3,
+          src: require('~/assets/icon/companies/themeforest.svg')
+        },
+        {
+          id: 4,
+          src: require('~/assets/icon/companies/audiojungle.svg')
+        },
+        {
+          id: 5,
+          src: require('~/assets/icon/companies/activeden.svg')
+        },
+      ],
+      homePageData: null
+    }
+  },
   computed: {
     ...mapState([
       'showNav'
     ])
+  },
+  async mounted() {
+    await this.$axios.get('home-page?lang=' + this.$store.state.lang)
+    .then(res => {
+      this.homePageData = res.data
+    })
   }
 }
 </script>
