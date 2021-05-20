@@ -41,12 +41,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-4">
-                                                <vue-picker v-model="color" autofocus placeholder="Регион">
+                                                <vue-picker v-model="city" autofocus placeholder="Регион">
                                                     <vue-picker-option value="1">Almaty</vue-picker-option>
                                                 </vue-picker>
                                             </div>
                                             <div class="col-xl-4">
-                                                <vue-picker v-model="color" autofocus placeholder="Город">
+                                                <vue-picker v-model="city" autofocus placeholder="Город">
                                                     <vue-picker-option value="1">Almaty</vue-picker-option>
                                                 </vue-picker>
                                             </div>
@@ -143,7 +143,7 @@ export default {
     name: 'checkout',
     data() {
         return {
-            color: ''
+            city: ''
         }
     }
 }
