@@ -66,7 +66,7 @@
         <layout-slider :title="'Бестселлеры'"/>
       </div>
     </div>
-    <other-categories />
+    <other-categories :other="homePageData.categories.other"/>
     <div class="container">
       <div class="sales_content">
         <layout-slider :title="'Скидки'"/>
