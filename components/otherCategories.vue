@@ -6,7 +6,7 @@
       </div>
       <div class="other_categories_content">
         <div class="row">
-          <div class="col-xl-4 col-lg-4 border_color" v-for="c in 6" :key="c">
+          <div class="col-xl-4 col-lg-4 border_color" v-for="o in other" :key="o.id">
             <div class="categories_card">
               <div class="row align-items-center">
                 <div class="col-xl-5 col-lg-5 col-5">
@@ -19,7 +19,7 @@
                     <p>Теплотехника, энергетика</p>
                   </div>
                   <div class="category_title">
-                    <p v-for="i in 4" :key="i">Наименование</p>
+                    <p v-for="item in o.subcategories" :key="item.id">{{item.title}}</p>
                   </div>
                   <div class="watch_now">
                     <p>Смотреть сейчас</p>
@@ -39,7 +39,8 @@
 
 <script>
 export default {
-  name: "otherCategories"
+  name: "otherCategories",
+  props: ['other']
 }
 </script>
 

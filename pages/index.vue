@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="catalog_option">
-              <CatalogOption :catalog = "homePageData.header.categories"/>
+              <CatalogOption :catalog = "homePageData.categories.main"/>
             </div>
           </div>
           <div class="col-xl-9 col-lg-9">
@@ -66,7 +66,7 @@
         <layout-slider :title="'Бестселлеры'"/>
       </div>
     </div>
-    <other-categories />
+    <other-categories :other="homePageData.categories.other"/>
     <div class="container">
       <div class="sales_content">
         <layout-slider :title="'Скидки'"/>
