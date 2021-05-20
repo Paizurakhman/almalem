@@ -1,8 +1,16 @@
 .product_card {
+  .overlay {
+    visibility: hidden;
+  }
   .main_img {
     position: relative;
     img {
       width: 100%;
+    }
+  }
+  &:hover {
+    .overlay {
+      visibility: visible;
     }
   }
 }

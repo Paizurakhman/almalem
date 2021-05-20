@@ -2,7 +2,7 @@ export const state = () => ({
     showNav: false,
     mobileNav: false,
     mobileShowCatalog: false,
-    lang: 'ru'
+    lang: 'ru',
 })
 
 export const mutations = {
@@ -26,7 +26,7 @@ export const actions = {
     },
     showCatalogAction({ commit }) {
         commit('setShowCatalog')
-    }
+    },
 }
 
 export const getters = {
@@ -35,5 +35,5 @@ export const getters = {
     },
     getShowCatalog(state) {
         return state.mobileShowCatalog
-    }
+    },
 }

@@ -8,7 +8,8 @@
     </div>
     <div class="catalog_option_item">
       <div v-for="item in catalog" :key="item.id">
-        <div class="option_item" @mouseover="handleCategory(item.id)"
+        <nuxt-link :to="{ name: 'catalog-slug', params: { slug: item.slug }}">
+          <div class="option_item" @mouseover="handleCategory(item.id)"
              @mouseleave="handleLeave">
           <p class="catalog_t">{{ item.title }}</p>
           <img src="~/assets/icon/main/black_arrow.svg" alt="">
@@ -16,9 +17,11 @@
             class="catalog_item"
             v-if="showId === item.id"
           >
-            <nuxt-link :to="{ name: 'Catalog' }">{{ item.title }}</nuxt-link>
+            <nuxt-link v-for="subcategory in item.subcategories"
+            :key="subcategory.id" :to="{ name: 'catalog-slug-id', params: { slug: item.slug, id: subcategory.slug }}">{{ subcategory.title }}</nuxt-link>
           </div>
         </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -27,59 +30,12 @@
 <script>
 export default {
   name: "CatalogOption",
-  data: () => ({
-    showId: -1,
-    catalog: [
-      {
-        id: 1,
-        title: 'Механические устройства'
-      },
-      {
-        id: 2,
-        title: 'Гидротехника, гидравлика'
-      },
-      {
-        id: 3,
-        title: 'Вычислительная техника'
-      },
-      {
-        id: 4,
-        title: 'Механические устройства'
-      },
-      {
-        id: 5,
-        title: 'Гидротехника, гидравлика'
-      },
-      {
-        id: 6,
-        title: 'Вычислительная техника'
-      },
-      {
-        id: 7,
-        title: 'Механические устройства'
-      },
-      {
-        id: 8,
-        title: 'Гидротехника, гидравлика'
-      },
-      {
-        id: 9,
-        title: 'Вычислительная техника'
-      },
-      {
-        id: 10,
-        title: 'Механические устройства'
-      },
-      {
-        id: 11,
-        title: 'Гидротехника, гидравлика'
-      },
-      {
-        id: 12,
-        title: 'Другие'
-      },
-    ]
-  }),
+  props: ['catalog'],
+  data() {
+    return {
+      showId: -1,
+    }
+  },
   methods: {
     handleCategory (id) {
         this.showId = id

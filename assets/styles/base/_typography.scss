@@ -1,11 +1,13 @@
 .footer_info {
   p {
     font-weight: 500;
-    color: #878787;
     .bolder_text {
       font-weight: 700;
       font-size: 18px;
       display: block;
+    }
+    a {
+      color: #878787;
     }
   }
   .bolder_text {
