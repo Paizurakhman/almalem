@@ -3,7 +3,8 @@ export const state = () => ({
     mobileNav: false,
     mobileShowCatalog: false,
     lang: 'ru',
-    imageUrl: 'http://cdn.astudiodigital.ru/'
+    imageUrl: 'http://cdn.astudiodigital.ru/',
+    cart: []
 })
 
 export const mutations = {
@@ -15,6 +16,12 @@ export const mutations = {
     },
     setShowCatalog(state) {
         state.mobileShowCatalog = !state.mobileShowCatalog
+    },
+    SET_CART(state, id) {
+      state.cart.push(id)
+      localStorage.setItem('cart', state.cart.filter((v) => {
+        return id !== v
+      }))
     }
 }
 
@@ -28,6 +35,9 @@ export const actions = {
     showCatalogAction({ commit }) {
         commit('setShowCatalog')
     },
+    ADD_TO_CART({commit}, id) {
+      commit('SET_CART', id)
+    }
 }
 
 export const getters = {
@@ -37,4 +47,7 @@ export const getters = {
     getShowCatalog(state) {
         return state.mobileShowCatalog
     },
+    GET_CART (state) {
+      return state.cart
+    }
 }

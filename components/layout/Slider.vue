@@ -14,9 +14,9 @@
         </div>
       </div>
       <VueSlickCarousel class="slider_component" v-bind="settings" ref="carousel_products">
-        <nuxt-link to="/" v-for="product in products" :key="product.id">
+        <div v-for="product in products" :key="product.id">
           <product-card class="card_carousel" :product="product"/>
-        </nuxt-link>
+        </div>
       </VueSlickCarousel>
     </div>
 </template>

@@ -17,9 +17,11 @@
 .detail_carousel {
   .slick-slider {
     max-width: 100%;
+    .slick-list {
+      margin: 0 30px;
+    }
     img {
       width: 100%;
-      margin: 0 auto;
     }
     .slick-arrow {
       height: 40px;
@@ -31,19 +33,19 @@
       background-image: url("~/assets/icon/prev_detail.svg");
       background-size: contain;
       background-repeat: no-repeat;
-      //right: 0;
+      right: 0;
     }
     .slick-prev {
       background-image: url("~/assets/icon/prev.svg");
       background-size: contain;
       background-repeat: no-repeat;
-      //left: 0;
+      left: 0;
       z-index: 10;
     }
   }
 }
 .container_slider {
-  width: 100%;  
+  width: 100%;
   margin: 0 auto;
 }
 

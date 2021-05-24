@@ -224,12 +224,21 @@
   width: 100%;
 }
 
+.card_images {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .detail_carousel .slick-slider {
   max-width: 100%;
 }
+.detail_carousel .slick-slider .slick-list {
+  margin: 0 30px;
+}
 .detail_carousel .slick-slider img {
   width: 100%;
-  margin: 0 auto;
 }
 .detail_carousel .slick-slider .slick-arrow {
   height: 40px;
@@ -241,16 +250,18 @@
   background-image: url("~/assets/icon/prev_detail.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  right: 0;
 }
 .detail_carousel .slick-slider .slick-prev {
   background-image: url("~/assets/icon/prev.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  left: 0;
   z-index: 10;
 }
 
 .container_slider {
-  max-width: 500px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -399,6 +410,77 @@
   color: #000000;
   font-weight: 500;
 }
+.brands_content .brand_item img {
+  width: 50%;
+  height: 100px;
+  min-height: 100px;
+  object-fit: contain;
+}
+
+.checkout_content .contacts_form .inputs span {
+  text-align: left;
+}
+.checkout_content .contacts_form .inputs span::before {
+  padding-left: 0;
+}
+.checkout_content .contacts_form .inputs button {
+  text-align: left;
+  border-radius: 4px;
+}
+.checkout_content .contacts_form .inputs .input_title {
+  margin: 20px 0;
+}
+.checkout_content .contacts_form .inputs .input_title p {
+  font-size: 24px;
+  color: #3E444A;
+}
+.checkout_content .contacts_form .inputs .i_title p {
+  color: #3E444A;
+}
+.checkout_content .contacts_form .vue-picker {
+  width: 100%;
+}
+.checkout_content .contacts_form .vue-picker .vue-picker__dropdown {
+  padding: 0;
+}
+.checkout_content .contacts_form .home_address {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+.checkout_content .contacts_form .home_address input {
+  margin: 0 15px;
+}
+.checkout_content .contacts_form .card_footer {
+  text-align: right;
+  margin: 30px 0;
+}
+.checkout_content .address_card .ordering_card {
+  margin: 20px 0;
+}
+.checkout_content .address_card .ordering_card .row {
+  display: flex;
+  align-items: center;
+}
+.checkout_content .address_card img {
+  width: 100%;
+}
+.checkout_content .address_card p {
+  font-size: 14px;
+  color: #343434;
+  margin-bottom: 0;
+}
+.checkout_content .address_card .item_amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.checkout_content .address_card .item_amount p {
+  font-weight: 500;
+  color: #000;
+  margin: 10px 0;
+}
 
 header .header {
   padding: 20px 0 30px;
@@ -425,10 +507,20 @@ header .header .header_top .contact {
 }
 header .header .header_top .contact .city {
   margin-right: 30px;
-  cursor: pointer;
 }
-header .header .header_top .contact .phone {
+header .header .header_top .contact .city select {
+  outline: none;
+  border: transparent;
+  background: transparent;
+  color: white;
   cursor: pointer;
+  margin: 0 10px;
+}
+header .header .header_top .contact .city select option {
+  color: #000;
+}
+header .header .header_top .contact .phone a {
+  color: #ffffff;
 }
 header .header .header_top .top_actions {
   margin-left: auto;
@@ -757,12 +849,14 @@ footer .copy_right p {
 }
 .footer_info p {
   font-weight: 500;
-  color: #878787;
 }
 .footer_info p .bolder_text {
   font-weight: 700;
   font-size: 18px;
   display: block;
+}
+.footer_info p a {
+  color: #878787;
 }
 .footer_info .bolder_text {
   color: #000000;
@@ -842,6 +936,9 @@ footer .copy_right p {
   color: #6B6A6A;
   font-size: 14px;
 }
+.page_links a:last-child {
+  pointer-events: none;
+}
 .page_links img {
   margin: 0 10px;
 }
@@ -895,6 +992,7 @@ footer .copy_right p {
   background-position: center;
   width: 40px;
   text-align: center;
+  font-size: 12px;
 }
 
 .b_500_16_text {
@@ -1044,7 +1142,6 @@ footer .copy_right p {
 }
 .catalog_option .catalog_option_item .option_item {
   position: relative;
-  cursor: pointer;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -1061,6 +1158,9 @@ footer .copy_right p {
 }
 .catalog_option .catalog_option_item .option_item img {
   transform: rotate(-90deg);
+}
+.catalog_option .catalog_option_item a {
+  color: #000000;
 }
 
 @media screen and (max-width: 1024px) {
@@ -1113,14 +1213,14 @@ footer .copy_right p {
   margin: 40px 0;
 }
 
-.card_carousel {
+.card_carousel .product_card {
   margin: 0 20px;
 }
 
 .product_card {
   border: 1px solid #878787;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 20px;
 }
 .product_card:hover {
   opacity: 1;
@@ -1219,10 +1319,16 @@ footer .copy_right p {
   color: #000000;
   font-weight: 500;
 }
+.other_categories .other_categories_content .categories_card .card_items {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 .other_categories .other_categories_content .categories_card .categories_img img {
   width: 100%;
 }
 .other_categories .other_categories_content .categories_card .category_title {
+  margin: 0;
   font-size: 14px;
 }
 .other_categories .other_categories_content .categories_card .category_title p {
@@ -1241,6 +1347,7 @@ footer .copy_right p {
   font-weight: 700;
   margin-bottom: 0;
   margin-right: 10px;
+  color: #000000;
 }
 .other_categories .other_categories_content .categories_card .watch_now .arrow {
   width: 12px;
@@ -1340,11 +1447,20 @@ footer .copy_right p {
     margin: 10px 0;
   }
 }
+.product_card {
+  margin: 20px 0;
+}
+.product_card .overlay {
+  visibility: hidden;
+}
 .product_card .main_img {
   position: relative;
 }
 .product_card .main_img img {
   width: 100%;
+}
+.product_card:hover .overlay {
+  visibility: visible;
 }
 
 .card_col_title {
@@ -1496,6 +1612,9 @@ footer .copy_right p {
   font-size: 14px;
   color: #757575;
 }
+.description .all_reviews {
+  margin: 30px 0;
+}
 .description .review_header {
   background: #EFEFEF;
   border: 1px solid #757575;
@@ -1506,14 +1625,13 @@ footer .copy_right p {
   margin-bottom: 0;
   font-size: 15px;
   font-weight: 500;
-  padding: 15px 40px;
+  padding: 15px 30px;
 }
 .description .review_header .ta_right {
   text-align: right;
   border-left: 1px solid #757575;
 }
 .description .review_text {
-  margin: 30px 0;
   padding-bottom: 20px;
 }
 .description .review_text .contacts_title {
