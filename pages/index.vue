@@ -5,8 +5,8 @@
       <div class="main_content">
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
-            <div class="catalog_option">
-              <CatalogOption :catalog = "homePageData.categories.main"/>
+            <div class="catalog_option" v-if="homePageData.header">
+              <CatalogOption :catalog="homePageData.header.categories.other"/>
             </div>
           </div>
           <div class="col-xl-9 col-lg-9">
