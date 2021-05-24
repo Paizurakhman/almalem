@@ -3,18 +3,23 @@
     <div class="description_action">
       <button
         class="btn_tab"
-        v-for="des in des_rev"
-        :key="des.id"
-        @click="tabDescription(des.id); current = des.title"
-        :class="{ activeDesc: des.id === currId }"
-      >{{des.title}}
-
+        @click="tabDescription('opisanie')"
+        :class="{ activeDesc: current === 'opisanie' }"
+      >
+        Описание
+      </button>
+      <button
+        class="btn_tab"
+        @click="tabDescription('otziv')"
+        :class="{ activeDesc: current === 'otziv' }"
+      >
+        Отзывы ({{reviews.length}})
       </button>
     </div>
-    <div class="description_text" v-if="current === 'Описание'">
+    <div class="description_text" v-if="current === 'opisanie'">
       <p>{{ description }}</p>
     </div>
-    <div class="review_text" v-if="current === 'Отзывы (1)'">
+    <div class="review_text" v-if="current === 'otziv'">
       <div class="all_reviews" v-for="review in reviews" :key="review.review_id">
         <div class="review_header">
           <div class="row">
@@ -29,7 +34,12 @@
         <div class="review1_text">
           <p>{{ review.review }}</p>
           <no-ssr>
-            <star-rating v-model="rating"></star-rating>
+            <star-rating 
+              v-model="review.rating" 
+              v-bind="settings"
+              :read-only="true"
+            >
+            </star-rating>
           </no-ssr>
         </div>
       </div>
@@ -38,18 +48,20 @@
           <p>Оставить отзыв</p>
         </div>
         <div class="form">
-          <form action="">
+          <form @submit.prevent="sendReview">
             <div class="inputs">
               <span class="necessarily">Имя</span>
-              <input type="text">
+              <input type="text" v-model="name">
             </div>
             <div class="inputs">
               <span class="necessarily">Ваш отзыв</span>
-              <textarea></textarea>
+              <textarea v-model="review_text"></textarea>
             </div>
-            <div class="inputs">
+            <div>
               <span class="necessarily">Рейтинг</span>
-              <p>*****</p>
+              <no-ssr>
+                <star-rating v-model="rating" v-bind="settings"></star-rating>
+              </no-ssr>
             </div>
             <div class="contacts_action">
               <button class="btn btn_silver">Продолжить</button>
@@ -64,27 +76,43 @@
 <script>
 export default {
   name: "Description",
-  props: ['description', 'reviews'],
+  props: ['description', 'reviews', 'product_id'],
   data() {
     return {
-      rating: 3,
+      rating: 0,
       currId: 1,
-      current: 'Описание',
-      des_rev: [
-        {
-          id: 1,
-          title: 'Описание'
-        },
-        {
-          id: 2,
-          title: 'Отзывы (1)'
-        },
-      ]
+      current: 'opisanie',
+      name: '',
+      review_text: '',
+      settings: {
+        'star-size': 15,
+        'show-rating': false,
+        'active-color': '#757575',
+        'inactive-color': '#CCCCCC',
+        'rounded-corners': true,
+        'padding': 10,
+        'border-width': 1,
+        'star-points': [23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]
+      }
     }
   },
   methods: {
-    tabDescription(id) {
-      this.currId = id
+    tabDescription(by) {
+      this.current = by
+    },
+    async sendReview () {
+      await this.$axios.post('review', {
+        name: this.name,
+        review: this.review_text,
+        rating: this.rating,
+        product_id: this.product_id
+      })
+      .then(res => {
+        this.reviews = res.data.reviews
+        this.name = ''
+        this.review_text = ''
+        this.rating = 0
+      })
     }
   }
 }

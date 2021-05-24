@@ -20,14 +20,14 @@
             <p>Личные данные</p>
           </div>
           <div class="form">
-            <form action="">
+            <form @submit.prevent="register">
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
                     <span class="necessarily">Имя</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="text">
+                    <input type="text" v-model="name">
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@
                     <span class="necessarily">Фамилия</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="text">
+                    <input type="text" v-model="surname">
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                     <span class="necessarily">Телефон</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <the-mask :mask="['#(###) ###-####']" />
+                    <the-mask :mask="['+#(###) ###-##-##']" v-model="phone_number"/>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                     <span class="necessarily">Email</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="email">
+                    <input type="email" v-model="email">
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
                     <span class="necessarily">Ваш пароль</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="password">
+                    <input type="password" v-model="password">
                   </div>
                 </div>
               </div>
@@ -80,7 +80,7 @@
                     <span class="necessarily pr-0">Подтвердите пароль</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="password">
+                    <input type="password" v-model="confirm_password">
                   </div>
                 </div>
               </div>
@@ -97,7 +97,31 @@
 
 <script>
 export default {
-  name: "register"
+  name: "register",
+  data () {
+    return {
+      name: '',
+      surname: '',
+      phone_number: '',
+      email: '',
+      password: '',
+      confirm_password: ''
+    }
+  },
+  methods: {
+    async register () {
+      await this.$axios.post('register', {
+        name: this.name,
+        last_name: this.surname,
+        phone: this.phone_number,
+        email: this.email,
+        password: this.password
+      })
+      .then(res => {
+        console.log(res.data);
+      })
+    }
+  }
 }
 </script>
 

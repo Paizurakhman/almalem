@@ -13,14 +13,27 @@
           <div class="col-xl-6 col-lg-6">
             <div class="card_images">
               <div class="detail_img">
-                <img 
+                <!-- <img 
                   :src="this.$store.state.imageUrl + detailsData.product.product_images[0].image" 
                   alt=""
-                >
+                > -->
+                <VueSlickCarousel
+                  ref="c1"
+                  :asNavFor="$refs.c2"
+                  :focusOnSelect="true">
+                  <div v-for="s in 6" :key="s">
+                      <img src="~/assets/img/detail_img.png" alt="">
+                  </div>
+                </VueSlickCarousel>
               </div>
               <div class="container_slider">
                 <div class="detail_carousel">
-                  <VueSlickCarousel v-bind="settings">
+                  <VueSlickCarousel
+                    v-bind="settings"
+                    ref="c2"
+                    :asNavFor="$refs.c1"
+                    :slidesToShow="4"
+                    :focusOnSelect="true">
                     <div v-for="s in 6" :key="s">
                       <img src="~/assets/img/detail_img.png" alt="">
                     </div>
@@ -36,15 +49,22 @@
               </div>
               <div class="review_info">
                 <div class="star_rating">
-                  <span>*****</span>
+                  <no-ssr placeholder="Loading...">
+                    <star-rating 
+                      v-model="rating"
+                      v-bind="settingRating"
+                      :read-only="true"
+                    >
+                    </star-rating>
+                  </no-ssr>
                 </div>
                 <div class="review">
-                  <span>(0 отзывов)</span>
+                  <span>({{detailsData.reviews.length}} отзывов)</span>
                   <span>Оставить отзыв</span>
                 </div>
               </div>
               <div class="product_price">
-                <p>{{detailsData.product.price}} KZT</p>
+                <p>{{detailsData.product.current_price}} KZT</p>
               </div>
               <div class="product_status">
                 <p>Налог: <span class="t_green">1000 KZT</span></p>
@@ -112,12 +132,13 @@
         <Description 
           :description="detailsData.product.description"
           :reviews="detailsData.reviews"
+          :product_id="detailsData.product.id"
         />
       </div>
     </div>
     <div class="container">
       <div class="sales_content">
-        <!-- <layout-slider :title="'Похожие товары'"/> -->
+        <layout-slider :title="'Похожие товары'" :products="detailsData.recomend_products"/>
       </div>
     </div>
   </div>
@@ -130,10 +151,20 @@ export default {
     return {
       slug: this.$route.params.slug,
       detailsData: null,
+      rating: null,
+      settingRating: {
+        'star-size': 15,
+        'show-rating': false,
+        'active-color': '#757575',
+        'inactive-color': '#CCCCCC',
+        'rounded-corners': true,
+        'padding': 5,
+        'border-width': 1,
+        'star-points': [23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]
+      },
       settings: {
         "dots": false,
         "arrows": true,
-        "infinite": false,
         "speed": 500,
         "slidesToShow": 4,
         "slidesToScroll": 1,
@@ -144,8 +175,7 @@ export default {
             "settings": {
               "slidesToShow": 4,
               "slidesToScroll": 1,
-              "infinite": true,
-              arrows: false
+              arrows: true
               // "dots": true
             }
           },
@@ -154,13 +184,13 @@ export default {
             "settings": {
               "slidesToShow": 3,
               "slidesToScroll": 1,
-              arrows: false
+              arrows: true
             }
           },
           {
             "breakpoint": 480,
             "settings": {
-              arrows: false,
+              arrows: true,
               "slidesToShow": 3,
               "slidesToScroll": 1
             }
@@ -173,6 +203,7 @@ export default {
     await this.$axios.get('product?lang=' + this.$store.state.lang + '&slug=' + this.slug)
     .then(res => {
       this.detailsData = res.data
+      this.rating = Math.round(Number(res.data.rating.average), 1)
     })
   }
 }
