@@ -49,7 +49,7 @@
                   <category-tab />
                 </no-ssr>
               </div>
-              <div class="product_card_item">
+              <!-- <div class="product_card_item">
                 <div class="row" v-if="current === 'grid'">
                   <nuxt-link class="col-xl-4 col-lg-4 col-md-4" to="/" v-for="s in 6" :key="s">
                     <product-card class="product_item"></product-card>
@@ -59,7 +59,7 @@
                 <nuxt-link to="/" v-if="current === 'list'" v-for="s in 6" :key="s">
                   <product-col-card class="product_item responsive_p_i"/>
                 </nuxt-link>
-              </div>
+              </div> -->
             </div>
             <div class="pagination_items">
               <layout-pagination />
@@ -79,7 +79,6 @@ export default {
         current: 'grid',
         mobileCategory: false,
         slug: this.$route.params.id
-      
     }
 
   },
@@ -87,6 +86,9 @@ export default {
     showCategory () {
       this.mobileCategory = !this.mobileCategory
     }
+  },
+  async mounted() {
+    await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&slug=' + this.slug)
   }
 }
 </script>

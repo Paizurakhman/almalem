@@ -63,13 +63,13 @@
         </div>
       </div>
       <div class="bestsellers_content">
-        <layout-slider :title="'Бестселлеры'"/>
+        <layout-slider :title="'Бестселлеры'" :products="homePageData.products.best"/>
       </div>
     </div>
     <other-categories :other="homePageData.categories.other"/>
     <div class="container">
       <div class="sales_content">
-        <layout-slider :title="'Скидки'"/>
+        <layout-slider :title="'Скидки'" :products="homePageData.products.sale"/>
       </div>
       <div class="company_content">
         <div class="company_logos" v-for="company in companies" :key="company.id">

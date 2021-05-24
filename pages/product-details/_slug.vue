@@ -1,5 +1,5 @@
 <template>
-  <div class="product_detail p_page">
+  <div class="product_detail p_page" v-if="detailsData">
     <div class="container">
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
@@ -11,26 +11,28 @@
       <div class="detail_content">
         <div class="row">
           <div class="col-xl-6 col-lg-6">
-            <div class="detail_img">
-              <img src="~/assets/img/detail_img.png" alt="">
-            </div>
-            <div class="container_slider">
-              <div class="detail_carousel">
-                <VueSlickCarousel v-bind="settings">
-                  <div v-for="s in 6" :key="s">
-                    <img src="~/assets/img/detail_img.png" alt="">
-                  </div>
-                </VueSlickCarousel>
+            <div class="card_images">
+              <div class="detail_img">
+                <img 
+                  :src="this.$store.state.imageUrl + detailsData.product.product_images[0].image" 
+                  alt=""
+                >
+              </div>
+              <div class="container_slider">
+                <div class="detail_carousel">
+                  <VueSlickCarousel v-bind="settings">
+                    <div v-for="s in 6" :key="s">
+                      <img src="~/assets/img/detail_img.png" alt="">
+                    </div>
+                  </VueSlickCarousel>
+                </div>
               </div>
             </div>
           </div>
           <div class="col-xl-6 col-lg-6">
             <div class="product_info_card">
-              <div class="tags">
-                <p>Теги: <span class="tag">Спорт, Железо</span></p>
-              </div>
               <div class="blue_text">
-                <p class="title">Lorem ipsum dolor sit amet, consectetur.</p>
+                <p class="title">{{ detailsData.product.title }}</p>
               </div>
               <div class="review_info">
                 <div class="star_rating">
@@ -42,24 +44,22 @@
                 </div>
               </div>
               <div class="product_price">
-                <p>1222 KZT</p>
+                <p>{{detailsData.product.price}} KZT</p>
               </div>
               <div class="product_status">
                 <p>Налог: <span class="t_green">1000 KZT</span></p>
               </div>
               <div class="product_status">
-                <p>Бренд: <span class="t_green">Sony</span></p>
+                <p>Бренд: <span class="t_green">{{ detailsData.product.brand_name }}</span></p>
               </div>
               <div class="product_status">
-                <p>Код продукта: <span class="t_green">model1</span></p>
+                <p>Код продукта: <span class="t_green">{{ detailsData.product.artikul }}</span></p>
               </div>
               <div class="product_status">
                 <p>Доступность: <span class="t_green">в наличии</span></p>
               </div>
               <div class="product_description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Congue in tortor hac quam non pellentesque. Urna sit tristique pulvinar lorem amet,
-                volutpat, quis.
+                 {{detailsData.product.short_description}}
               </div>
               <div class="add_to_cart">
                 <div class="row align-items-center">
@@ -109,12 +109,15 @@
     </div>
     <div class="description_content">
       <div class="container">
-        <Description />
+        <Description 
+          :description="detailsData.product.description"
+          :reviews="detailsData.reviews"
+        />
       </div>
     </div>
     <div class="container">
       <div class="sales_content">
-        <layout-slider :title="'Похожие товары'"/>
+        <!-- <layout-slider :title="'Похожие товары'"/> -->
       </div>
     </div>
   </div>
@@ -122,10 +125,11 @@
 
 <script>
 export default {
-  name: "id",
+  name: "slug",
   data() {
     return {
-      id: this.$route.params.id,
+      slug: this.$route.params.slug,
+      detailsData: null,
       settings: {
         "dots": false,
         "arrows": true,
@@ -164,6 +168,12 @@ export default {
         ]
       }
     }
+  },
+  async mounted() {
+    await this.$axios.get('product?lang=' + this.$store.state.lang + '&slug=' + this.slug)
+    .then(res => {
+      this.detailsData = res.data
+    })
   }
 }
 </script>

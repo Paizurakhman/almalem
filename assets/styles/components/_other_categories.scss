@@ -14,12 +14,18 @@
           font-weight: 500;
         }
       }
+      .card_items {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
       .categories_img {
         img {
           width: 100%;
         }
       }
       .category_title {
+        margin: 0;
         font-size: 14px;
         p {
           font-weight: 300;
@@ -37,6 +43,7 @@
           font-weight: 700;
           margin-bottom: 0;
           margin-right: 10px;
+          color: #000000;
         }
         .arrow {
           width: 12px;

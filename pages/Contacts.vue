@@ -80,14 +80,14 @@
           <p>Свяжитесь с нами</p>
         </div>
         <div class="form">
-          <form action="">
+          <form @submit.prevent="sendContact">
             <div class="inputs">
               <div class="row">
                 <div class="col-xl-2 col-lg-2">
                   <span class="necessarily">Имя</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <input type="text">
+                  <input type="text" v-model="name">
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                   <span class="necessarily">Телефон</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <the-mask :mask="['#(###) ###-####']" />
+                  <the-mask :mask="['+#(###) ###-##-##']" v-model="phone"/>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@
                   <span class="necessarily">Email</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <input type="text">
+                  <input type="text" v-model="email">
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                   <span>Компания</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <input type="text">
+                  <input type="text" v-model="company">
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@
                   <span>Сообщение</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <textarea></textarea>
+                  <textarea v-model="message"></textarea>
                 </div>
               </div>
             </div>
@@ -144,12 +144,41 @@
 <script>
 export default {
   name: "Contacts",
-  data: () => ({
-    isShowMap: false
-  }),
+  data(){
+    return {
+      isShowMap: false,
+      name: '',
+      phone: '',
+      email: '',
+      company: '',
+      message: ''
+    }
+  },
   methods: {
     showMap () {
       this.isShowMap = !this.isShowMap
+    },
+    async sendContact () {
+      if (this.name && this.email && this.phone) {
+        await this.$axios.post('feedback', {
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        company: this.company,
+        message: this.message
+      })
+      .then(res => {
+        if(res.data) {
+          this.name = ''
+          this.phone = ''
+          this.email = ''
+          this.company = ''
+          this.message = ''
+        }
+      })
+      } else {
+          console.log("name required");
+      }
     }
   },
   // async mounted() {

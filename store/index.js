@@ -3,6 +3,7 @@ export const state = () => ({
     mobileNav: false,
     mobileShowCatalog: false,
     lang: 'ru',
+    imageUrl: 'http://cdn.astudiodigital.ru/'
 })
 
 export const mutations = {

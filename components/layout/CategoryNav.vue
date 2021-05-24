@@ -8,10 +8,15 @@
             <nuxt-link :to="{ name: 'catalog-slug', params: { slug: category.slug}}">{{ category.title }}</nuxt-link>
           </div>
           <div class="category_nav_text">
-            <nuxt-link to="/catalog">Lorem ipsum</nuxt-link>
-            <nuxt-link to="/catalog">Lorem ipsum</nuxt-link>
-            <nuxt-link to="/catalog">Lorem ipsum</nuxt-link>
-            <nuxt-link to="/catalog">Lorem ipsum</nuxt-link>
+            <nuxt-link v-for="catalog in category.subcategories" :key="catalog.id" :to="{
+              name: 'catalog-slug-id',
+              params: {
+                slug: category.slug,
+                id: catalog.slug
+              }
+            }">
+              {{ catalog.title }}
+            </nuxt-link>
           </div>
         </div>
       </div>

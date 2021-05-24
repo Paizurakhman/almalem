@@ -14,8 +14,8 @@
         </div>
       </div>
       <VueSlickCarousel class="slider_component" v-bind="settings" ref="carousel_products">
-        <nuxt-link to="/" v-for="s in 6" :key="s">
-          <product-card class="card_carousel"/>
+        <nuxt-link to="/" v-for="product in products" :key="product.id">
+          <product-card class="card_carousel" :product="product"/>
         </nuxt-link>
       </VueSlickCarousel>
     </div>
@@ -25,7 +25,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "Slider",
-  props: ['title'],
+  props: ['title', 'products'],
   data: () => ({
     settings: {
       "dots": false,
