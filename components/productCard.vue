@@ -18,7 +18,7 @@
         <div class="main_img">
           <div class="sale" v-if="product.sale">-{{product.sale}}%</div>
           <img
-            :src="this.$store.state.imageUrl + product.images.image" 
+            :src="this.$store.state.imageUrl + product.images.image"
             alt=""
             style="object-fit:cover"
             ref="image"
@@ -29,14 +29,15 @@
           <div class="price">
             <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">1400₸</span></p>
           </div>
-          <img class="overlay" src="~/assets/icon/black_basket.svg" alt="">
+          <img @click="addToCart(product.id)" class="overlay" src="~/assets/icon/black_basket.svg" alt="">
         </div>
       </div>
   </nuxt-link>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import {mapActions} from "vuex";
+
 export default {
   name: "productCard",
   props: ['product'],
@@ -46,13 +47,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'ADD_TO_CART'
+    ]),
+    addToCart (id) {
+      this.ADD_TO_CART(id)
+    }
   },
   mounted() {
     if(this.product) {
       this.width = this.$refs.image.width + 1
     }
   }
-  
+
 }
 </script>
 

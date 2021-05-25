@@ -13,16 +13,12 @@
           <div class="col-xl-6 col-lg-6">
             <div class="card_images">
               <div class="detail_img">
-                <!-- <img 
-                  :src="this.$store.state.imageUrl + detailsData.product.product_images[0].image" 
-                  alt=""
-                > -->
                 <VueSlickCarousel
                   ref="c1"
                   :asNavFor="$refs.c2"
                   :focusOnSelect="true">
-                  <div v-for="s in 6" :key="s">
-                      <img src="~/assets/img/detail_img.png" alt="">
+                  <div v-for="(image, index) in detailsData.product.product_images" :key="index">
+                      <img :src="imgUrl + image.image" alt="">
                   </div>
                 </VueSlickCarousel>
               </div>
@@ -50,7 +46,7 @@
               <div class="review_info">
                 <div class="star_rating">
                   <no-ssr placeholder="Loading...">
-                    <star-rating 
+                    <star-rating
                       v-model="rating"
                       v-bind="settingRating"
                       :read-only="true"
@@ -129,7 +125,7 @@
     </div>
     <div class="description_content">
       <div class="container">
-        <Description 
+        <Description
           :description="detailsData.product.description"
           :reviews="detailsData.reviews"
           :product_id="detailsData.product.id"
@@ -150,6 +146,7 @@ export default {
   data() {
     return {
       slug: this.$route.params.slug,
+      imgUrl: this.$store.state.imageUrl,
       detailsData: null,
       rating: null,
       settingRating: {
