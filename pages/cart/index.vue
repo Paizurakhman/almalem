@@ -8,7 +8,6 @@
       </div>
       <div class="p_title">
         <p>Корзина</p>
-        <pre>{{ GET_CART }}</pre>
       </div>
       <div class="table_wrapper">
         <table class="table table-bordered table-responsive-sm">
@@ -94,9 +93,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'GET_CART'
-    ])
+    get_cart() {
+      console.log(localStorage.getItem('cart'))
+    }
+  },
+  mounted() {
+    this.get_cart
   }
 }
 </script>

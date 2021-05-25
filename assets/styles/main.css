@@ -205,9 +205,6 @@
     margin-top: 20px;
   }
 }
-.product_card_item {
-  padding: 50px 0 0;
-}
 .product_card_item .product_item {
   margin-bottom: 30px;
 }
@@ -537,7 +534,6 @@ header .header .header_top .top_actions .my_account a {
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-  display: flex;
 }
 header .header .header_top .top_actions .my_account img {
   margin-right: 5px;
@@ -557,23 +553,30 @@ header .header .header_center .logo {
   margin-left: 40px;
 }
 header .header .header_center .search {
-  display: flex;
   max-width: 550px;
   width: 100%;
+  position: relative;
 }
-header .header .header_center .search input {
+header .header .header_center form {
+  display: flex;
+  width: 100%;
+}
+header .header .header_center form input {
   border: transparent;
   border-radius: 5px;
   padding: 18px 12px;
   width: 100%;
   outline: transparent;
 }
-header .header .header_center .search button {
+header .header .header_center form button {
   border: transparent;
   background: #000000;
   padding: 18px 24px;
   border-radius: 5px;
   margin-left: -10px;
+}
+header .header .header_center form button:hover {
+  background: #242424;
 }
 header .header .header_center .center_actions {
   display: flex;
@@ -847,6 +850,33 @@ footer .copy_right p {
     display: none;
   }
 }
+.result {
+  background: #ffffff;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  padding: 20px 0;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 10;
+}
+.result a {
+  display: block;
+  font-size: 14px;
+  color: #000000;
+  padding: 10px;
+}
+.result a:hover {
+  background: #C4C4C4;
+}
+.result .no_res {
+  padding: 0 10px;
+}
+
+.search_active input {
+  border-bottom-left-radius: 0 !important;
+}
+
 .footer_info p {
   font-weight: 500;
 }
@@ -1226,10 +1256,14 @@ footer .copy_right p {
   opacity: 1;
 }
 .product_card .product_title {
+  margin-bottom: 10px;
+}
+.product_card .product_title p {
   color: #586DCD;
   font-size: 14px;
   font-weight: 500;
-  margin-bottom: 10px;
+  height: 50px;
+  overflow: hidden;
 }
 .product_card .card_header {
   display: flex;
@@ -1455,9 +1489,11 @@ footer .copy_right p {
 }
 .product_card .main_img {
   position: relative;
+  margin: 20px 0;
 }
 .product_card .main_img img {
-  width: 100%;
+  width: 90%;
+  object-fit: contain;
 }
 .product_card:hover .overlay {
   visibility: visible;
