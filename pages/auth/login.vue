@@ -21,44 +21,46 @@
                   consectetur adipiscing elit. Ut felis magna tristique non ipsum donec.
                   Proin aenean sed placerat ut.</p>
               </div>
-              <button class="btn btn_silver">Продолжить</button>
+              <nuxt-link :to="{name: 'auth-register'}" class="btn btn_silver">Продолжить</nuxt-link>
             </div>
           </div>
 
           <div class="col-xl-6 col-lg-6">
-            <div class="address_card">
-              <div class="card_title">
-                <p>У меня есть аккаунт</p>
-              </div>
-              <div class="c_title">
-                <p class="b_text">Логин</p>
-                <div class="contacts_form">
+            <form @submit.prevent="handleLogin">
+              <div class="address_card">
+                <div class="card_title">
+                  <p>У меня есть аккаунт</p>
+                </div>
+                <div class="c_title">
+                  <p class="b_text">Логин</p>
+                  <div class="contacts_form">
 
-                  <div class="form">
-                    <form>
-                      <div class="inputs">
-                        <span>E-mail</span>
-                        <input type="email">
-                      </div>
-                      <div class="inputs">
-                        <span>Пароль</span>
-                        <input type="password">
-                      </div>
-                    </form>
+                    <div class="form">
+                      <form>
+                        <div class="inputs">
+                          <span>E-mail</span>
+                          <input type="email" v-model="email">
+                        </div>
+                        <div class="inputs">
+                          <span>Пароль</span>
+                          <input type="password" v-model="password">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="action_auth">
+                  <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-6 o_2">
+                      <button class="btn btn_silver">Продолжить</button>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 t_a_r_m o_1 m_b_30">
+                      <nuxt-link to="/">Не помню логин или пароль</nuxt-link>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="action_auth">
-                <div class="row align-items-center">
-                  <div class="col-xl-6 col-lg-6 o_2">
-                    <button class="btn btn_silver">Продолжить</button>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 t_a_r_m o_1 m_b_30">
-                    <nuxt-link to="/">Не помню логин или пароль</nuxt-link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -68,7 +70,28 @@
 
 <script>
 export default {
-  name: "login"
+  name: "login",
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async handleLogin () {
+      await this.$axios.$post('login', {
+        email: this.email,
+        password: this.password
+      })
+      .then((res) => {
+        localStorage.setItem('token', res.token)
+
+        this.$router.push({
+          name: 'auth-profile'
+        })
+      })
+    }
+  }
 }
 </script>
 

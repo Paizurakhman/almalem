@@ -8,6 +8,7 @@
       </div>
       <div class="p_title">
         <p>Корзина</p>
+        <pre>{{ GET_CART }}</pre>
       </div>
       <div class="table_wrapper">
         <table class="table table-bordered table-responsive-sm">
@@ -83,8 +84,20 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "basket"
+  name: "basket",
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'GET_CART'
+    ])
+  }
 }
 </script>
 

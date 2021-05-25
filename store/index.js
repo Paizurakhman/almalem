@@ -4,7 +4,7 @@ export const state = () => ({
     mobileShowCatalog: false,
     lang: 'ru',
     imageUrl: 'http://cdn.astudiodigital.ru/',
-    cart: []
+    cart: [],
 })
 
 export const mutations = {
@@ -18,10 +18,24 @@ export const mutations = {
         state.mobileShowCatalog = !state.mobileShowCatalog
     },
     SET_CART(state, id) {
-      state.cart.push(id)
-      localStorage.setItem('cart', state.cart.filter((v) => {
-        return id !== v
-      }))
+      let cartData = JSON.parse(localStorage.getItem('cart')) || null
+      if (cartData !== null) {
+        if (cartData.find(item => item === id)) {
+          localStorage.setItem('cart', JSON.stringify(cartData.filter(v => {
+            return v !== id
+          })))
+          state.cart = state.cart.filter(el => {
+            return el !== id
+          })
+        }else {
+          state.cart.push(id)
+          localStorage.setItem('cart', JSON.stringify(state.cart))
+        }
+      }
+      else {
+        state.cart.push(id)
+        localStorage.setItem('cart', JSON.stringify(state.cart))
+      }
     }
 }
 
@@ -49,5 +63,8 @@ export const getters = {
     },
     GET_CART (state) {
       return state.cart
+    },
+    loggedIn () {
+      return localStorage.getItem('token') || null
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="discounts_content p_page">
+  <div class="discounts_content p_page" v-if="saleData">
     <div class="container">
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
@@ -14,13 +14,13 @@
       </div>
       <div class="product_card_item">
         <div class="row" v-if="current === 'grid'">
-          <nuxt-link class="col-xl-3 col-lg-3" to="/" v-for="s in 6" :key="s">
-              <product-card class="product_item"></product-card>
-          </nuxt-link>
+          <div class="col-xl-3 col-lg-3" v-for="product in saleData.products.data" :key="product.id">
+              <product-card class="product_item" :product="product"></product-card>
+          </div>
         </div>
 
-        <nuxt-link to="/" v-if="current === 'list'" v-for="s in 6" :key="s">
-          <product-col-card class="product_item"/>
+        <nuxt-link to="/" v-if="current === 'list'" v-for="product in saleData.products.data" :key="product.id">
+          <product-col-card class="product_item" :product="product"/>
         </nuxt-link>
       </div>
       <div class="pagination_items">
@@ -35,9 +35,18 @@ import Pagination from "@/components/layout/Pagination";
 export default {
   name: "Discounts",
   components: { Pagination },
-  data: () => ({
-    current: 'grid'
-  })
+  data() {
+    return {
+      current: 'grid',
+      saleData: null
+    }
+  },
+  async mounted() {
+    await this.$axios.$get('sale?lang=' + this.$store.state.lang)
+    .then(res => {
+      this.saleData = res
+    })
+  }
 }
 </script>
 

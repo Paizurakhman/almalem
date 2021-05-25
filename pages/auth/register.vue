@@ -119,7 +119,9 @@ export default {
         password_confirmation: this.confirm_password
       })
       .then(res => {
-        console.log(res.data);
+        this.$router.push({
+          name: 'auth-login'
+        })
       })
     }
   }

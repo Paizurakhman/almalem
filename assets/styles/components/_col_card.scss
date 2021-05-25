@@ -5,8 +5,10 @@
   }
   .main_img {
     position: relative;
+    margin: 20px 0;
     img {
-      width: 100%;
+      width: 90%;
+      object-fit: contain;
     }
   }
   &:hover {

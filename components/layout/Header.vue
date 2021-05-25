@@ -22,13 +22,13 @@
           </div>
           <div class="top_actions">
             <div class="my_account">
-              <nuxt-link to="/auth/profile">
+              <nuxt-link to="/auth/profile" v-if="loggedIn">
                 <img src="~/assets/icon/main/user.svg" alt=""
                 ><span> Мой аккаунт</span></nuxt-link>
-<!--              <div class="auth_action">-->
-<!--                <nuxt-link to="/auth/login">Войти</nuxt-link> /-->
-<!--                <nuxt-link to="/auth/register">Регистрация</nuxt-link>-->
-<!--              </div>-->
+              <div class="auth_action" v-if="!loggedIn">
+                <nuxt-link to="/auth/login">Войти</nuxt-link> /
+                <nuxt-link to="/auth/register">Регистрация</nuxt-link>
+              </div>
             </div>
             <div class="language">
               <div
@@ -48,12 +48,7 @@
           <div class="logo">
             <img src="~/assets/logo.svg" alt="" @click="createCookies">
           </div>
-          <div class="search">
-            <input type="text" placeholder="Поиск по товарам">
-            <button>
-              <span><img src="~/assets/icon/main/search.svg" alt=""></span>
-            </button>
-          </div>
+          <layout-search />
           <div class="center_actions">
             <nuxt-link :to="{ name: 'favorites'}">
               <div class="like">
@@ -232,7 +227,8 @@ export default {
       'showNav'
     ]),
     ...mapGetters([
-      'getMobileNav'
+      'getMobileNav',
+      'loggedIn'
     ]),
     currentLanguage() {
       return this.currentLang

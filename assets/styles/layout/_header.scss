@@ -54,7 +54,6 @@ header {
             color: #ffffff;
             font-size: 14px;
             font-weight: 500;
-            display: flex;
           }
           img {
             margin-right: 5px;
@@ -76,8 +75,12 @@ header {
         margin-left: 40px;
       }
       .search {
-        display: flex;
         max-width: 550px;
+        width: 100%;
+        position: relative;
+      }
+      form {
+        display: flex;
         width: 100%;
         input {
           border: transparent;
@@ -92,6 +95,9 @@ header {
           padding: 18px 24px;
           border-radius: 5px;
           margin-left: -10px;
+          &:hover {
+            background: #242424;
+          }
         }
       }
       .center_actions {

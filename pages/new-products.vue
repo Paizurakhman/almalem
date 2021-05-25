@@ -46,7 +46,6 @@ export default {
     await this.$axios.get('new?lang=' + this.$store.state.lang)
     .then(res => {
       this.newProducts = res.data
-      console.log(res.data);
     })
     console.log('mounted');
   }
