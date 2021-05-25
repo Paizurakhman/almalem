@@ -1,15 +1,17 @@
 <template>
-  <div class="inner_brand p_page">
+  <div class="inner_brand p_page" v-if="innerData">
     <div class="container">
         <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/brands">Бренды</nuxt-link>
+        <img src="~/assets/icon/arrow_silver.svg" alt="">
+        <nuxt-link to="/brands">{{ innerData.brands.title }}</nuxt-link>
       </div>
       <div class="p_title">
         <p>Бренды</p>
       </div>
-      <div class="inner_brand_content" v-if="innerData">
+      <div class="inner_brand_content">
         <div class="inner_brand_wrapper">
           <div class="brand_item">
             <img :src="this.$store.state.imageUrl + innerData.brands.image" alt="">
@@ -21,9 +23,9 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" v-if="innerData.products.data.length">
       <div class="sales_content">
-        <!-- <layout-slider :title="'Похожие товары'" :products="innerData.products.data"/> -->
+        <layout-slider :title="'Похожие товары'" :products="innerData.products.data"/>
       </div>
     </div>
   </div>

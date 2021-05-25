@@ -15,10 +15,14 @@
     opacity: 1;
   }
   .product_title {
-    color: #586DCD;
-    font-size: 14px;
-    font-weight: 500;
     margin-bottom: 10px;
+    p {
+      color: #586DCD;
+      font-size: 14px;
+      font-weight: 500;
+      height: 50px;
+      overflow: hidden;
+    }
   }
   .card_header {
     display: flex;

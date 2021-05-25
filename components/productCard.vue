@@ -7,7 +7,7 @@
   }">
       <div class="product_card">
         <div class="product_title">
-          {{ product.title }}
+          <p>{{ product.title }}</p>
         </div>
         <div class="card_header overlay">
           <div class="company_name">

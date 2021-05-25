@@ -56,9 +56,9 @@
                   </div>
                 </div>
                 
-                <!-- <nuxt-link to="/" v-if="current === 'list'" v-for="s in 6" :key="s">
-                  <product-col-card class="product_item responsive_p_i"/>
-                </nuxt-link> -->
+                <div v-if="current === 'list'" v-for="product in categoryData.products.data" :key="product.id">
+                  <product-col-card class="product_item responsive_p_i" :product="product"/>
+                </div>
               </div>
             </div>
             <div class="pagination_items">
