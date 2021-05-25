@@ -115,7 +115,8 @@ export default {
         last_name: this.surname,
         phone: this.phone_number,
         email: this.email,
-        password: this.password
+        password: this.password,
+        password_confirmation: this.confirm_password
       })
       .then(res => {
         console.log(res.data);
