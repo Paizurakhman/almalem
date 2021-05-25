@@ -7,7 +7,7 @@
   }">
       <div class="product_card">
         <div class="product_title">
-          <p>{{ product.title }}</p>
+          <p>{{ product.title | truncate }} </p>
         </div>
         <div class="card_header overlay">
           <div class="company_name">

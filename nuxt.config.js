@@ -34,6 +34,7 @@ export default {
         '~/plugins/vue-no-ssr',
         '~/plugins/vue-cookies',
         '~/plugins/picker',
+        '~/plugins/filter',
         { src: '~/plugins/star-rating', mode: 'client'}
     ],
 
