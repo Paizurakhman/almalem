@@ -9,96 +9,78 @@
       <div class="p_title">
         <p>Корзина</p>
       </div>
-      <div class="table_wrapper">
+      <div class="table_wrapper" v-if="cartData">
         <table class="table table-bordered table-responsive-sm">
           <thead>
-          <tr>
-            <th scope="col" width="190px">Картинка</th>
-            <th scope="col" width="440px">Название</th>
-            <th scope="col" width="190px">Количество</th>
-            <th scope="col" width="190px">Цена за шт.</th>
-            <th scope="col" width="190px">Общая цена</th>
-          </tr>
+            <tr>
+              <th scope="col" width="190px">Картинка</th>
+              <th scope="col" width="440px">Название</th>
+              <th scope="col" width="190px">Количество</th>
+              <th scope="col" width="190px">Цена за шт.</th>
+              <th scope="col" width="190px">Общая цена</th>
+            </tr>
           </thead>
           <tbody>
-          <tr height="100px">
-            <th scope="row" width="190px">
-              <div class="table_img">
-                <img src="~/assets/img/motor.png" alt="">
-              </div>
-            </th>
-            <td width="440px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-            <td width="190px">
-              <div class="amount">
-                <input type="text" value="1">
-                <div class="clear">
-                  <img src="~/assets/icon/clear_red.svg" alt="">
-                </div>
-              </div>
-            </td>
-            <td width="190px">
-              <p class="t_price price">1400 ₸ <span class="old_price">2400 ₸</span></p>
-            </td>
-            <td width="190px">
-              <div class="table_action">
-                <p class="t_price price">1400 ₸</p>
-                <img class="delete" src="~/assets/icon/clear.svg" alt="">
-              </div>
-            </td>
-          </tr>
-          <tr height="100px">
-            <th scope="row" width="190px">
-              <div class="table_img">
-                <img src="~/assets/img/product.png" alt="">
-              </div>
-            </th>
-            <td width="440px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-            <td width="190px">
-              <div class="amount">
-                <input type="text" value="1">
-                <div class="clear">
-                  <img src="~/assets/icon/clear_red.svg" alt="">
-                </div>
-              </div>
-            </td>
-            <td width="190px">
-              <p class="t_price price">1400 ₸ <span class="old_price">2400 ₸</span></p>
-            </td>
-            <td width="190px">
-              <div class="table_action">
-                <p class="t_price price">1400 ₸</p>
-                <img class="delete" src="~/assets/icon/clear.svg" alt="">
-              </div>
-            </td>
-          </tr>
+          <table-row v-for="product in cartData.products" :key="product.id" :product="product" @deleteCartProduct="deleteCartProduct"/>
           </tbody>
+
         </table>
         <div class="t_action">
           <button class="btn btn_silver">Продолжить покупки</button>
           <nuxt-link :to="{ name: 'cart-checkout' }" class="btn btn_silver">Купить</nuxt-link>
         </div>
       </div>
+      <div v-else>No products</div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
 
+import TableRow from "../../components/tableRow";
 export default {
   name: "basket",
+  components: {TableRow},
   data() {
     return {
-
+      cartData: null,
+      cart: null,
     }
   },
   computed: {
-    get_cart() {
-      console.log(localStorage.getItem('cart'))
+    get_cart () {
+      if (this.cart.length) {
+        this.$axios.$get('card-product', {
+          params: {
+            lang: this.$store.state.lang,
+            product_id: this.cart.map(item => {
+              return item.id
+            })
+          }
+        })
+          .then(res => {
+            this.cartData = res
+          })
+      }else {
+        this.cartData = null
+      }
     }
   },
-  mounted() {
-    this.get_cart
+  async mounted() {
+    this.cart = JSON.parse(localStorage.getItem('cart'))
+    if (this.cart) {
+      this.get_cart
+    }
+  },
+  methods: {
+    deleteCartProduct (id) {
+      this.cart = this.cart.filter(rm => {
+          return rm.id !== id
+      })
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+
+      this.get_cart
+    }
   }
 }
 </script>

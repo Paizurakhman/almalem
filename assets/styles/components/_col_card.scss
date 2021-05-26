@@ -1,7 +1,19 @@
 .product_card {
   margin: 20px 0;
+  overflow: hidden;
   .overlay {
     visibility: hidden;
+    img {
+      transition: all 0.5s ease;
+      transform: translateX(100px);
+    }
+    p {
+      transition: all 0.5s ease;
+      transform: translateX(-100px);
+    }
+  }
+  .inline_img {
+    display: inline-block;
   }
   .main_img {
     position: relative;
@@ -14,6 +26,14 @@
   &:hover {
     .overlay {
       visibility: visible;
+      img {
+        transition: all 0.5s ease;
+        transform: translateX(0);
+      }
+      p {
+        transition: all 0.5s ease;
+        transform: translateX(0);
+      }
     }
   }
 }

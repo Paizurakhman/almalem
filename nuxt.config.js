@@ -15,7 +15,8 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/logo.svg' },
-            { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css' }
+            { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css' },
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
         ]
     },
 

@@ -29,11 +29,14 @@
           <div class="price">
             <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">{{ product.current_price + (product.current_price * product.sale / 100) }} ₸</span></p>
           </div>
-          <img
-            @click.stop.prevent="addToCart(product.id)"
-            class="overlay"
-            src="~/assets/icon/black_basket.svg"
-            alt="">
+          <div class="inline_img overlay">
+<!--            <span class="material-icons md-36">shopping_cart</span>-->
+<!--            <span class="material-icons">remove_shopping_cart</span>-->
+            <img
+              @click.stop.prevent="addToCart(product.id)"
+              src="~/assets/icon/black_basket.svg"
+              alt="">
+          </div>
         </div>
       </div>
   </nuxt-link>
