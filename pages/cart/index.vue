@@ -21,7 +21,12 @@
             </tr>
           </thead>
           <tbody>
-          <table-row v-for="product in cartData.products" :key="product.id" :product="product" @deleteCartProduct="deleteCartProduct"/>
+          <table-row
+            v-for="product in cartData.products"
+            :key="product.id"
+            :product="product"
+            :products="cartData.products"
+            @deleteCartProduct="deleteCartProduct"/>
           </tbody>
 
         </table>

@@ -19,7 +19,7 @@
       </td>
       <td width="190px">
         <div class="table_action">
-          <p class="t_price price">1400 ₸</p>
+          <p class="t_price price">{{ singleProdTotalPrice }} ₸</p>
           <img @click="deleteCart(product.id)" class="delete" src="~/assets/icon/clear.svg" alt="">
         </div>
       </td>
@@ -29,17 +29,31 @@
 <script>
 export default {
   name: "tableRow",
-  props: ['product'],
+  props: ['product', 'products'],
   data() {
     return {
-      count: 1
+      count: 1,
     }
   },
   methods: {
     deleteCart(id) {
       this.$emit('deleteCartProduct', id)
     }
-  }
+  },
+  computed: {
+    singleProdTotalPrice() {
+      let cart = JSON.parse(localStorage.getItem('cart'))
+      let price = []
+      for (const i of cart) {
+        this.products.filter(elem => {
+          if (i.id === elem.id) {
+            price.push(elem.price)
+          }
+        })
+      }
+      return price
+    }
+  },
 }
 </script>
 
