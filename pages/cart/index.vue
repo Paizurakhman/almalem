@@ -22,10 +22,11 @@
           </thead>
           <tbody>
           <table-row
-            v-for="product in cartData.products"
+            v-for="(product, index) in cartData.products"
             :key="product.id"
             :product="product"
             :products="cartData.products"
+            :index="index"
             @deleteCartProduct="deleteCartProduct"/>
           </tbody>
 

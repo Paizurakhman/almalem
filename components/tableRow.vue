@@ -19,7 +19,7 @@
       </td>
       <td width="190px">
         <div class="table_action">
-          <p class="t_price price">{{ singleProdTotalPrice }} ₸</p>
+          <p class="t_price price">{{ singleProdTotalPrice[index].t_price }} ₸</p>
           <img @click="deleteCart(product.id)" class="delete" src="~/assets/icon/clear.svg" alt="">
         </div>
       </td>
@@ -29,7 +29,7 @@
 <script>
 export default {
   name: "tableRow",
-  props: ['product', 'products'],
+  props: ['product', 'products', 'index'],
   data() {
     return {
       count: 1,
@@ -47,10 +47,16 @@ export default {
       for (const i of cart) {
         this.products.filter(elem => {
           if (i.id === elem.id) {
-            price.push(elem.price)
+            price.push({
+              p_id: elem.id,
+              t_price: elem.price * i.count
+            })
           }
         })
       }
+      price.sort((a, b) => {
+        return a.p_id - b.p_id
+      })
       return price
     }
   },
