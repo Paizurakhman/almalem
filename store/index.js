@@ -21,14 +21,14 @@ export const mutations = {
       let cartData = JSON.parse(localStorage.getItem('cart')) || null
       if (cartData !== null) {
         state.cart = cartData
-        if (cartData) {
+        if (cartData.find(el => el === id)) {
+          localStorage.setItem('cart', JSON.stringify(cartData.filter(item => {
+            return item !== id
+          })))
+        }
+        else {
           state.cart.push(id)
           localStorage.setItem('cart', JSON.stringify(state.cart))
-        }
-        if (cartData.find(el => el === id)) {
-          state.cart = cartData.filter(item => {
-            return item !== id
-          })
         }
       }
       else {
