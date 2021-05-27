@@ -9,7 +9,7 @@
       <div class="p_title">
         <p>Каталог</p>
       </div>
-      <div class="catalog_content">
+      <div class="catalog_content" v-if="productsData">
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="category_tab_nav">
@@ -49,17 +49,17 @@
                   <category-tab />
                 </no-ssr>
               </div>
-              <!-- <div class="product_card_item">
+              <div class="product_card_item">
                 <div class="row" v-if="current === 'grid'">
-                  <nuxt-link class="col-xl-4 col-lg-4 col-md-4" to="/" v-for="s in 6" :key="s">
-                    <product-card class="product_item"></product-card>
-                  </nuxt-link>
+                  <div class="col-xl-4 col-lg-4 col-md-4" v-for="product in productsData.products.data" :key="product.id">
+                    <product-card class="product_item" :product="product"></product-card>
+                  </div>
                 </div>
 
-                <nuxt-link to="/" v-if="current === 'list'" v-for="s in 6" :key="s">
-                  <product-col-card class="product_item responsive_p_i"/>
-                </nuxt-link>
-              </div> -->
+                <div v-if="current === 'list'" v-for="product in productsData.products.data" :key="product.id">
+                  <product-col-card class="product_item responsive_p_i" :product="product"/>
+                </div>
+              </div>
             </div>
             <div class="pagination_items">
               <layout-pagination />
@@ -91,7 +91,7 @@ export default {
   async mounted() {
     await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug)
     .then(res => {
-      console.log(res.data);
+      this.productsData = res.data
     })
   }
 }

@@ -4,7 +4,7 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="" />
-        <nuxt-link to="/brands">Бренды</nuxt-link>
+        <nuxt-link to="/cart">Корзина</nuxt-link>
       </div>
       <div class="p_title">
         <p>Корзина</p>

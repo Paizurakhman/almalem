@@ -22,10 +22,10 @@
           </div>
           <div class="top_actions">
             <div class="my_account">
-              <nuxt-link to="/auth/profile" v-if="loggedIn">
+              <nuxt-link to="/auth/profile" v-if="token">
                 <img src="~/assets/icon/main/user.svg" alt=""
                 ><span> Мой аккаунт</span></nuxt-link>
-              <div class="auth_action" v-if="!loggedIn">
+              <div class="auth_action" v-if="!token">
                 <nuxt-link to="/auth/login">Войти</nuxt-link> /
                 <nuxt-link to="/auth/register">Регистрация</nuxt-link>
               </div>
@@ -197,14 +197,17 @@ export default {
       headerData: null,
       currentLang: this.lang[0],
       getLanguage: false,
-      city: null
+      city: null,
+      token: null
     }
   },
   watch: {
     $route(to, from) {
-
+      this.token = localStorage.getItem('token')
     }
   },
+
+
   methods: {
     ...mapActions([
       'showAction',
@@ -223,16 +226,23 @@ export default {
     }
   },
   computed: {
+    // logout(){
+    //   if(localStorage.getItem('token') !== null){
+    //     console.log('true')
+    //   }else{
+    //     console.log('false')
+    //   }
+    // },
+
     ...mapState([
       'showNav'
     ]),
     ...mapGetters([
       'getMobileNav',
-      'loggedIn'
     ]),
     currentLanguage() {
       return this.currentLang
-    }
+    },
   },
   updated() {
     if (this.getMobileNav) {
@@ -243,6 +253,7 @@ export default {
     }
   },
   mounted() {
+    this.token = localStorage.getItem('token')
     this.$axios.get('get-header?lang=' + this.$store.state.lang)
     .then(res => {
       this.headerData = res.data;

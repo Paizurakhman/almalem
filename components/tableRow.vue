@@ -8,7 +8,7 @@
       <td width="440px">{{ product.title }}</td>
       <td width="190px">
         <div class="amount">
-          <input type="text" v-model="count">
+          <input type="text" v-model="count" @change="counter(product.id)">
           <div class="clear">
             <img src="~/assets/icon/clear_red.svg" alt="">
           </div>
@@ -33,18 +33,29 @@ export default {
   data() {
     return {
       count: 1,
+      cart: null
     }
   },
   methods: {
     deleteCart(id) {
       this.$emit('deleteCartProduct', id)
+    },
+    counter (id) {
+      if (this.count) {
+        this.cart.filter(v => {
+          if (v.id === id) {
+            v.count = Number(this.count)
+          }
+        })
+        localStorage.setItem('cart', JSON.stringify(this.cart))
+      }
     }
   },
   computed: {
     singleProdTotalPrice() {
-      let cart = JSON.parse(localStorage.getItem('cart'))
+      this.cart = JSON.parse(localStorage.getItem('cart'))
       let price = []
-      for (const i of cart) {
+      for (const i of this.cart) {
         this.products.filter(elem => {
           if (i.id === elem.id) {
             price.push({
