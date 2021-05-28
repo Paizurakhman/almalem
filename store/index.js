@@ -5,6 +5,7 @@ export const state = () => ({
     lang: 'ru',
     imageUrl: 'http://cdn.astudiodigital.ru/',
     cart: [],
+    favorites: []
 })
 
 export const mutations = {
@@ -41,6 +42,28 @@ export const mutations = {
         })
         localStorage.setItem('cart', JSON.stringify(state.cart))
       }
+    },
+    SET_FAVORITE (state, product) {
+      let favorite = JSON.parse(localStorage.getItem('favorite')) || null
+      if (favorite !== null) {
+        state.favorites = favorite.products
+
+        if (favorite.products.find(el => el.id === product.id)) {
+          localStorage.setItem('favorite', JSON.stringify(favorite.products.filter(val => {
+            return val.id !== product.id
+          })))
+        }else  {
+          state.favorites.push(product)
+          localStorage.setItem('favorite', JSON.stringify({
+            products: state.favorites
+          }))
+        }
+      }else {
+        state.favorites.push(product)
+        localStorage.setItem('favorite', JSON.stringify({
+          products: state.favorites
+        }))
+      }
     }
 }
 
@@ -56,6 +79,9 @@ export const actions = {
     },
     ADD_TO_CART({commit}, id) {
       commit('SET_CART', id)
+    },
+    ADD_FAVORITE ({commit}, product) {
+      commit('SET_FAVORITE', product)
     }
 }
 

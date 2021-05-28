@@ -55,6 +55,14 @@
 <script>
 export default {
   name: "history",
+  data() {
+    return {
+
+    }
+  },
+  async mounted() {
+    await this.$axios.$post('user-orders?token=' + localStorage.getItem('token'))
+  }
 };
 </script>
 

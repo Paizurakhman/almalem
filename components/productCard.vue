@@ -13,7 +13,7 @@
           <div class="company_name">
             <p>Company</p>
           </div>
-          <img src="~/assets/icon/black_heart.svg" alt="">
+          <img @click.stop.prevent="addFavorite(product)" src="~/assets/icon/black_heart.svg" alt="">
         </div>
         <div class="main_img">
           <div class="sale" v-if="product.sale">-{{product.sale}}%</div>
@@ -55,10 +55,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'ADD_TO_CART'
+      'ADD_TO_CART',
+      'ADD_FAVORITE'
     ]),
     addToCart (id) {
       this.ADD_TO_CART(id)
+    },
+    addFavorite (product) {
+      this.ADD_FAVORITE(product)
     }
   },
   mounted() {
