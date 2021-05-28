@@ -36,7 +36,7 @@ export default {
         '~/plugins/vue-cookies',
         '~/plugins/picker',
         '~/plugins/filter',
-        '~/plugins/route',
+        // '~/plugins/route',
         { src: '~/plugins/star-rating', mode: 'client'}
     ],
 

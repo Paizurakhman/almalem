@@ -126,7 +126,8 @@ export default {
         name: '',
         phone: '',
         email: '',
-        comment: ''
+        comment: '',
+        token: null
       },
       address: {
         region: '',
@@ -175,6 +176,7 @@ export default {
       this.get_cart
     },
     async handleBuy() {
+      this.main_info.token = localStorage.getItem('token')
       await this.$axios.$post('get-order', {
         main_info: this.main_info,
         products: this.cart,

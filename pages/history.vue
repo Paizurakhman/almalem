@@ -11,7 +11,7 @@
       <div class="p_title">
         <p>Активные заказы</p>
       </div>
-      <div class="table_wrapper">
+      <div class="table_wrapper" v-if="orderData">
         <table class="table table-bordered table-responsive-sm">
           <thead>
             <tr>
@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr height="100px">
+            <tr height="100px" v-for="order in orderData.orders" :key="order.id">
               <th scope="row" width="190px">324234</th>
               <td width="550px">
                 <div class="my_order_name">
@@ -51,11 +51,14 @@ export default {
   name: "history",
   data() {
     return {
-
+      orderData: null
     }
   },
   async mounted() {
     await this.$axios.$post('user-orders?token=' + localStorage.getItem('token'))
+    .then(res => {
+      this.orderData = res
+    })
   }
 };
 </script>

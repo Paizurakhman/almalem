@@ -49,9 +49,11 @@ export const mutations = {
         state.favorites = favorite.products
 
         if (favorite.products.find(el => el.id === product.id)) {
-          localStorage.setItem('favorite', JSON.stringify(favorite.products.filter(val => {
-            return val.id !== product.id
-          })))
+          localStorage.setItem('favorite', JSON.stringify({
+            products: favorite.products.filter(val => {
+              return val.id !== product.id
+            })
+          }))
         }else  {
           state.favorites.push(product)
           localStorage.setItem('favorite', JSON.stringify({

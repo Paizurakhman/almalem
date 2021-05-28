@@ -53,7 +53,7 @@
                       <button class="btn btn_silver">Продолжить</button>
                     </div>
                     <div class="col-xl-6 col-lg-6 t_a_r_m o_1 m_b_30">
-                      <nuxt-link to="/">Не помню логин или пароль</nuxt-link>
+                      <nuxt-link to="/auth/forgot-password">Не помню логин или пароль</nuxt-link>
                     </div>
                   </div>
                 </div>

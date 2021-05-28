@@ -4,74 +4,83 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="" />
-        <nuxt-link to="/brands">Бренды</nuxt-link>
+        <nuxt-link to="/favorites">Избранное</nuxt-link>
       </div>
       <div class="p_title">
         <p>Мои избранные товары</p>
       </div>
-      <div class="table_wrapper">
-        <table class="table table-bordered table-responsive-sm">
-          <thead>
-          <tr>
-            <th scope="col" width="190px">Картинка</th>
-            <th scope="col" width="440px">Название</th>
-            <th scope="col" width="190px">Наличие</th>
-            <th scope="col" width="190px">Цена за шт.</th>
-            <th scope="col" width="190px">Действие</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr height="100px">
-            <th scope="row" width="190px">
-              <div class="table_img">
-                <img src="~/assets/img/motor.png" alt="">
-              </div>
-            </th>
-            <td width="440px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-            <td width="190px">В наличии</td>
-            <td width="190px">
-              <p class="t_price price">1400 ₸ <span class="old_price">2400 ₸</span></p>
-            </td>
-            <td width="190px">
-              <div class="table_action">
-                <img class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
-                <img class="delete" src="~/assets/icon/clear.svg" alt="">
-              </div>
-            </td>
-          </tr>
-          <tr height="100px">
-            <th scope="row" width="190px">
-              <div class="table_img">
-                <img src="~/assets/img/product.png" alt="">
-              </div>
-            </th>
-            <td width="440px">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-            <td width="190px">В наличии</td>
-            <td width="190px">
-              <p class="t_price price">1400 ₸ <span class="old_price">2400 ₸</span></p>
-            </td>
-            <td width="190px">
-              <div class="table_action">
-                <img class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
-                <img class="delete" src="~/assets/icon/clear.svg" alt="">
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="contacts_form">
-        <div class="contacts_action">
-          <button class="btn btn_silver">Вперед</button>
+      <div v-if="favoriteData">
+        <div v-if="favoriteData.products.length">
+          <div class="table_wrapper">
+            <table class="table table-bordered table-responsive-sm">
+              <thead>
+              <tr>
+                <th scope="col" width="190px">Картинка</th>
+                <th scope="col" width="440px">Название</th>
+                <th scope="col" width="190px">Наличие</th>
+                <th scope="col" width="190px">Цена за шт.</th>
+                <th scope="col" width="190px">Действие</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr height="100px" v-for="favorite in favoriteData.products" :key="favorite.id">
+                <th scope="row" width="190px">
+                  <div class="table_img">
+                    <img :src="'http://cdn.astudiodigital.ru/' + favorite.images.image" alt="">
+                  </div>
+                </th>
+                <td width="440px">{{ favorite.title }}</td>
+                <td width="190px">В наличии</td>
+                <td width="190px">
+                  <p class="t_price price">{{favorite.price}} ₸ <span v-if="favorite.sale" class="old_price">2400 ₸</span></p>
+                </td>
+                <td width="190px">
+                  <div class="table_action">
+                    <img class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
+                    <img class="delete" @click="deleteFavorite(favorite)" src="~/assets/icon/clear.svg" alt="">
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contacts_form">
+            <div class="contacts_action">
+              <button class="btn btn_silver">Вперед</button>
+            </div>
+          </div>
         </div>
+        <div v-else>No favorite products</div>
       </div>
+      <div v-else>No favorite products</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "favorites"
+  name: "favorites",
+  data() {
+    return {
+      favoriteData: null
+    }
+  },
+  methods: {
+    deleteFavorite (product) {
+      localStorage.setItem('favorite', JSON.stringify({
+        products: this.favoriteData.products.filter(val => {
+          return val.id !== product.id
+        })
+      }))
+      this.favoriteData = JSON.parse(localStorage.getItem('favorite'))
+    }
+  },
+  mounted() {
+    let data = JSON.parse(localStorage.getItem('favorite'))
+    if (data) {
+      this.favoriteData = JSON.parse(localStorage.getItem('favorite'))
+    }
+  }
 }
 </script>
 
