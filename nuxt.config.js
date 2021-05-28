@@ -36,6 +36,7 @@ export default {
         '~/plugins/vue-cookies',
         '~/plugins/picker',
         '~/plugins/filter',
+        '~/plugins/route',
         { src: '~/plugins/star-rating', mode: 'client'}
     ],
 
@@ -57,5 +58,6 @@ export default {
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {}
+    build: {},
+
 }

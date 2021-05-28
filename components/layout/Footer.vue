@@ -67,14 +67,23 @@
                 </div>
               </div>
               <div class="col-xl-7 col-lg-6 col-md-6">
-                <div class="account">
+                <div class="account" v-if="token">
                   <div class="footer_info">
                     <p class="bolder_text mb-4">Мой аккаунт</p>
                   </div>
                   <div class="footer_text">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                   </div>
-                  <button class="btn btn_main">Смотреть</button>
+                  <nuxt-link :to="{ name: 'auth-profile'}" class="btn btn_main">Смотреть</nuxt-link>
+                </div>
+                <div class="account" v-else>
+                  <div class="footer_info">
+                    <p class="bolder_text mb-4">Регистрация</p>
+                  </div>
+                  <div class="footer_text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                  <nuxt-link :to="{ name: 'auth-register'}" class="btn btn_main">Начать</nuxt-link>
                 </div>
               </div>
             </div>
@@ -93,18 +102,30 @@ export default {
   name: "Footer",
   data() {
     return {
-      footerData: null
+      footerData: null,
+      token: null
     }
   },
   mounted() {
+    this.token = localStorage.getItem('token')
     this.$axios.get('get-footer?lang=' + this.$store.state.lang)
     .then(res => {
       this.footerData = res.data.contacts
     })
-  }
+  },
+  watch: {
+    $route(to, from) {
+      this.token = localStorage.getItem('token')
+    }
+  },
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .account {
+    a {
+      display: block;
+      width: 70%;
+    }
+  }
 </style>

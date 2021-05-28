@@ -179,7 +179,10 @@ export default {
         main_info: this.main_info,
         products: this.cart,
         address: this.address
-
+      })
+      .then(res => {
+        // window.location.href = res.url
+        window.open(res.url, '_self')
       })
     }
   }

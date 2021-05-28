@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="sales_content">
+      <div class="sales_content" v-if="detailsData.recomend_products.length">
         <layout-slider :title="'Похожие товары'" :products="detailsData.recomend_products"/>
       </div>
     </div>

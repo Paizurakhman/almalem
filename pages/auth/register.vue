@@ -4,15 +4,15 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/">Аккаунт</nuxt-link>
-        <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/auth/register">Регистрация</nuxt-link>
       </div>
       <div class="p_title">
         <p>Регистрация пользователя</p>
       </div>
       <div class="card_title">
-        <p>Если у вас уже есть учетная запись у нас, пожалуйста, войдите на страницу <b>входа.</b></p>
+        <p>Если у вас уже есть учетная запись у нас, пожалуйста, войдите на страницу <b>
+          <nuxt-link :to="{ name: 'auth-login' }">входа.</nuxt-link>
+        </b></p>
       </div>
       <div class="register_content">
         <div class="contacts_form">

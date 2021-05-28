@@ -5,8 +5,6 @@
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/">Аккаунт</nuxt-link>
-        <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/auth/profile">Профиль</nuxt-link>
       </div>
       <div class="profile_header">
         <button
@@ -162,7 +160,7 @@
         <div class="profile_action">
           <div class="active_orders">
             <p>Активные заказы</p>
-            <button class="btn btn_main">Смотреть</button>
+            <nuxt-link :to="{ name: 'history' }" class="btn btn_main">Смотреть</nuxt-link>
           </div>
           <button class="btn btn_silver" @click="logout">Выйти с аккаунта</button>
         </div>
@@ -423,8 +421,9 @@ export default {
       color: #3E444A;
     }
     .active_orders {
-      button {
+      a {
         padding: 16px 70px;
+        display: block;
       }
     }
   }
