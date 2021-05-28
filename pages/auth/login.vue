@@ -4,8 +4,6 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/">Аккаунт</nuxt-link>
-        <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/auth/login">Логин</nuxt-link>
       </div>
       <div class="login_content">
