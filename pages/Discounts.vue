@@ -10,7 +10,7 @@
         <p>Скидки</p>
       </div>
       <div class="tab_content">
-        <layout-tabBar @viewMode="current = $event" :current="current"/>
+        <layout-tabBar @viewMode="current = $event" :current="current" :products="saleData.products"/>
       </div>
       <div class="product_card_item">
         <div class="row" v-if="current === 'grid'">
@@ -24,17 +24,15 @@
         </nuxt-link>
       </div>
       <div class="pagination_items">
-        <layout-pagination />
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Pagination from "@/components/layout/Pagination";
 export default {
   name: "Discounts",
-  components: { Pagination },
   data() {
     return {
       current: 'grid',

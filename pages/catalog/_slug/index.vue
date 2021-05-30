@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class="tab_content">
-                <layout-tabBar @viewMode="current = $event" :current="current"/>
+                <layout-tabBar @viewMode="current = $event" :current="current" :products="productsData.products"/>
                 <div class="tab_action d_none">
                   <button @click="showCategory" class="btn btn_outline">Фильтры</button>
                 </div>
@@ -62,7 +62,12 @@
               </div>
             </div>
             <div class="pagination_items">
-              <layout-pagination />
+              <paginate
+                v-model="page"
+                :page-count="productsData.products.last_page"
+                :click-handler="myCallback"
+                :page-range="3"
+              />
             </div>
           </div>
         </div>
@@ -76,22 +81,30 @@ export default {
   name: "slug",
   data(){
     return {
-        current: 'grid',
-        mobileCategory: false,
-        slug: this.$route.params.slug,
-        productsData: null
+      page: 1,
+      current: 'grid',
+      mobileCategory: false,
+      slug: this.$route.params.slug,
+      productsData: null
     }
-
   },
   methods: {
     showCategory () {
       this.mobileCategory = !this.mobileCategory
+    },
+    async myCallback () {
+      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&page=' + this.page)
+        .then(res => {
+          this.productsData = res.data
+          this.page = res.data.products.current_page
+        })
     }
   },
   async mounted() {
     await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug)
     .then(res => {
       this.productsData = res.data
+      this.page = res.data.products.current_page
     })
   }
 }

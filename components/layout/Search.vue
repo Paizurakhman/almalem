@@ -45,6 +45,7 @@ export default {
     },
     handleClick () {
       this.search = ''
+      this.$emit('empty')
     }
   }
 }

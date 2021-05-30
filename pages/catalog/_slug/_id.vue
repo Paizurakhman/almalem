@@ -55,14 +55,14 @@
                     <product-card class="product_item" :product="product"></product-card>
                   </div>
                 </div>
-                
+
                 <div v-if="current === 'list'" v-for="product in categoryData.products.data" :key="product.id">
                   <product-col-card class="product_item responsive_p_i" :product="product"/>
                 </div>
               </div>
             </div>
             <div class="pagination_items">
-              <layout-pagination />
+              <pagination v-model="categoryData.products.current_page" :records="categoryData.products.total" :per-page="categoryData.products.per_page"/>
             </div>
           </div>
         </div>

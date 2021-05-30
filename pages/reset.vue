@@ -6,7 +6,7 @@
         <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/auth/login">Логин</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/auth/forgot-password">Восстановление аккаунта</nuxt-link>
+        <nuxt-link to="/auth/forgot-password">Восстановление</nuxt-link>
       </div>
       <form @submit.prevent="resetPassword">
         <div class="address_card">
@@ -41,7 +41,20 @@ export default {
   name: "reset",
   data() {
     return {
-
+      new_password: '',
+      repeat_password: ''
+    }
+  },
+  methods: {
+    async resetPassword () {
+      await this.$axios.$post('password/reset?email=' + this.$route.query.email +
+      '&token=' + this.$route.query.token, {
+        password: this.new_password,
+        password_confirmation: this.repeat_password
+      })
+      .then(res => {
+        console.log(res)
+      })
     }
   }
 }

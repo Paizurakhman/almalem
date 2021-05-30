@@ -30,8 +30,8 @@
             </div>
           </div>
           <div class="col-xl-9 col-md-9 m_margin">
-            <div class="tab_bar_text">
-              <p>Показано с 1 по 6 из 6 (1 страниц)</p>
+            <div class="tab_bar_text" v-if="products">
+              <p>Показано с {{ products.from}} по {{products.to}} из {{products.total}} ({{products.current_page}} страниц)</p>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
 <script>
 export default {
   name: "TabBar",
-  props: ['current'],
+  props: ['current', 'products'],
   methods: {
     viewMode(value) {
       this.$emit('viewMode', value)

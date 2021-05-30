@@ -10,7 +10,7 @@
         <p>Новинки</p>
       </div>
       <div class="tab_content">
-        <layout-tabBar @viewMode="current = $event" :current="current"/>
+        <layout-tabBar @viewMode="current = $event" :current="current" :products="newProducts.products"/>
       </div>
       <div class="product_card_item">
         <div class="row" v-if="current === 'grid'">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="pagination_items">
-        <layout-pagination />
+<!--        <pagination v-model="page" :records="1000" :per-page="12"/>-->
       </div>
     </div>
   </div>
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       current: 'grid',
-      newProducts: null
+      newProducts: null,
+      page: 1
     }
   },
   async mounted() {

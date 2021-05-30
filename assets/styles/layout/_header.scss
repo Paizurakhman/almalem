@@ -67,6 +67,11 @@ header {
         }
       }
     }
+    .top_actions {
+      a, span {
+        color: #ffffff;
+      }
+    }
     .header_center {
       display: flex;
       justify-content: space-between;
@@ -196,6 +201,22 @@ nav {
 }
 .mob_nav-enter-active, .mob_nav-leave-active {
   transition: all 0.5s ease;
+}
+.mobile_search_wrapper {
+  position: fixed;
+  z-index: 100;
+  width: 90%;
+  right: 0;
+  max-width: 550px;
+  left: 0;
+  top: 10%;
+  margin: 0 auto;
+  button {
+    position: absolute;
+    right: 0;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
 }
 @media screen and (max-width: 1024px) {
   nav {

@@ -314,9 +314,6 @@
   font-weight: 500;
   margin-bottom: 10px;
 }
-.product_info_card .product_status .t_green {
-  color: #60cf10;
-}
 .product_info_card .product_description {
   padding: 20px 0;
   border-top: 1px solid #757575;
@@ -544,6 +541,9 @@ header .header .header_top .top_actions .lang {
 header .header .header_top .top_actions .lang span {
   margin-left: 10px;
 }
+header .header .top_actions a, header .header .top_actions span {
+  color: #ffffff;
+}
 header .header .header_center {
   display: flex;
   justify-content: space-between;
@@ -674,6 +674,23 @@ nav .links ul li span {
   transition: all 0.5s ease;
 }
 
+.mobile_search_wrapper {
+  position: fixed;
+  z-index: 100;
+  width: 90%;
+  right: 0;
+  max-width: 550px;
+  left: 0;
+  top: 10%;
+  margin: 0 auto;
+}
+.mobile_search_wrapper button {
+  position: absolute;
+  right: 0;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
 @media screen and (max-width: 1024px) {
   nav .links ul {
     justify-content: space-between;
@@ -769,7 +786,7 @@ footer .copy_right p {
   width: 100%;
   max-height: 78vh;
   height: 100%;
-  top: 26%;
+  top: 25%;
   left: 0;
   padding: 10px 20px 30px;
   overflow-y: scroll;
@@ -1087,6 +1104,10 @@ footer .copy_right p {
 
 .error {
   color: crimson;
+}
+
+.t_green {
+  color: #60cf10;
 }
 
 .table_wrapper .data {

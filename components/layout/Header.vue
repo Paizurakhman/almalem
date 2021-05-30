@@ -78,15 +78,14 @@
                 <span><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></span>
               </div>
               <div class="top_actions">
-                <div class="my_account">
+                <div class="my_account" v-if="token">
                   <nuxt-link to="/auth/profile">
                     <img src="~/assets/icon/main/user.svg" alt=""></nuxt-link>
                   <img src="~/assets/icon/main/arrow.svg" alt="">
-
-                  <!--              <div class="auth_action">-->
-                  <!--                <nuxt-link to="/auth/login">Войти</nuxt-link> /-->
-                  <!--                <nuxt-link to="/auth/register">Регистрация</nuxt-link>-->
-                  <!--              </div>-->
+                </div>
+                <div class="my_account" v-else>
+                  <nuxt-link to="/auth/login">Войти</nuxt-link> <span> /</span>
+                  <nuxt-link to="/auth/register">Регистрация</nuxt-link>
                 </div>
                 <div class="language" ref="language">
                   <div
@@ -122,7 +121,7 @@
                 </div>
                 <div class="col_6 w_mob">
                     <div class="mobile_icon">
-                      <img src="~/assets/icon/search.svg" alt="">
+                      <img src="~/assets/icon/search.svg" alt="" @click="isSearch">
                     </div>
                     <div class="mobile_icon">
                       <nuxt-link :to="{ name: 'favorites'}">
@@ -135,6 +134,12 @@
                       </nuxt-link>
                     </div>
                 </div>
+              <div class="bg" v-if="searchWrapper" @click.self="isSearch"></div>
+              <div class="mobile_search_wrapper" v-if="searchWrapper">
+                <div class="header_center">
+                  <layout-search @empty="isSearch"/>
+                </div>
+              </div>
             </div>
           </div>
           <transition name="mob_nav">
@@ -198,7 +203,8 @@ export default {
       currentLang: this.lang[0],
       getLanguage: false,
       city: null,
-      token: null
+      token: null,
+      searchWrapper: false
     }
   },
   watch: {
@@ -206,7 +212,6 @@ export default {
       this.token = localStorage.getItem('token')
     }
   },
-
 
   methods: {
     ...mapActions([
@@ -223,6 +228,9 @@ export default {
     },
     handleLanguage () {
       this.getLanguage = !this.getLanguage
+    },
+    isSearch () {
+      this.searchWrapper = !this.searchWrapper
     }
   },
   computed: {

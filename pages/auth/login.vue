@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { email, required } from 'vuelidate/lib/validators'
 export default {
   name: "login",
   data() {
@@ -75,6 +76,15 @@ export default {
       password: ''
     }
   },
+  // validations: {
+  //   email: {
+  //     email,
+  //     required
+  //   },
+  //   password: {
+  //     required
+  //   }
+  // },
   methods: {
     async handleLogin () {
       await this.$axios.$post('login', {
@@ -89,7 +99,7 @@ export default {
         })
       })
     }
-  }
+  },
 }
 </script>
 
