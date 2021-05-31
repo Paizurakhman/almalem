@@ -31,7 +31,8 @@
           </div>
           <div class="col-xl-9 col-md-9 m_margin">
             <div class="tab_bar_text" v-if="products">
-              <p>Показано с {{ products.from}} по {{products.to}} из {{products.total}} ({{products.current_page}} страниц)</p>
+              <p v-if="products.data.length">Показано с {{ products.from}} по {{products.to}} из {{products.total}} ({{products.current_page}} страниц)</p>
+              <p v-else>Нет продуктов</p>
             </div>
           </div>
         </div>
@@ -40,7 +41,7 @@
         <div class="tab_bar_filter">
           <div class="tab_bar_filter_item">
             <p>Сортировать:</p>
-            <select name="sort" class="sort_action">
+            <select name="sort" class="sort_action" v-model="sortVal">
               <option value="">По умолчанию</option>
               <option value="ASC"> По возрастанию цены</option>
               <option value="DESC"> По убыванию цены</option>
@@ -56,9 +57,19 @@
 export default {
   name: "TabBar",
   props: ['current', 'products'],
+  data() {
+    return {
+      sortVal: ""
+    }
+  },
   methods: {
     viewMode(value) {
       this.$emit('viewMode', value)
+    }
+  },
+  watch: {
+    sortVal(e){
+      this.$emit('sort', e)
     }
   }
 }

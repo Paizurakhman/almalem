@@ -14,7 +14,7 @@
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="category_tab_nav">
               <no-ssr>
-                <category-tab />
+                <category-tab @change_price="changePrice"/>
               </no-ssr>
             </div>
           </div>
@@ -39,14 +39,19 @@
                 </div>
               </div>
               <div class="tab_content">
-                <layout-tabBar @viewMode="current = $event" :current="current"/>
+                <layout-tabBar
+                  @viewMode="current = $event"
+                  :current="current"
+                  :products="categoryData.products"
+                  @sort="sortProducts"
+                />
                 <div class="tab_action d_none">
                   <button @click="showCategory" class="btn btn_outline">Фильтры</button>
                 </div>
               </div>
               <div class="category_tab_nav d_none" v-if="mobileCategory">
                 <no-ssr>
-                  <category-tab />
+                  <category-tab @change_price="changePrice"/>
                 </no-ssr>
               </div>
               <div class="product_card_item">
@@ -61,8 +66,17 @@
                 </div>
               </div>
             </div>
-            <div class="pagination_items">
-              <pagination v-model="categoryData.products.current_page" :records="categoryData.products.total" :per-page="categoryData.products.per_page"/>
+            <div class="pagination_content" v-if="categoryData.products.last_page > 1">
+              <paginate
+                v-model="page"
+                :page-count="categoryData.products.last_page"
+                :click-handler="myCallback"
+                :page-range="3"
+                :container-class="'pagination'"
+                :prev-text="'<span class=prev></span>'"
+                :next-text="'<span class=next></span>'"
+              />
+              <p>Показано с {{ categoryData.products.from}} по {{categoryData.products.to}} из {{categoryData.products.total}} ({{categoryData.products.current_page}} страниц)</p>
             </div>
           </div>
         </div>
@@ -76,24 +90,46 @@ export default {
   name: "id",
   data(){
     return {
-        current: 'grid',
+      page: this.$route.params.page,
+      current: 'grid',
         mobileCategory: false,
         slug: this.$route.params.slug,
         id: this.$route.params.id,
-        categoryData: null
+        categoryData: null,
+      sortValue: ''
     }
 
   },
   methods: {
     showCategory () {
       this.mobileCategory = !this.mobileCategory
+    },
+    async myCallback (currentPage) {
+      this.$router.push({ name: 'catalog-slug-id', params:{ page: currentPage} })
+    },
+    async sortProducts (value) {
+      this.sortValue = value
+      this.page = this.$route.params.page
+      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + value + '&slug=' + this.slug + '&page=' + this.page)
+        .then(res => {
+          this.categoryData = res.data
+          this.page = res.data.products.current_page
+        })
+    },
+    async changePrice (value) {
+      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&from=' + value[0] + '&to=' + value[1] + '&slug=' + this.slug)
+        .then(res => {
+          this.categoryData = res.data
+        })
     }
   },
-  async mounted() {
-    await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&slug=' + this.id)
-    .then(res => {
-      this.categoryData = res.data
-    })
+  async mounted(){
+    this.page = this.$route.params.page
+    await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&slug=' + this.id + '&page=' + this.page)
+      .then(res => {
+        this.categoryData = res.data
+        this.page = res.data.products.current_page
+      })
   }
 }
 </script>

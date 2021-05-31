@@ -18,9 +18,13 @@
             <div class="form">
               <div class="inputs">
                 <p>Адрес эл.почты</p>
-                <input type="email" v-model="email">
+                <input type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
+                          || ($v.email.$dirty && !$v.email.email)}">
+                <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
+                <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
               </div>
-              <p class="t_green">Письмо со ссылкой для восстановления пароля выслано на <b>user@mail.</b></p>
+              <p class="error" v-if="error">{{error}}</p>
+              <p v-if="success" class="t_green">Письмо со ссылкой для восстановления пароля выслано на <b>{{email}}</b></p>
             </div>
           </div>
           <div class="action_auth">
@@ -33,24 +37,38 @@
 </template>
 
 <script>
+import {required, email} from 'vuelidate/lib/validators'
 export default {
   name: "forgot-password",
   data() {
     return {
       email: '',
-
+      success: null,
+      error: null
     }
   },
   methods: {
     async resetPassword () {
-      await this.$axios.$get('password/email', {
-        params: {
-          email: this.email
-        }
-      })
-      .then(res => {
-        console.log(res)
-      })
+      this.$v.$touch();
+
+      if(!this.$v.$invalid) {
+        await this.$axios.$get('password/email', {
+          params: {
+            email: this.email
+          }
+        })
+          .then(res => {
+            this.success = true
+          }).catch(err => {
+            this.error = err.response.data.error
+          })
+      }
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
     }
   }
 }

@@ -19,7 +19,14 @@
       </div>
       <div class="range_slider">
         <no-ssr>
-          <vue-range-slider v-bind="setting" :bg-style="bgStyle" :process-style="processStyle" v-model="value"></vue-range-slider>
+          <vue-range-slider
+            v-bind="setting"
+            :bg-style="bgStyle"
+            :process-style="processStyle"
+            v-model="value"
+            :clickable="false"
+            @drag-end="changePrice"
+          ></vue-range-slider>
         </no-ssr>
       </div>
       <div class="range_price">
@@ -50,13 +57,12 @@ export default {
   components: {VueRangeSlider},
   data() {
     return {
-      value: [0, 100000],
+      value: [0, 500000],
       processStyle: '',
       bgStyle: '',
       setting: {
-        // tooltip: true,
         dotSize: 25,
-        max: 100000,
+        max: 500000,
         step: 100
       }
     }
@@ -68,6 +74,11 @@ export default {
     }
     this.processStyle = {
       backgroundColor: '#59367C'
+    }
+  },
+  methods: {
+    changePrice () {
+      this.$emit('change_price', this.value)
     }
   }
 }

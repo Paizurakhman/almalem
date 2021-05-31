@@ -8,7 +8,7 @@
     </div>
     <div class="catalog_option_item">
       <div v-for="item in catalog" :key="item.id">
-        <nuxt-link :to="{ name: 'catalog-slug', params: { slug: item.slug }}">
+        <nuxt-link :to="{ name: 'catalog-slug', params: { slug: item.slug, page: 1 }}">
           <div class="option_item" @mouseover="handleCategory(item.id)"
              @mouseleave="handleLeave">
           <p class="catalog_t">{{ item.title }}</p>
@@ -18,7 +18,7 @@
             v-if="showId === item.id"
           >
             <nuxt-link v-for="subcategory in item.subcategories"
-            :key="subcategory.id" :to="{ name: 'catalog-slug-id', params: { slug: item.slug, id: subcategory.slug }}">{{ subcategory.title }}</nuxt-link>
+            :key="subcategory.id" :to="{ name: 'catalog-slug-id', params: { slug: item.slug, id: subcategory.slug, page: 1 }}">{{ subcategory.title }}</nuxt-link>
           </div>
         </div>
         </nuxt-link>

@@ -24,6 +24,7 @@ export default  {
       ],
     }
   },
+
   watch: {
     $route(to, from) {
       if (this.$cookies.get('token_time') !== null) {

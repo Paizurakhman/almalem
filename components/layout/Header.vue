@@ -266,7 +266,7 @@ export default {
     .then(res => {
       this.headerData = res.data;
 
-      this.city = res.data.cities[0].id
+      // this.city = res.data.cities[0].id
     })
 
     let vm = this

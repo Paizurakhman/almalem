@@ -37,12 +37,19 @@
                       <form>
                         <div class="inputs">
                           <span>E-mail</span>
-                          <input type="email" v-model="email">
+                          <input type="email" v-model="email" :class="{invalid:($v.email.$dirty && !$v.email.required)
+                          || ($v.email.$dirty && !$v.email.email)}">
+                          <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
+                          <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
                         </div>
                         <div class="inputs">
                           <span>Пароль</span>
-                          <input type="password" v-model="password">
+                          <input type="password" v-model.trim="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
+                          || ($v.password.$dirty && !$v.password.minLength)}">
+                          <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
+                          <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">Password must be at least 6 characters</span>
                         </div>
+                        <p class="error" v-if="error">{{ error }}</p>
                       </form>
                     </div>
                   </div>
@@ -50,7 +57,7 @@
                 <div class="action_auth">
                   <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6 o_2">
-                      <button class="btn btn_silver">Продолжить</button>
+                      <button class="btn btn_silver" >Продолжить</button>
                     </div>
                     <div class="col-xl-6 col-lg-6 t_a_r_m o_1 m_b_30">
                       <nuxt-link to="/auth/forgot-password">Не помню логин или пароль</nuxt-link>
@@ -67,37 +74,45 @@
 </template>
 
 <script>
-import { email, required } from 'vuelidate/lib/validators'
+import { email, minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: "login",
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: null
     }
   },
-  // validations: {
-  //   email: {
-  //     email,
-  //     required
-  //   },
-  //   password: {
-  //     required
-  //   }
-  // },
+  validations: {
+    email: {
+      email,
+      required
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    }
+  },
   methods: {
     async handleLogin () {
-      await this.$axios.$post('login', {
-        email: this.email,
-        password: this.password
-      })
-      .then((res) => {
-        localStorage.setItem('token', res.token)
+      this.$v.$touch();
 
-        this.$router.push({
-          name: 'auth-profile'
+      if(!this.$v.$invalid){
+        await this.$axios.$post('login', {
+          email: this.email,
+          password: this.password
         })
-      })
+          .then((res) => {
+            localStorage.setItem('token', res.token)
+
+            this.$router.push({
+              name: 'auth-profile'
+            })
+          }).catch(err => {
+            this.error = err.response.data.error
+          })
+      }
     }
   },
 }

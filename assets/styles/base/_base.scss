@@ -125,9 +125,12 @@
   padding: 20px;
 }
 .error {
-  color: crimson;
+  color: crimson !important;
 }
 
 .t_green {
   color: #60cf10;
+}
+input.invalid {
+  border: 1px solid crimson !important;
 }
