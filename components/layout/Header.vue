@@ -143,7 +143,7 @@
             </div>
           </div>
           <transition name="mob_nav">
-            <layout-mobile-nav v-if="getMobileNav"/>
+            <layout-mobile-nav v-if="mobileNav"/>
           </transition>
         </div>
       </div>
@@ -204,20 +204,25 @@ export default {
       getLanguage: false,
       city: null,
       token: null,
-      searchWrapper: false
+      searchWrapper: false,
+      mobileNav: false
     }
   },
   watch: {
     $route(to, from) {
       this.token = localStorage.getItem('token')
+      this.mobileNav = false
     }
   },
 
   methods: {
     ...mapActions([
       'showAction',
-      'mobileNavAction'
+      // 'mobileNavAction'
     ]),
+    mobileNavAction () {
+      this.mobileNav = !this.mobileNav
+    },
     changeLanguage (value) {
       this.currentLang = value
       this.getLanguage = false
@@ -234,20 +239,12 @@ export default {
     }
   },
   computed: {
-    // logout(){
-    //   if(localStorage.getItem('token') !== null){
-    //     console.log('true')
-    //   }else{
-    //     console.log('false')
-    //   }
-    // },
-
     ...mapState([
       'showNav'
     ]),
-    ...mapGetters([
-      'getMobileNav',
-    ]),
+    // ...mapGetters([
+    //   'getMobileNav',
+    // ]),
     currentLanguage() {
       return this.currentLang
     },

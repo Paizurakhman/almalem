@@ -7,6 +7,12 @@
   .category_content {
     padding: 20px 0;
     border-bottom: 1px solid #C9C9C9;
+    .sub_items {
+      margin: 10px 0;
+      a {
+        color: #3e444a;
+      }
+    }
   }
 }
 

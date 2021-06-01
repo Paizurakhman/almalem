@@ -87,7 +87,10 @@
                   <span class="necessarily">Имя</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <input type="text" v-model="name">
+                  <input type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
+                          || ($v.name.$dirty && !$v.name.minLength)}">
+                  <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">Name must be at least 3 characters</span>
+                  <span class="error" v-if="$v.name.$dirty && !$v.name.required">Name required</span>
                 </div>
               </div>
             </div>
@@ -97,7 +100,10 @@
                   <span class="necessarily">Телефон</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <the-mask :mask="['+#(###) ###-##-##']" v-model="phone"/>
+                  <the-mask :mask="['+#(###) ###-##-##']" v-model="phone" :class="{ invalid:($v.phone.$dirty && !$v.phone.required)
+                          || ($v.phone.$dirty && !$v.phone.minLength)}"/>
+                  <span class="error" v-if="$v.phone.$dirty && !$v.phone.minLength">Phone number must be at least 11 numbers</span>
+                  <span class="error" v-if="$v.phone.$dirty && !$v.phone.required">Phone number required</span>
                 </div>
               </div>
             </div>
@@ -107,7 +113,10 @@
                   <span class="necessarily">Email</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
-                  <input type="text" v-model="email">
+                  <input type="text" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
+                          || ($v.email.$dirty && !$v.email.email)}">
+                  <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
+                  <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
                 </div>
               </div>
             </div>
@@ -142,6 +151,7 @@
 </template>
 
 <script>
+import { email, minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: "Contacts",
   data(){
@@ -159,34 +169,48 @@ export default {
       this.isShowMap = !this.isShowMap
     },
     async sendContact () {
-      if (this.name && this.email && this.phone) {
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
         await this.$axios.post('feedback', {
-        name: this.name,
-        phone: this.phone,
-        email: this.email,
-        company: this.company,
-        message: this.message
-      })
-      .then(res => {
-        if(res.data) {
-          this.name = ''
-          this.phone = ''
-          this.email = ''
-          this.company = ''
-          this.message = ''
-        }
-      })
-      } else {
-          console.log("name required");
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          company: this.company,
+          message: this.message
+        })
+        .then(res => {
+          if(res.data) {
+            this.name = ''
+            this.phone = ''
+            this.email = ''
+            this.company = ''
+            this.message = ''
+          }
+        })
       }
     }
   },
-  // async mounted() {
-  //   await this.$axios.get('address')
-  //   .then(res => {
-  //     // console.log(res.data);
-  //   })
-  // }
+  validations: {
+    name: {
+      required,
+      minLength: minLength(3)
+    },
+    phone: {
+      required,
+      minLength: minLength(11)
+    },
+    email: {
+      required,
+      email
+    }
+  },
+  async mounted() {
+    await this.$axios.get('address?lang=' + this.$store.state.lang)
+    .then(res => {
+      console.log(res.data);
+    })
+  }
 }
 </script>
 

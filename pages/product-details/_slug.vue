@@ -30,8 +30,8 @@
                     :asNavFor="$refs.c1"
                     :slidesToShow="4"
                     :focusOnSelect="true">
-                    <div v-for="s in 6" :key="s">
-                      <img src="~/assets/img/detail_img.png" alt="">
+                    <div v-for="(image, index) in detailsData.product.product_images" :key="index">
+                      <img :src="imgUrl + image.image" alt="">
                     </div>
                   </VueSlickCarousel>
                 </div>
@@ -87,13 +87,13 @@
                   </div>
                   <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="action_cart">
-                      <button class="btn btn_main">+ Добавить в корзину</button>
+                      <button class="btn btn_main" @click="addToCart(detailsData.product.id)">+ Добавить в корзину</button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="add_to_like">
-                <img src="~/assets/icon/heart_silver.svg" alt="">
+                <img @click="addFavorite(detailsData.product)" src="~/assets/icon/heart_silver.svg" alt="">
                 <span>Добавить в избранные</span>
               </div>
               <div class="product_card_bottom t_none">
@@ -141,6 +141,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "slug",
   data() {
@@ -194,6 +196,18 @@ export default {
           }
         ]
       }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'ADD_TO_CART',
+      'ADD_FAVORITE'
+    ]),
+    addToCart (id) {
+      this.ADD_TO_CART(id)
+    },
+    addFavorite (product) {
+      this.ADD_FAVORITE(product)
     }
   },
   async mounted() {

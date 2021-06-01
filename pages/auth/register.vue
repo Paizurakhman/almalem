@@ -67,7 +67,7 @@
                     <span class="necessarily">Email</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="email" v-model="email" :class="{invalid:($v.email.$dirty && !$v.email.required)
+                    <input type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
                     <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
                     <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>

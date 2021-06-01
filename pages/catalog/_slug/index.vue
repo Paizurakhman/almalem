@@ -14,7 +14,7 @@
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="category_tab_nav">
               <no-ssr>
-                <category-tab @change_price="changePrice"/>
+                <category-tab @change_price="changePrice" :subcategories="productsData.subcategories"/>
               </no-ssr>
             </div>
           </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="category_tab_nav d_none" v-if="mobileCategory">
                 <no-ssr>
-                  <category-tab @change_price="changePrice"/>
+                  <category-tab @change_price="changePrice" :subcategories="productsData.subcategories"/>
                 </no-ssr>
               </div>
               <div class="product_card_item">
@@ -93,42 +93,74 @@ export default {
       page: 1,
       current: 'grid',
       mobileCategory: false,
-      slug: this.$route.params.slug,
       productsData: null,
-      sortValue: ''
+      slug: this.$route.params.slug,
+      obj: {}
     }
   },
   methods: {
+    async allProducts () {
+      if (Object.keys(this.obj).length > 0) {
+        this.$router.push({ query: this.obj })
+      }
+      else {
+        this.obj = this.$route.query
+      }
+      console.log(this.obj)
+      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug, {
+        params: this.obj
+      })
+        .then(res => {
+          this.productsData = res.data
+          // this.page = res.data.products.current_page
+        })
+    },
     showCategory () {
       this.mobileCategory = !this.mobileCategory
     },
     async myCallback (currentPage) {
-      this.$router.push({ name: 'catalog-slug', params:{ page: currentPage} })
+      this.obj['page'] = currentPage
+      this.allProducts()
+      // this.$router.replace({ query :{ page: currentPage} })
+      // await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&slug=' + this.slug + '&page=' + this.page)
+      //   .then(res => {
+      //     this.productsData = res.data
+      //     this.page = res.data.products.current_page
+      //   })
     },
     async sortProducts (value) {
-      this.sortValue = value
-      this.page = this.$route.params.page
-      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + value + '&slug=' + this.slug + '&page=' + this.page)
-        .then(res => {
-          this.productsData = res.data
-          this.page = res.data.products.current_page
-        })
+      this.obj['order_by'] = value
+      this.allProducts()
+      // this.$router.replace({ query :{ page: null, sort: value} })
+      // // this.page = this.$route.params.page
+      // await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + value + '&slug=' + this.slug + '&page=' + this.page)
+      //   .then(res => {
+      //     this.productsData = res.data
+      //     // this.page = res.data.products.current_page
+      //   })
     },
     async changePrice (value) {
-      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&from=' + value[0] + '&to=' + value[1] + '&slug=' + this.slug)
-        .then(res => {
-          this.productsData = res.data
-        })
+      this.obj['from'] = value[0]
+      this.obj['to'] = value[1]
+      this.obj['page'] = 1
+      this.allProducts()
+      // await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&from=' + value[0] + '&to=' + value[1] + '&slug=' + this.slug)
+      //   .then(res => {
+      //     this.productsData = res.data
+      //   })
     }
 
   },
   async mounted(){
-    this.page = this.$route.params.page
-    await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&slug=' + this.slug + '&page=' + this.page)
-    .then(res => {
-      this.productsData = res.data
-      this.page = res.data.products.current_page
-    })
+    this.allProducts()
+    // this.obj = this.$route.query
+    // this.$router.replace({ query: this.obj })
+    // this.allProducts()
+    // await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&order_by=' + this.sortValue + '&slug=' + this.slug + '&page=' + this.page)
+    //   .then(res => {
+    //     this.productsData = res.data
+    //     // this.page = res.data.products.current_page
+    //   })
   }
 }
 </script>

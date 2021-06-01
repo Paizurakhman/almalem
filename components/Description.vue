@@ -27,15 +27,15 @@
               <p>{{ review.name }}</p>
             </div>
             <div class="col-xl-6 col-6 pl-0 ta_right">
-              <p>{{ review.created_at }}</p>
+              <p>{{ new Date(review.created_at).getDate() }}/{{ new Date(review.created_at).getMonth() }}/{{ new Date(review.created_at).getFullYear() }}</p>
             </div>
           </div>
         </div>
         <div class="review1_text">
           <p>{{ review.review }}</p>
           <no-ssr>
-            <star-rating 
-              v-model="review.rating" 
+            <star-rating
+              v-model="review.rating"
               v-bind="settings"
               :read-only="true"
             >

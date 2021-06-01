@@ -9,10 +9,9 @@
           </div>
           <div class="category_nav_text">
             <nuxt-link v-for="catalog in category.subcategories" :key="catalog.id" :to="{
-              name: 'catalog-slug-id',
+              name: 'catalog-slug',
               params: {
-                slug: category.slug,
-                id: catalog.slug
+                slug: catalog.slug
               }
             }">
               {{ catalog.title }}

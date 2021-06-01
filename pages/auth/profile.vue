@@ -26,40 +26,40 @@
               <div class="form">
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-4 col-lg-4">
+                    <div class="col-xl-4 col-lg-4 col-4">
                       <p>Имя</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p>{{ userData.user.name }}</p>
                     </div>
                   </div>
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-4 col-lg-4">
+                    <div class="col-xl-4 col-lg-4 col-4">
                       <p>Фамилия</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p>{{ userData.user.last_name }}</p>
                     </div>
                   </div>
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-4 col-lg-4">
+                    <div class="col-xl-4 col-lg-4 col-4">
                       <p>Телефон</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p>{{userData.user.phone}}</p>
                     </div>
                   </div>
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-4 col-lg-4">
+                    <div class="col-xl-4 col-lg-4 col-4">
                       <p>Email</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p>{{ userData.user.email }}</p>
                     </div>
                   </div>
@@ -75,10 +75,10 @@
               <div class="form">
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-4">
                       <p>Регион</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p v-if="userData.user.region">{{ userData.user.region }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -86,10 +86,10 @@
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-4">
                       <p>Город</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p v-if="userData.user.city">{{ userData.user.city }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -97,10 +97,10 @@
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-4">
                       <p>Улица</p>
                     </div>
-                    <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-8">
                       <p v-if="userData.user.street">{{ userData.user.street }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -108,17 +108,17 @@
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p>Дом</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p v-if="userData.user.house">{{ userData.user.house }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
-                    <div class="col-xl-2 col-lg-2">
+                    <div class="col-xl-2 col-lg-2 col-3">
                       <p>Подъезд</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p v-if="userData.user.entrance">{{ userData.user.entrance }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -126,17 +126,17 @@
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p>Корпус</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p v-if="userData.user.building">{{ userData.user.building }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
-                    <div class="col-xl-2 col-lg-2">
+                    <div class="col-xl-2 col-lg-2 col-3">
                       <p>Этаж</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p v-if="userData.user.floor">{{ userData.user.floor }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -144,10 +144,10 @@
                 </div>
                 <div class="inputs">
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3 p_r_0">
+                    <div class="col-xl-3 col-lg-3 p_r_0 col-3">
                       <p>Квартира</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-3 col-lg-3 col-3">
                       <p v-if="userData.user.apartment">{{ userData.user.apartment }}</p>
                       <p v-else class="error">Не указана</p>
                     </div>
@@ -348,6 +348,8 @@ export default {
     return {
       edit_info: 'account',
       userData: null,
+      password: '',
+      confirm_password: '',
       profileEdit: {
         name: '',
         first_name: '',
@@ -392,6 +394,14 @@ export default {
       this.profileEdit.first_name = res.user.last_name
       this.profileEdit.phone = res.user.phone
       this.profileEdit.email = res.user.email
+      this.profileEdit.region = res.user.region
+      this.profileEdit.city = res.user.city
+      this.profileEdit.street = res.user.street
+      this.profileEdit.house = res.user.house
+      this.profileEdit.entrance = res.user.entrance
+      this.profileEdit.building = res.user.building
+      this.profileEdit.floor = res.user.floor
+      this.profileEdit.apartment = res.user.apartment
     })
   }
 }
@@ -424,6 +434,24 @@ export default {
       a {
         padding: 16px 70px;
         display: block;
+      }
+    }
+  }
+  @media screen and (max-width: 576px){
+    .profile_action {
+      align-items: center;
+      flex-direction: column;
+      .active_orders {
+        width: 100%;
+        margin: 20px 0;
+      }
+      button {
+        width: 100%;
+      }
+    }
+    .contacts_action {
+      button {
+        width: 100%;
       }
     }
   }

@@ -32,17 +32,17 @@
               <div class="product_card_left">
                 <div class="product_status">
                   <div class="like">
-                    <img src="~/assets/icon/black_heart.svg" alt="heart">
+                    <img @click.stop.prevent="addFavorite(product)" src="~/assets/icon/black_heart.svg" alt="heart">
                   </div>
                   <div class="card_col_title">
                     <p>Доступно: <span>98 на складе</span></p>
                   </div>
                   <div class="price">
-                    <p><span class="new_price">1400 ₸</span> <span class="old_price">1400₸</span></p>
+                    <p><span class="new_price">{{ product.current_price }} ₸</span> <span v-if="product.sale" class="old_price">{{ (product.current_price + (product.current_price * product.sale)) * 0.1 }}₸</span></p>
                   </div>
                 </div>
                 <div class="add_to_card">
-                  <button class="btn btn_main">Добавить в корзину</button>
+                  <button class="btn btn_main" @click.stop.prevent="addToCart(product.id)">Добавить в корзину</button>
                 </div>
               </div>
             </div>
@@ -54,9 +54,22 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
 export default {
   name: "productColCard",
   props: ['product'],
+  methods: {
+    ...mapActions([
+      'ADD_TO_CART',
+      'ADD_FAVORITE'
+    ]),
+    addToCart (id) {
+      this.ADD_TO_CART(id)
+    },
+    addFavorite (product) {
+      this.ADD_FAVORITE(product)
+    }
+  },
 }
 </script>
 

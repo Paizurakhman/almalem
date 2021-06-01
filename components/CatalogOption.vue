@@ -18,7 +18,7 @@
             v-if="showId === item.id"
           >
             <nuxt-link v-for="subcategory in item.subcategories"
-            :key="subcategory.id" :to="{ name: 'catalog-slug-id', params: { slug: item.slug, id: subcategory.slug, page: 1 }}">{{ subcategory.title }}</nuxt-link>
+            :key="subcategory.id" :to="{ name: 'catalog-slug', params: { slug: subcategory.slug, page: 1 }}">{{ subcategory.title }}</nuxt-link>
           </div>
         </div>
         </nuxt-link>

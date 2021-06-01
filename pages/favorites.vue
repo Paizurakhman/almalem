@@ -25,8 +25,11 @@
               <tbody>
               <tr height="100px" v-for="favorite in favoriteData.products" :key="favorite.id">
                 <th scope="row" width="190px">
-                  <div class="table_img">
+                  <div class="table_img" v-if="favorite.images">
                     <img :src="'http://cdn.astudiodigital.ru/' + favorite.images.image" alt="">
+                  </div>
+                  <div class="table_img" v-else>
+                    <img :src="'http://cdn.astudiodigital.ru/' + favorite.product_images[0].image" alt="">
                   </div>
                 </th>
                 <td width="440px">{{ favorite.title }}</td>
@@ -36,7 +39,7 @@
                 </td>
                 <td width="190px">
                   <div class="table_action">
-                    <img class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
+                    <img @click="addToCart(favorite.id)" class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
                     <img class="delete" @click="deleteFavorite(favorite)" src="~/assets/icon/clear.svg" alt="">
                   </div>
                 </td>
@@ -58,6 +61,7 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
 export default {
   name: "favorites",
   data() {
@@ -66,6 +70,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'ADD_TO_CART',
+    ]),
+    addToCart (id) {
+      this.ADD_TO_CART(id)
+    },
     deleteFavorite (product) {
       localStorage.setItem('favorite', JSON.stringify({
         products: this.favoriteData.products.filter(val => {

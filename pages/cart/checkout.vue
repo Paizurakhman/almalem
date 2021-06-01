@@ -27,7 +27,7 @@
                                                     <input type="text" placeholder="Имя и фамилия" v-model="main_info.name">
                                                 </div>
                                                 <div class="col-xl-4">
-                                                    <the-mask :mask="['#(###) ###-####']" placeholder="Номер телефона" v-model="main_info.phone"/>
+                                                    <the-mask :mask="['+7(###) ###-####']" placeholder="Номер телефона" v-model="main_info.phone"/>
                                                 </div>
                                                 <div class="col-xl-4">
                                                     <input type="email" placeholder="E-mail" v-model="main_info.email">

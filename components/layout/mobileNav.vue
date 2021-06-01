@@ -14,10 +14,6 @@
             <nuxt-link to="/catalog">ВОЕННАЯ ТЕХНИКА</nuxt-link>
             <img src="~/assets/icon/main/black_arrow.svg" alt="">
           </div>
-          <div class="catalog_title" v-if="getShowCatalog">
-            <nuxt-link to="/catalog">ГИДРОТЕХНИКА</nuxt-link>
-            <img src="~/assets/icon/main/black_arrow.svg" alt="">
-          </div>
         </li>
         <li>
           <nuxt-link to="/oplata-i-dostavka">ОПЛАТА И ДОСТАВКА</nuxt-link>
@@ -46,6 +42,11 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: "mobileNav",
+  data() {
+    return {
+      headerData: null
+    }
+  },
   methods: {
     ...mapActions([
       'showCatalogAction'
@@ -55,7 +56,17 @@ export default {
     ...mapGetters([
       'getShowCatalog'
     ])
+  },
+  mounted() {
+    this.token = localStorage.getItem('token')
+    this.$axios.get('get-header?lang=' + this.$store.state.lang)
+      .then(res => {
+        this.headerData = res.data;
+
+        // this.city = res.data.cities[0].id
+      })
   }
+
 }
 </script>
 

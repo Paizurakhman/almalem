@@ -18,11 +18,18 @@
             <div class="form">
               <div class="inputs">
                 <p>Новый пароль</p>
-                <input type="password" v-model="new_password">
+                <input type="password" v-model="new_password" :class="{ invalid:($v.new_password.$dirty && !$v.new_password.required)
+                          || ($v.new_password.$dirty && !$v.new_password.minLength)}">
+                <span class="error" v-if="$v.new_password.$dirty && !$v.new_password.required">Password required</span>
+                <span class="error" v-if="$v.new_password.$dirty && !$v.new_password.minLength">Password must be at least 6 characters</span>
               </div>
               <div class="inputs">
                 <p>Подтвердите новый пароль</p>
-                <input type="password" v-model="repeat_password">
+                <input type="password" v-model="repeat_password" :class="{ invalid:($v.repeat_password.$dirty && !$v.repeat_password.required)
+                          || ($v.repeat_password.$dirty && !$v.repeat_password.sameAsPassword)}">
+                <span class="error" v-if="$v.repeat_password.$dirty && !$v.repeat_password.required">Confirm password required</span>
+                <span class="error" v-if="$v.repeat_password.$dirty && !$v.repeat_password.sameAsPassword">Confirm password must be identical.</span>
+
               </div>
 <!--              <p class="t_green">Письмо со ссылкой для восстановления пароля выслано на <b>user@mail.</b></p>-->
             </div>
@@ -37,6 +44,7 @@
 </template>
 
 <script>
+import { required, sameAs, minLength } from 'vuelidate/lib/validators'
 export default {
   name: "reset",
   data() {
@@ -47,14 +55,28 @@ export default {
   },
   methods: {
     async resetPassword () {
-      await this.$axios.$post('password/reset?email=' + this.$route.query.email +
-      '&token=' + this.$route.query.token, {
-        password: this.new_password,
-        password_confirmation: this.repeat_password
-      })
-      .then(res => {
-        console.log(res)
-      })
+      this.$v.$touch();
+
+      if(!this.$v.$invalid) {
+        await this.$axios.$post('password/reset?email=' + this.$route.query.email +
+          '&token=' + this.$route.query.token, {
+          password: this.new_password,
+          password_confirmation: this.repeat_password
+        })
+          .then(res => {
+            console.log(res)
+          })
+      }
+    }
+  },
+  validations: {
+    new_password: {
+      required,
+      minLength: minLength(6)
+    },
+    repeat_password: {
+      required,
+      sameAsPassword: sameAs('new_password')
     }
   }
 }

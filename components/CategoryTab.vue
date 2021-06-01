@@ -5,12 +5,16 @@
         <p class="b_500_16_text">Категория</p>
       </div>
       <div class="category_text">
-        <p>Механические устройства</p>
-        <p>Механические устройства</p>
-        <p>Механические устройства</p>
-        <p>Механические устройства</p>
-        <p>Механические устройства</p>
-        <p>Механические устройства</p>
+        <div v-for="category in subcategories" :key="category.id" class="sub_items">
+          <nuxt-link
+            :to="{
+              name: 'catalog-slug',
+              params: { slug: category.slug }
+            }"
+          >
+            {{ category.title }}
+          </nuxt-link>
+        </div>
       </div>
     </div>
     <div class="category_content">
@@ -55,6 +59,7 @@ import VueRangeSlider from 'vue-range-component'
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
+  props: ['subcategories'],
   data() {
     return {
       value: [0, 500000],

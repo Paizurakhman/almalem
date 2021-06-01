@@ -25,18 +25,19 @@
           </thead>
           <tbody>
             <tr height="100px" v-for="order in orderData.orders" :key="order.id">
-              <th scope="row" width="190px">324234</th>
-              <td width="550px">
+              <td v-for="item in order.products">{{item.artikul}}</td>
+<!--              <td scope="row" width="190px">{{order.products}}</td>-->
+              <td width="550px" v-for="item in order.products" :key="order.id">
                 <div class="my_order_name">
-                  <img src="~/assets/img/product.png" alt="">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <img :src="'http://cdn.astudiodigital.ru/' + item.image.image" alt="">
+                  <p>{{item.title}}</p>
                 </div>
               </td>
-              <td width="190px">1 шт</td>
-              <td width="190px">1440 ₸</td>
-              <td width="190px">Принят</td>
+              <td width="190px" v-for="item in order.products" :key="order.id">{{ item.count }} шт</td>
+              <td width="190px" v-for="item in order.products" :key="order.id">{{ item.price }} ₸</td>
+              <td width="190px">{{ order.type_status }}</td>
               <td width="190px">
-                <p>12/03/2021</p>
+                <p>{{ new Date(order.created_at).getDate() }}/{{ new Date(order.created_at).getMonth() }}/{{ new Date(order.created_at).getFullYear() }}</p>
               </td>
             </tr>
           </tbody>

@@ -23,9 +23,26 @@
         </div>
       </div>
     </div>
-    <div class="container" v-if="innerData.products.data.length">
+    <div class="container">
+      <p class="bolder_text">Товары компании</p>
       <div class="sales_content">
-        <layout-slider :title="'Похожие товары'" :products="innerData.products.data"/>
+        <div class="row">
+          <div class="col-xl-3 col-lg-3" v-for="product in innerData.products.data" :key="product.id">
+            <product-card class="product_item" :product="product"></product-card>
+          </div>
+        </div>
+      </div>
+      <div class="pagination_content" v-if="innerData.products.last_page > 1">
+        <paginate
+          v-model="page"
+          :page-count="innerData.products.last_page"
+          :click-handler="myCallback"
+          :page-range="3"
+          :container-class="'pagination'"
+          :prev-text="'<span class=prev></span>'"
+          :next-text="'<span class=next></span>'"
+        />
+        <p>Показано с {{ innerData.products.from}} по {{innerData.products.to}} из {{innerData.products.total}} ({{innerData.products.current_page}} страниц)</p>
       </div>
     </div>
   </div>
@@ -36,8 +53,9 @@ export default {
     name: 'id',
     data() {
         return {
-            id: this.$route.params.id,
-            innerData: null
+          page: 1,
+          id: this.$route.params.id,
+          innerData: null
         }
     },
     async mounted () {
