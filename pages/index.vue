@@ -12,7 +12,8 @@
           <div class="col-xl-9 col-lg-9">
             <div class="banner_content">
               <div class="banner_image">
-                <img src="~/assets/img/banner_image.png" alt="banner">
+<!--                <img src="~/assets/img/banner_image.png" alt="banner">-->
+                <v-lazy-image :src="this.$store.state.imageUrl + homePageData.products.best[0].images.image" alt="banner" />
               </div>
               <div class="banner_text">
                 <h1>- Гидравлика</h1>

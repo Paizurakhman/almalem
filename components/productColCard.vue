@@ -10,7 +10,7 @@
         <div class="col-xl-3 col-lg-4">
           <div class="main_img">
             <div class="sale" v-if="product.sale">-{{product.sale}}</div>
-            <img :src="this.$store.state.imageUrl + product.images.image" alt="">
+            <v-lazy-image :src="this.$store.state.imageUrl + product.images.image" alt="" />
           </div>
         </div>
         <div class="col-xl-9 col-lg-8 position-static">
@@ -32,7 +32,12 @@
               <div class="product_card_left">
                 <div class="product_status">
                   <div class="like">
-                    <img @click.stop.prevent="addFavorite(product)" src="~/assets/icon/black_heart.svg" alt="heart">
+                    <span>
+                      <i
+                        @click.stop.prevent="addFavorite(product)"
+                        :class="[activeFav? 'fas fa-heart': 'far fa-heart']"
+                      ></i>
+                    </span>
                   </div>
                   <div class="card_col_title">
                     <p>Доступно: <span>98 на складе</span></p>
@@ -58,18 +63,43 @@ import {mapActions} from "vuex";
 export default {
   name: "productColCard",
   props: ['product'],
+  data() {
+    return {
+      hasFav: null,
+      activeFav: false
+    }
+  },
   methods: {
     ...mapActions([
       'ADD_TO_CART',
-      'ADD_FAVORITE'
+      'ADD_FAVORITE',
+      'CART_ACTION',
+      'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
       this.ADD_TO_CART(id)
+      this.CART_ACTION()
     },
     addFavorite (product) {
       this.ADD_FAVORITE(product)
+      this.FAV_LEN_ACTION()
+      this.activeFav = !this.activeFav
+    },
+    favId() {
+      if (this.hasFav) {
+        this.hasFav.filter(val => {
+          if (val.id === this.product.id) {
+            this.activeFav = true
+          }
+        })
+      }
     }
   },
+  mounted() {
+    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+
+    this.favId()
+  }
 }
 </script>
 

@@ -11,6 +11,10 @@
       margin: 10px 0;
       a {
         color: #3e444a;
+        &.nuxt-link-exact-active {
+          font-weight: 500;
+          color: #000000;
+        }
       }
     }
   }

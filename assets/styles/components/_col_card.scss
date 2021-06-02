@@ -3,7 +3,7 @@
   overflow: hidden;
   .overlay {
     visibility: hidden;
-    img {
+    span {
       transition: all 0.5s ease;
       transform: translateX(100px);
     }
@@ -20,13 +20,13 @@
     margin: 20px 0;
     img {
       width: 90%;
-      object-fit: contain;
+      height: 200px;
     }
   }
   &:hover {
     .overlay {
       visibility: visible;
-      img {
+      span {
         transition: all 0.5s ease;
         transform: translateX(0);
       }

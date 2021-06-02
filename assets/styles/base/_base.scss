@@ -63,6 +63,7 @@
   width: 40px;
   text-align: center;
   font-size: 12px;
+  z-index: 1;
 }
 
 .b_500_16_text {
@@ -133,4 +134,47 @@
 }
 input.invalid {
   border: 1px solid crimson !important;
+}
+.activeCart {
+}
+.inline_img {
+  span {
+    display: block;
+    padding: 10px;
+    &.activeCart {
+      background: #59367C;
+      border-radius: 50px;
+    }
+  }
+}
+.far {
+  font-size: 24px;
+  color: #000000;
+  cursor: pointer;
+}
+.fas {
+  font-size: 24px;
+  color: #EA6C6C;
+  cursor: pointer;
+  animation: like_anim 0.2s ease;
+}
+
+@keyframes like_anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.v-lazy-image {
+  filter: blur(15px);
+  transition: filter 0.7s;
+}
+.v-lazy-image-loaded {
+  filter: blur(0);
 }

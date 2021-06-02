@@ -42,7 +42,7 @@
                                         <div class="row">
                                             <div class="col-xl-4">
                                                 <vue-picker v-model="address.region" autofocus placeholder="Регион">
-                                                    <vue-picker-option value="1">Turkestan</vue-picker-option>
+                                                    <vue-picker-option :value="reg.title" v-for="reg in regions" :key="reg.id">{{reg.title}}</vue-picker-option>
                                                 </vue-picker>
                                             </div>
                                             <div class="col-xl-4">
@@ -116,12 +116,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'checkout',
   data() {
     return {
       cartData: null,
       cart: null,
+      regions: null,
       main_info: {
         name: '',
         phone: '',
@@ -165,8 +167,15 @@ export default {
     if (this.cart) {
       this.get_cart
     }
+    await this.$axios.$get('order-address?lang=' + this.$store.state.lang)
+    .then(res => {
+      this.regions = res.regions
+    })
   },
   methods: {
+    ...mapActions([
+      'CART_ACTION'
+    ]),
     deleteCartProduct (id) {
       this.cart = this.cart.filter(rm => {
         return rm.id !== id
@@ -174,6 +183,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart))
 
       this.get_cart
+      this.CART_ACTION()
     },
     async handleBuy() {
       this.main_info.token = localStorage.getItem('token')

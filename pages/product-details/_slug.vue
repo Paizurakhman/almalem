@@ -4,7 +4,7 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/catalog">Каталог</nuxt-link>
+        <nuxt-link :to="{ name: 'catalog-slug', params: { slug: detailsData.category_parent.slug }}">Каталог</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
         <nuxt-link to="/catalog">Detail</nuxt-link>
       </div>
@@ -93,7 +93,10 @@
                 </div>
               </div>
               <div class="add_to_like">
-                <img @click="addFavorite(detailsData.product)" src="~/assets/icon/heart_silver.svg" alt="">
+                <i
+                  @click.stop.prevent="addFavorite(detailsData.product)"
+                  :class="[activeFav? 'fas fa-heart': 'far fa-heart']"
+                ></i>
                 <span>Добавить в избранные</span>
               </div>
               <div class="product_card_bottom t_none">
@@ -151,6 +154,8 @@ export default {
       imgUrl: this.$store.state.imageUrl,
       detailsData: null,
       rating: null,
+      hasFav: null,
+      activeFav: false,
       settingRating: {
         'star-size': 15,
         'show-rating': false,
@@ -175,7 +180,6 @@ export default {
               "slidesToShow": 4,
               "slidesToScroll": 1,
               arrows: true
-              // "dots": true
             }
           },
           {
@@ -201,21 +205,38 @@ export default {
   methods: {
     ...mapActions([
       'ADD_TO_CART',
-      'ADD_FAVORITE'
+      'ADD_FAVORITE',
+      'CART_ACTION',
+      'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
       this.ADD_TO_CART(id)
+      this.CART_ACTION()
     },
     addFavorite (product) {
       this.ADD_FAVORITE(product)
+      this.FAV_LEN_ACTION()
+      this.activeFav = !this.activeFav
+    },
+    favId() {
+      if (this.hasFav) {
+        this.hasFav.filter(val => {
+          if (val.id === this.detailsData.product.id) {
+            this.activeFav = true
+          }
+        })
+      }
     }
   },
   async mounted() {
+    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+
     await this.$axios.get('product?lang=' + this.$store.state.lang + '&slug=' + this.slug)
     .then(res => {
       this.detailsData = res.data
       this.rating = Math.round(Number(res.data.rating.average), 1)
     })
+    this.favId()
   }
 }
 </script>

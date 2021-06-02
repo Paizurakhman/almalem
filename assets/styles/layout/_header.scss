@@ -112,9 +112,41 @@ header {
         .like {
           margin: 0 20px;
           cursor: pointer;
+          position: relative;
+          .fav_length {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #ffffff;
+            color: #3e444a;
+            width: 20px;
+            height: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+          }
         }
         .basket {
           cursor: pointer;
+          position: relative;
+          .cart_length {
+            background: #ffffff;
+            color: #3e444a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            position: absolute;
+            top: -10px;
+            right: 0;
+          }
         }
         p{
           font-weight: 500;

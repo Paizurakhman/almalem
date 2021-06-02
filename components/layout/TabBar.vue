@@ -56,10 +56,10 @@
 <script>
 export default {
   name: "TabBar",
-  props: ['current', 'products'],
+  props: ['current', 'products', 'sortValue'],
   data() {
     return {
-      sortVal: ""
+      sortVal: this.sortValue || ''
     }
   },
   methods: {

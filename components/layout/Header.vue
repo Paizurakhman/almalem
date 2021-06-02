@@ -54,12 +54,14 @@
               <div class="like">
                   <img src="~/assets/icon/main/heart.svg" alt="">
                   <p>Избранное</p>
+                  <div class="fav_length" v-if="GET_FAV_LEN">{{ GET_FAV_LEN }}</div>
               </div>
             </nuxt-link>
             <nuxt-link :to="{ name: 'cart'}">
               <div class="basket">
                   <img src="~/assets/icon/main/basket.svg" alt="">
                   <p>Корзина</p>
+                  <div class="cart_length" v-if="getCartLen">{{ getCartLen }}</div>
               </div>
             </nuxt-link>
           </div>
@@ -205,7 +207,8 @@ export default {
       city: null,
       token: null,
       searchWrapper: false,
-      mobileNav: false
+      mobileNav: false,
+
     }
   },
   watch: {
@@ -218,7 +221,9 @@ export default {
   methods: {
     ...mapActions([
       'showAction',
-      // 'mobileNavAction'
+      // 'mobileNavAction',
+      'CART_ACTION',
+      'FAV_LEN_ACTION'
     ]),
     mobileNavAction () {
       this.mobileNav = !this.mobileNav
@@ -242,9 +247,10 @@ export default {
     ...mapState([
       'showNav'
     ]),
-    // ...mapGetters([
-    //   'getMobileNav',
-    // ]),
+    ...mapGetters([
+      'getCartLen',
+      'GET_FAV_LEN'
+    ]),
     currentLanguage() {
       return this.currentLang
     },
@@ -258,6 +264,8 @@ export default {
     }
   },
   mounted() {
+    this.CART_ACTION()
+    this.FAV_LEN_ACTION()
     this.token = localStorage.getItem('token')
     this.$axios.get('get-header?lang=' + this.$store.state.lang)
     .then(res => {

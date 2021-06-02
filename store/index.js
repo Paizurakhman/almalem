@@ -5,7 +5,9 @@ export const state = () => ({
     lang: 'ru',
     imageUrl: 'http://cdn.astudiodigital.ru/',
     cart: [],
-    favorites: []
+    favorites: [],
+    cartLength: 0,
+    favoriteLength: 0
 })
 
 export const mutations = {
@@ -66,6 +68,12 @@ export const mutations = {
           products: state.favorites
         }))
       }
+    },
+    SET_CART_LENGTH (state) {
+        state.cartLength = JSON.parse(localStorage.getItem('cart')).length
+    },
+    SET_FAV_LENGTH (state) {
+      state.favoriteLength = JSON.parse(localStorage.getItem('favorite')).products.length
     }
 }
 
@@ -84,6 +92,12 @@ export const actions = {
     },
     ADD_FAVORITE ({commit}, product) {
       commit('SET_FAVORITE', product)
+    },
+    CART_ACTION ({commit}) {
+      commit('SET_CART_LENGTH')
+    },
+    FAV_LEN_ACTION ({commit}) {
+      commit('SET_FAV_LENGTH')
     }
 }
 
@@ -96,5 +110,11 @@ export const getters = {
     },
     loggedIn () {
       return localStorage.getItem('token') || null
+    },
+    getCartLen (state) {
+      return state.cartLength
+    },
+    GET_FAV_LEN(state) {
+      return state.favoriteLength
     }
 }

@@ -13,29 +13,38 @@
           <div class="company_name">
             <p>Company</p>
           </div>
-          <img @click.stop.prevent="addFavorite(product)" src="~/assets/icon/black_heart.svg" alt="">
+          <span>
+            <i
+              @click.stop.prevent="addFavorite(product)"
+              :class="[activeFav? 'fas fa-heart': 'far fa-heart']"
+            ></i>
+<!--            <img @click.stop.prevent="addFavorite(product)" src="~/assets/icon/black_heart.svg" alt="">-->
+          </span>
         </div>
         <div class="main_img">
           <div class="sale" v-if="product.sale">-{{product.sale}}%</div>
-          <img
+          <v-lazy-image
             :src="this.$store.state.imageUrl + product.images.image"
-            alt=""
-            style="object-fit:cover"
-            ref="image"
-            :height="width"
-          >
+
+          />
         </div>
         <div class="product_card_bottom">
           <div class="price">
             <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">{{ product.current_price + (product.current_price * product.sale / 100) }} ₸</span></p>
           </div>
           <div class="inline_img overlay">
-<!--            <span class="material-icons md-36">shopping_cart</span>-->
-<!--            <span class="material-icons">remove_shopping_cart</span>-->
-            <img
-              @click.stop.prevent="addToCart(product.id)"
-              src="~/assets/icon/black_basket.svg"
-              alt="">
+            <span v-if="activeCart" :class="{activeCart: activeCart}">
+              <img
+                @click.stop.prevent="addToCart(product.id)"
+                src="~/assets/icon/white_basket.svg"
+              >
+            </span>
+            <span v-else>
+              <img
+                @click.stop.prevent="addToCart(product.id)"
+                src="~/assets/icon/black_basket.svg"
+              >
+            </span>
           </div>
         </div>
       </div>
@@ -50,25 +59,53 @@ export default {
   props: ['product'],
   data() {
     return {
-      width: ''
+      hasCart: null,
+      hasFav: null,
+      activeCart: false,
+      activeFav: false
     }
   },
   methods: {
     ...mapActions([
       'ADD_TO_CART',
-      'ADD_FAVORITE'
+      'ADD_FAVORITE',
+      "CART_ACTION",
+      'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
       this.ADD_TO_CART(id)
+      this.activeCart = !this.activeCart
+      this.CART_ACTION()
     },
     addFavorite (product) {
       this.ADD_FAVORITE(product)
+      this.FAV_LEN_ACTION()
+      this.activeFav = !this.activeFav
+    },
+    cartId () {
+      if (this.hasCart) {
+        this.hasCart.filter(val => {
+          if (val.id === this.product.id) {
+            this.activeCart = true
+          }
+        })
+      }
+    },
+    favId() {
+      if (this.hasFav) {
+        this.hasFav.filter(val => {
+          if (val.id === this.product.id) {
+            this.activeFav = true
+          }
+        })
+      }
     }
   },
   mounted() {
-    if(this.product) {
-      this.width = this.$refs.image.width + 1
-    }
+    this.hasCart = JSON.parse(localStorage.getItem('cart')) || null
+    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+    this.cartId()
+    this.favId()
   }
 
 }

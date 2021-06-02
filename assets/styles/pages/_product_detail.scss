@@ -16,12 +16,12 @@
 
 .detail_carousel {
   .slick-slider {
-    max-width: 100%;
-    .slick-list {
-      margin: 0 30px;
+    .slick-current {
+      filter: opacity(0.4);
     }
     img {
       width: 100%;
+      padding: 15px;
     }
     .slick-arrow {
       height: 40px;
@@ -133,9 +133,12 @@
   .add_to_like {
     margin: 20px 0;
     font-size: 14px;
+    display: flex;
+    align-items: center;
     span {
       color: #757575;
       font-weight: 500;
+      margin-left: 10px;
     }
   }
   .product_card_bottom {

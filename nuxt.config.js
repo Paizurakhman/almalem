@@ -16,7 +16,8 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/logo.svg' },
             { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+            { rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v5.10.0/css/all.css" }
         ]
     },
 
@@ -38,6 +39,7 @@ export default {
         '~/plugins/filter',
         { src: '~/plugins/vue-pagination', mode: 'client'},
         '~/plugins/vue-validate',
+        { src: '~/plugins/vue-lazy-load', mode: 'client'},
         // '~/plugins/route',
         { src: '~/plugins/star-rating', mode: 'client'}
     ],

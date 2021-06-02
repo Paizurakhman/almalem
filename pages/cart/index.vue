@@ -36,7 +36,7 @@
           <nuxt-link :to="{ name: 'cart-checkout' }" class="btn btn_silver">Купить</nuxt-link>
         </div>
       </div>
-      <div v-else>No products</div>
+      <div v-else>Корзина пуста</div>
     </div>
   </div>
 </template>
@@ -44,6 +44,7 @@
 <script>
 
 import TableRow from "../../components/tableRow";
+import { mapActions } from 'vuex'
 export default {
   name: "basket",
   components: {TableRow},
@@ -79,6 +80,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'CART_ACTION'
+    ]),
     deleteCartProduct (id) {
       this.cart = this.cart.filter(rm => {
           return rm.id !== id
@@ -86,6 +90,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart))
 
       this.get_cart
+      this.CART_ACTION()
     }
   }
 }

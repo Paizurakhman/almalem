@@ -72,9 +72,12 @@ export default {
   methods: {
     ...mapActions([
       'ADD_TO_CART',
+      'CART_ACTION',
+      'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
       this.ADD_TO_CART(id)
+      this.CART_ACTION()
     },
     deleteFavorite (product) {
       localStorage.setItem('favorite', JSON.stringify({
@@ -83,6 +86,7 @@ export default {
         })
       }))
       this.favoriteData = JSON.parse(localStorage.getItem('favorite'))
+      this.FAV_LEN_ACTION()
     }
   },
   mounted() {

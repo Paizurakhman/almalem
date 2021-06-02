@@ -9,9 +9,9 @@
       <div class="p_title">
         <p>Новинки</p>
       </div>
-      <div class="tab_content">
-        <layout-tabBar @viewMode="current = $event" :current="current" :products="newProducts.products"/>
-      </div>
+<!--      <div class="tab_content">-->
+<!--        <layout-tabBar @viewMode="current = $event" :current="current" :products="newProducts.products"/>-->
+<!--      </div>-->
       <div class="product_card_item">
         <div class="row" v-if="current === 'grid'">
           <div class="col-xl-3 col-lg-3 col-md-4" v-for="product in newProducts.products" :key="product.id">
@@ -22,9 +22,6 @@
         <div v-if="current === 'list'" v-for="product in newProducts.products" :key="product.id">
           <product-col-card class="product_item" :product="product"/>
         </div>
-      </div>
-      <div class="pagination_items">
-<!--        <pagination v-model="page" :records="1000" :per-page="12"/>-->
       </div>
     </div>
   </div>
@@ -40,7 +37,6 @@ export default {
     return {
       current: 'grid',
       newProducts: null,
-      page: 1
     }
   },
   async mounted() {
@@ -48,7 +44,6 @@ export default {
     .then(res => {
       this.newProducts = res.data
     })
-    console.log('mounted');
   }
 }
 </script>

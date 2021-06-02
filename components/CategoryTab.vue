@@ -59,15 +59,15 @@ import VueRangeSlider from 'vue-range-component'
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
-  props: ['subcategories'],
+  props: ['subcategories', 'range_from', 'range_to'],
   data() {
     return {
-      value: [0, 500000],
+      value: [0, 1000000],
       processStyle: '',
       bgStyle: '',
       setting: {
         dotSize: 25,
-        max: 500000,
+        max: 1000000,
         step: 100
       }
     }
@@ -84,6 +84,11 @@ export default {
   methods: {
     changePrice () {
       this.$emit('change_price', this.value)
+    }
+  },
+  mounted() {
+    if (this.range_from && this.range_to) {
+      this.value = [this.range_from, this.range_to]
     }
   }
 }
