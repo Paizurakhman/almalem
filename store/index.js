@@ -70,7 +70,7 @@ export const mutations = {
       }
     },
     SET_CART_LENGTH (state) {
-        state.cartLength = JSON.parse(localStorage.getItem('cart')).length
+        state.cartLength = JSON.parse(localStorage.getItem('cart'))?.length
     },
     SET_FAV_LENGTH (state) {
       state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
