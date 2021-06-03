@@ -48,13 +48,13 @@
 <!--                                                    <vue-picker-option :value="reg" v-for="reg in regions" :key="reg.id">{{reg.title}}</vue-picker-option>-->
 <!--                                                </vue-picker>-->
                                             </div>
-                                            <div class="col-xl-4" v-if="">
-<!--                                              <select v-model="address.city" :disabled="selectedItem">-->
-<!--                                                <option :value="reg" v-for="city in selectedItem.cities" :key="city.id">{{ city.title }}</option>-->
-<!--                                              </select>-->
-<!--                                                <vue-picker v-model="address.city" autofocus placeholder="Город" :disabled="address.region">-->
-<!--                                                    <vue-picker-option value="1">Kentau</vue-picker-option>-->
-<!--                                                </vue-picker>-->
+                                            <div class="col-xl-4" v-if="" >
+                                              <select v-model="address.city" v-if="selectedItem">
+                                                <option :value="city.title" v-for="city in selectedItem.cities" :key="city.id">{{ city.title }}</option>
+                                              </select>
+                                                <vue-picker v-model="address.city" autofocus placeholder="Город" :disabled="address.region">
+                                                    <vue-picker-option value="1">Kentau</vue-picker-option>
+                                                </vue-picker>
                                             </div>
                                             <div class="col-xl-4">
                                                 <input type="text" placeholder="Улица" v-model="address.street">                                                </div>

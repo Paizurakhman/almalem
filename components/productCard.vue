@@ -103,7 +103,7 @@ export default {
   },
   mounted() {
     this.hasCart = JSON.parse(localStorage.getItem('cart')) || null
-    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+    this.hasFav = JSON.parse(localStorage.getItem('favorite'))?.products
     this.cartId()
     this.favId()
   }
