@@ -1,20 +1,30 @@
 .mobile_nav {
   background: #ffffff;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   width: 100%;
-  max-height: 78vh;
-  height: 100%;
-  top: 25%;
-  left: 0;
-  padding: 10px 20px 30px;
+  height: 100vh;
   overflow-y: scroll;
   .catalog_title {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0 10px 30px;
+    padding: 10px 0 5px 30px;
+  }
+  .category_over {
+    max-height: 100px;
+    overflow-y: scroll;
+  }
+  .sub_category {
+    margin-left: 60px;
+    a {
+      display: block;
+      padding: 5px 0;
+    }
   }
   .nav_links {
+    height: 70%;
+    overflow-y: scroll;
+    padding: 10px 20px 0;
     .drop_down {
       display: flex;
       justify-content: space-between;
@@ -28,7 +38,7 @@
           font-size: 14px;
           font-weight: 500;
           color: #000000;
-          &.nuxt-link-exact-active {
+          &.nuxt-link-active {
             color: #58357B;
           }
         }

@@ -39,16 +39,22 @@
                                         <div class="i_title">
                                             <p>Адрес</p>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" v-if="regions">
                                             <div class="col-xl-4">
-                                                <vue-picker v-model="address.region" autofocus placeholder="Регион">
-                                                    <vue-picker-option :value="reg.title" v-for="reg in regions" :key="reg.id">{{reg.title}}</vue-picker-option>
-                                                </vue-picker>
+                                              <select v-model="selectedItem" @change="selected(selectedItem)">
+                                                <option :value="reg" v-for="reg in regions" :key="reg.id">{{ reg.title }}</option>
+                                              </select>
+<!--                                                <vue-picker v-model="selectedItem" @input="selected(selectedItem)" autofocus placeholder="Регион">-->
+<!--                                                    <vue-picker-option :value="reg" v-for="reg in regions" :key="reg.id">{{reg.title}}</vue-picker-option>-->
+<!--                                                </vue-picker>-->
                                             </div>
-                                            <div class="col-xl-4">
-                                                <vue-picker v-model="address.city" autofocus placeholder="Город">
-                                                    <vue-picker-option value="1">Kentau</vue-picker-option>
-                                                </vue-picker>
+                                            <div class="col-xl-4" v-if="">
+<!--                                              <select v-model="address.city" :disabled="selectedItem">-->
+<!--                                                <option :value="reg" v-for="city in selectedItem.cities" :key="city.id">{{ city.title }}</option>-->
+<!--                                              </select>-->
+<!--                                                <vue-picker v-model="address.city" autofocus placeholder="Город" :disabled="address.region">-->
+<!--                                                    <vue-picker-option value="1">Kentau</vue-picker-option>-->
+<!--                                                </vue-picker>-->
                                             </div>
                                             <div class="col-xl-4">
                                                 <input type="text" placeholder="Улица" v-model="address.street">                                                </div>
@@ -124,6 +130,7 @@ export default {
       cartData: null,
       cart: null,
       regions: null,
+      selectedItem: null,
       main_info: {
         name: '',
         phone: '',
@@ -176,6 +183,11 @@ export default {
     ...mapActions([
       'CART_ACTION'
     ]),
+
+    selected(item) {
+      this.address.region = item.title
+    },
+
     deleteCartProduct (id) {
       this.cart = this.cart.filter(rm => {
         return rm.id !== id
@@ -196,11 +208,18 @@ export default {
         // window.location.href = res.url
         window.open(res.url, '_self')
       })
-    }
+    },
   }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+  select {
+    width: 100%;
+    padding: 10px 4px;
+    border-radius: 5px;
+    background: transparent;
+    outline: transparent;
+    border: 1px solid #757575;
+  }
 </style>

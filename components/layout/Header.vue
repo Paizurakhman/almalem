@@ -69,7 +69,7 @@
       </div>
 
       <div class="container">
-        <div class="d_none">
+        <div class="d_none mobile_top">
           <div class="mobile_header">
             <div class="mobile_header_top">
               <div class="social_networks">
@@ -144,13 +144,12 @@
               </div>
             </div>
           </div>
-          <transition name="mob_nav">
-            <layout-mobile-nav v-if="mobileNav"/>
-          </transition>
         </div>
       </div>
     </div>
-
+    <transition name="mob_nav">
+      <layout-mobile-nav v-if="mobileNav"/>
+    </transition>
     <nav class="m_none">
       <div class="container">
         <div class="links">
@@ -221,7 +220,6 @@ export default {
   methods: {
     ...mapActions([
       'showAction',
-      // 'mobileNavAction',
       'CART_ACTION',
       'FAV_LEN_ACTION'
     ]),
@@ -249,15 +247,17 @@ export default {
     ]),
     ...mapGetters([
       'getCartLen',
-      'GET_FAV_LEN'
+      'GET_FAV_LEN',
+      'getMobileNav'
     ]),
     currentLanguage() {
       return this.currentLang
     },
   },
   updated() {
-    if (this.getMobileNav) {
+    if (this.mobileNav) {
       document.body.style.overflowY = 'hidden'
+      console.log('hidden')
     }
     else  {
       document.body.style.overflowY = 'auto'
@@ -271,7 +271,7 @@ export default {
     .then(res => {
       this.headerData = res.data;
 
-      // this.city = res.data.cities[0].id
+      this.city = res.data.cities[0].id
     })
 
     let vm = this
