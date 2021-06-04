@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { VuePicker, VuePickerOption } from '@invisiburu/vue-picker'
+import vSelect from 'vue-select'
 
-Vue.component('VuePicker', VuePicker)
-Vue.component('VuePickerOption', VuePickerOption)
+Vue.component('v-select', vSelect)
