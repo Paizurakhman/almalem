@@ -4,11 +4,11 @@
       <div class="container m_none">
         <div class="header_top">
           <div class="social_networks">
-            <span><a href="#"><img src="~/assets/icon/socials/facebook.svg" alt="social"></a></span>
-            <span><a href="#"><img src="~/assets/icon/socials/instagram.svg" alt="social"></a></span>
-            <span><a href="#"><img src="~/assets/icon/socials/youtube.svg" alt="social"></a></span>
-            <span><a href="#"><img src="~/assets/icon/socials/vk.svg" alt="social"></a></span>
-            <span><a href="#"><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></a></span>
+            <span><a :href="headerData.contacts.facebook" target="_blank"><img src="~/assets/icon/socials/facebook.svg" alt="social"></a></span>
+            <span><a :href="headerData.contacts.instagram" target="_blank"><img src="~/assets/icon/socials/instagram.svg" alt="social"></a></span>
+            <span><a :href="headerData.contacts.youtube" target="_blank"><img src="~/assets/icon/socials/youtube.svg" alt="social"></a></span>
+            <span><a :href="headerData.contacts.vk" target="_blank"><img src="~/assets/icon/socials/vk.svg" alt="social"></a></span>
+            <span><a :href="headerData.contacts.odnoklassniki" target="_blank"><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></a></span>
           </div>
           <div class="contact">
             <div class="city">
@@ -73,11 +73,11 @@
           <div class="mobile_header">
             <div class="mobile_header_top">
               <div class="social_networks">
-                <span><img src="~/assets/icon/socials/facebook.svg" alt="social"></span>
-                <span><img src="~/assets/icon/socials/instagram.svg" alt="social"></span>
-                <span><img src="~/assets/icon/socials/youtube.svg" alt="social"></span>
-                <span><img src="~/assets/icon/socials/vk.svg" alt="social"></span>
-                <span><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></span>
+                <span><a :href="headerData.contacts.facebook" target="_blank"><img src="~/assets/icon/socials/facebook.svg" alt="social"></a></span>
+                <span><a :href="headerData.contacts.instagram" target="_blank"><img src="~/assets/icon/socials/instagram.svg" alt="social"></a></span>
+                <span><a :href="headerData.contacts.youtube" target="_blank"><img src="~/assets/icon/socials/youtube.svg" alt="social"></a></span>
+                <span><a :href="headerData.contacts.vk" target="_blank"><img src="~/assets/icon/socials/vk.svg" alt="social"></a></span>
+                <span><a :href="headerData.contacts.odnoklassniki" target="_blank"><img src="~/assets/icon/socials/odnoklassniki.svg" alt="social"></a></span>
               </div>
               <div class="top_actions">
                 <div class="my_account" v-if="token">
@@ -89,10 +89,11 @@
                   <nuxt-link to="/auth/login">Войти</nuxt-link> <span> /</span>
                   <nuxt-link to="/auth/register">Регистрация</nuxt-link>
                 </div>
-                <div class="language" ref="language">
+                <div class="language">
                   <div
                     class="lang"
-                    @click="handleLanguage"
+                    @click.stop="handleLanguage"
+                    ref="language"
                   >
                     <img :src="currentLanguage.src" alt="">
                     <img src="~/assets/icon/main/arrow.svg" alt="">
@@ -104,11 +105,12 @@
             <div class="mobile_header_center">
               <div class="contact">
                 <div class="city">
-                  <span>Алматы</span>
-                  <img src="~/assets/icon/main/arrow.svg" alt="">
+                  <select name="city" v-model="city">
+                    <option v-for="c in headerData.cities" :key="c.id" :value="c.id">{{ c.title}}</option>
+                  </select>
                 </div>
                 <div class="phone">
-                  <span>+7(777)777-77-77</span>
+                  <span>{{ headerData.contacts.phone_number }}</span>
                 </div>
               </div>
             </div>
@@ -125,14 +127,16 @@
                     <div class="mobile_icon">
                       <img src="~/assets/icon/search.svg" alt="" @click="isSearch">
                     </div>
-                    <div class="mobile_icon">
+                    <div class="mobile_icon heart">
                       <nuxt-link :to="{ name: 'favorites'}">
                         <img src="~/assets/icon/main/heart.svg" alt="">
+                        <div class="fav_length" v-if="GET_FAV_LEN">{{ GET_FAV_LEN }}</div>
                       </nuxt-link>
                     </div>
-                    <div class="mobile_icon">
+                    <div class="mobile_icon cart">
                       <nuxt-link :to="{name: 'cart'}">
                         <img src="~/assets/icon/main/basket.svg" alt="">
+                        <div class="cart_length" v-if="getCartLen">{{ getCartLen }}</div>
                       </nuxt-link>
                     </div>
                 </div>

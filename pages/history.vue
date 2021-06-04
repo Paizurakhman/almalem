@@ -26,7 +26,6 @@
           <tbody>
             <tr height="100px" v-for="(order, index) in orderData.orders">
               <td v-for="item in order.products">{{item.artikul}}</td>
-<!--              <td scope="row" width="190px">{{order.products}}</td>-->
               <td width="550px" v-for="item in order.products" >
                 <div class="my_order_name">
                   <img :src="'http://cdn.astudiodigital.ru/' + item.image.image" alt="">

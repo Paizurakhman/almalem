@@ -35,9 +35,6 @@
       align-items: center;
       justify-content: space-between;
       margin: 20px 0;
-      input {
-        margin: 0 15px;
-      }
     }
     .card_footer {
       text-align: right;
@@ -52,7 +49,7 @@
         align-items: center;
       }
     }
-    img {
+    img.order {
       width: 100%;
     }
     p {
@@ -77,4 +74,16 @@
   width: 135px;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+@media screen and (max-width: 576px){
+  .vs__selected {
+    white-space: normal;
+    width: 90%;
+  }
+  .home_address {
+    flex-wrap: wrap;
+    input {
+      width: 45% !important;
+    }
+  }
 }
