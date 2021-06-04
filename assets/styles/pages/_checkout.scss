@@ -1,7 +1,7 @@
 .checkout_content {
     .contacts_form {
         .inputs {
-            span {
+            .custom_span {
                 text-align: left;
                 &::before {
                     padding-left: 0;
@@ -10,7 +10,7 @@
             button {
                 text-align: left;
                 border-radius: 4px;
-        
+
             }
 
             .input_title {
@@ -18,7 +18,7 @@
                 p {
                     font-size: 24px;
                     color: #3E444A;
-                
+
                 }
             }
             .i_title {
