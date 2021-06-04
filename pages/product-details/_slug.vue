@@ -229,7 +229,7 @@ export default {
     }
   },
   async mounted() {
-    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+    this.hasFav = JSON.parse(localStorage.getItem('favorite'))?.products
 
     await this.$axios.get('product?lang=' + this.$store.state.lang + '&slug=' + this.slug)
     .then(res => {
