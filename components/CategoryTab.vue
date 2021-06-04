@@ -97,7 +97,9 @@ export default {
     let filter = JSON.parse(localStorage.getItem('object'))?.filter_id
 
     if (filter) {
-      console.log(filter)
+      for (const filter_id of filter) {
+        this.filteredValue.push(filter_id)
+      }
     }
     // this.filteredValue = [this.$route.query.filter_id]
     // console.log(this.$route.query.filter_id)
