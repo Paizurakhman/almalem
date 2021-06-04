@@ -10,14 +10,14 @@
         <p>Корзина</p>
       </div>
       <div class="table_wrapper" v-if="cartData">
-        <table class="table table-bordered table-responsive-sm">
+        <table class="table table-bordered table-responsive">
           <thead>
             <tr>
-              <th scope="col" width="190px">Картинка</th>
-              <th scope="col" width="440px">Название</th>
-              <th scope="col" width="190px">Количество</th>
-              <th scope="col" width="190px">Цена за шт.</th>
-              <th scope="col" width="190px">Общая цена</th>
+              <th scope="col"><p style="width: 100px">Картинка</p></th>
+              <th scope="col"><p style="width: 200px">Название</p></th>
+              <th scope="col"><p style="width: 120px">Количество</p></th>
+              <th scope="col"><p style="width: 150px">Цена за шт.</p></th>
+              <th scope="col"><p style="width: 150px">Общая цена</p></th>
             </tr>
           </thead>
           <tbody>

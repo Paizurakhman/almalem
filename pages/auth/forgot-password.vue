@@ -18,7 +18,7 @@
             <div class="form">
               <div class="inputs">
                 <p>Адрес эл.почты</p>
-                <input type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
+                <input class="custom_input" type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
                 <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
                 <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>

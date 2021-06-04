@@ -37,14 +37,14 @@
                       <form>
                         <div class="inputs">
                           <span>E-mail</span>
-                          <input type="email" v-model="email" :class="{invalid:($v.email.$dirty && !$v.email.required)
+                          <input class="custom_input" type="email" v-model="email" :class="{invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
                           <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
                           <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
                         </div>
                         <div class="inputs">
                           <span>Пароль</span>
-                          <input type="password" v-model.trim="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
+                          <input class="custom_input" type="password" v-model.trim="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
                           || ($v.password.$dirty && !$v.password.minLength)}">
                           <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
                           <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">Password must be at least 6 characters</span>
