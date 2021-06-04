@@ -16,6 +16,7 @@
               <no-ssr>
                 <category-tab
                   @change_price="changePrice"
+                  @filter="filterHandle"
                   :subcategories="productsData.subcategories"
                   :filters="productsData.filters"
                   :range_from="$route.query.from"
@@ -58,7 +59,14 @@
               </div>
               <div class="category_tab_nav d_none" v-if="mobileCategory">
                 <no-ssr>
-                  <category-tab @change_price="changePrice" :subcategories="productsData.subcategories"/>
+                  <category-tab
+                    @change_price="changePrice"
+                    @filter="filterHandle"
+                    :subcategories="productsData.subcategories"
+                    :filters="productsData.filters"
+                    :range_from="$route.query.from"
+                    :range_to="$route.query.to"
+                  />
                 </no-ssr>
               </div>
               <div class="product_card_item">
@@ -139,7 +147,11 @@ export default {
       this.obj['page'] = 1
       localStorage.setItem('object', JSON.stringify(this.obj))
       this.allProducts()
-
+    },
+    filterHandle(value) {
+      this.obj['filter_id'] = value
+      localStorage.setItem('object', JSON.stringify(this.obj))
+      this.allProducts()
     }
 
   },
