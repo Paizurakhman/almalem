@@ -30,7 +30,7 @@
         </div>
         <div class="product_card_bottom">
           <div class="price">
-            <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">{{ product.current_price + (product.current_price * product.sale / 100) }} ₸</span></p>
+            <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">{{ product.price }} ₸</span></p>
           </div>
           <div class="inline_img overlay">
             <span v-if="activeCart" :class="{activeCart: activeCart}">

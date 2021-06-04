@@ -50,18 +50,20 @@
         <div class="form">
           <form @submit.prevent="sendReview">
             <div class="inputs">
-              <span class="necessarily">Имя</span>
-              <input type="text" v-model="name">
+              <span class="necessarily custom_span">Имя</span>
+              <input class="custom_input" type="text" v-model="name">
             </div>
             <div class="inputs">
-              <span class="necessarily">Ваш отзыв</span>
+              <span class="necessarily custom_span">Ваш отзыв</span>
               <textarea v-model="review_text"></textarea>
             </div>
             <div>
-              <span class="necessarily">Рейтинг</span>
-              <no-ssr>
-                <star-rating v-model="rating" v-bind="settings"></star-rating>
-              </no-ssr>
+              <div class="inputs">
+                <span class="necessarily custom_span">Рейтинг</span>
+                <no-ssr>
+                  <star-rating v-model="rating" v-bind="settings"></star-rating>
+                </no-ssr>
+              </div>
             </div>
             <div class="contacts_action">
               <button class="btn btn_silver">Продолжить</button>

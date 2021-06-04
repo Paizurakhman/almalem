@@ -180,7 +180,7 @@
                           <p>Имя</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input type="text" v-model="profileEdit.name">
+                          <input class="custom_input" type="text" v-model="profileEdit.name">
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@
                           <p>Фамилия</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input type="text" v-model="profileEdit.first_name">
+                          <input class="custom_input" type="text" v-model="profileEdit.first_name">
                         </div>
                       </div>
                     </div>
@@ -200,7 +200,7 @@
                           <p>Телефон</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <the-mask :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone"/>
+                          <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone"/>
                         </div>
                       </div>
                     </div>
@@ -210,7 +210,7 @@
                           <p>Email</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input type="email" v-model="profileEdit.email">
+                          <input class="custom_input" type="email" v-model="profileEdit.email">
                         </div>
                       </div>
                     </div>
@@ -223,7 +223,7 @@
                           <p>Старый пароль</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input type="password" v-model="password">
+                          <input class="custom_input" type="password" v-model="password">
                         </div>
                       </div>
                     </div>
@@ -233,7 +233,7 @@
                         <p>Новый пароль</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input type="password" v-model="password">
+                        <input class="custom_input" type="password" v-model="password">
                       </div>
                     </div>
                   </div>
@@ -243,7 +243,7 @@
                           <p>Подтвердите пароль</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input type="password" v-model="confirm_password">
+                          <input class="custom_input" type="password" v-model="confirm_password">
                         </div>
                       </div>
                     </div>
@@ -262,7 +262,7 @@
                         <p>Регион</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input type="text" v-model="profileEdit.region">
+                        <input class="custom_input" type="text" v-model="profileEdit.region">
                       </div>
                     </div>
                   </div>
@@ -272,7 +272,7 @@
                         <p>Город</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input type="text" v-model="profileEdit.city">
+                        <input class="custom_input" type="text" v-model="profileEdit.city">
                       </div>
                     </div>
                   </div>
@@ -282,7 +282,7 @@
                         <p>Улица</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input type="text" v-model="profileEdit.street">
+                        <input class="custom_input" type="text" v-model="profileEdit.street">
                       </div>
                     </div>
                   </div>
@@ -292,13 +292,13 @@
                         <p>Дом</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input type="text" v-model="profileEdit.house">
+                        <input class="custom_input" type="text" v-model="profileEdit.house">
                       </div>
                       <div class="col-xl-2 col-lg-2">
                         <p>Подъезд</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input type="text" v-model="profileEdit.entrance">
+                        <input class="custom_input" type="text" v-model="profileEdit.entrance">
                       </div>
                     </div>
                   </div>
@@ -308,13 +308,13 @@
                         <p>Корпус</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input type="text" v-model="profileEdit.building">
+                        <input class="custom_input" type="text" v-model="profileEdit.building">
                       </div>
                       <div class="col-xl-2 col-lg-2">
                         <p>Этаж</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input type="text" v-model="profileEdit.floor">
+                        <input  class="custom_input"type="text" v-model="profileEdit.floor">
                       </div>
                     </div>
                   </div>
@@ -324,7 +324,7 @@
                         <p>Квартира</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input type="text" v-model="profileEdit.apartment">
+                        <input class="custom_input" type="text" v-model="profileEdit.apartment">
                       </div>
                     </div>
                   </div>

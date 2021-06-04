@@ -23,13 +23,13 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-4">
-                        <input type="text" placeholder="Имя и фамилия" v-model="main_info.name">
+                        <input class="custom_input" type="text" placeholder="Имя и фамилия" v-model="main_info.name">
                       </div>
                       <div class="col-xl-4">
-                        <the-mask :mask="['+7(###) ###-####']" placeholder="Номер телефона" v-model="main_info.phone"/>
+                        <the-mask class="custom_input" :mask="['+7(###) ###-####']" placeholder="Номер телефона" v-model="main_info.phone"/>
                       </div>
                       <div class="col-xl-4">
-                        <input type="email" placeholder="E-mail" v-model="main_info.email">
+                        <input class="custom_input" type="email" placeholder="E-mail" v-model="main_info.email">
                       </div>
                     </div>
                     <div class="input_title">
@@ -40,27 +40,22 @@
                     </div>
                     <div class="row" v-if="regions">
                       <div class="col-xl-4">
-                        <v-select :options="regions" label="title"></v-select>
-<!--                        <vue-picker v-model="address.region" autofocus placeholder="Регион" @input="getCity">-->
-<!--                          <vue-picker-option :value="String(reg.id)" v-for="reg in regions" :key="reg.id">{{reg.title}}</vue-picker-option>-->
-<!--                        </vue-picker>-->
-                      </div>
-                      <div class="col-xl-4" v-if="" >
-<!--                        <vue-picker v-model="address.city" autofocus placeholder="Город" :disabled="address.region">-->
-<!--                          <vue-picker-option :value="String(city.id)" v-for="city in cities" :key="city.id">{{ city.title }}</vue-picker-option>-->
-<!--                        </vue-picker>-->
+                        <v-select v-model="address.region" :reduce="region_id => region_id.id" @input="getCity" :options="regions" label="title" placeholder="Регион"></v-select>
                       </div>
                       <div class="col-xl-4">
-                        <input type="text" placeholder="Улица" v-model="address.street">
+                        <v-select v-model="address.city" :reduce="city_id => city_id.id" label="title" v-if="cities" placeholder="Город" :options="cities" :disabled="!address.region"></v-select>
+                      </div>
+                      <div class="col-xl-4">
+                        <input class="custom_input" type="text" placeholder="Улица" v-model="address.street">
                       </div>
                     </div>
                     <div class="row">
                       <div class="home_address">
-                        <input type="text" placeholder="Дом" v-model="address.house">
-                        <input type="text" placeholder="Корпус" v-model="address.building">
-                        <input type="text" placeholder="Подъезд" v-model="address.entrance">
-                        <input type="text" placeholder="Этаж" v-model="address.floor">
-                        <input type="text" placeholder="Квартира" v-model="address.apartment">
+                        <input class="custom_input" type="text" placeholder="Дом" v-model="address.house">
+                        <input class="custom_input" type="text" placeholder="Корпус" v-model="address.building">
+                        <input class="custom_input" type="text" placeholder="Подъезд" v-model="address.entrance">
+                        <input class="custom_input" type="text" placeholder="Этаж" v-model="address.floor">
+                        <input class="custom_input" type="text" placeholder="Квартира" v-model="address.apartment">
                       </div>
                     </div>
                     <div class="i_title">

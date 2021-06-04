@@ -2,11 +2,15 @@
   p {
     margin-bottom: 0;
   }
+  .tab_left_side {
+    display: flex;
+    align-items: center;
+  }
   .view_action {
+    width: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 4px;
     svg {
       cursor: pointer;
     }
@@ -26,6 +30,7 @@
 }
 .tab_bar_text {
   color: #757575;
+  margin: 0 20px;
   p {
     font-weight: 500;
     margin-bottom: 0;
@@ -36,8 +41,11 @@
 }
 
 @media screen and (max-width: 576px){
+  .tab_left_side {
+    flex-direction: column;
+  }
   .view_action {
-    justify-content: space-around !important;
+    width: 100%;
   }
   .tab_bar_text {
     text-align: center;

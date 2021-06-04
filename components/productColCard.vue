@@ -43,7 +43,7 @@
                     <p>Доступно: <span>98 на складе</span></p>
                   </div>
                   <div class="price">
-                    <p><span class="new_price">{{ product.current_price }} ₸</span> <span v-if="product.sale" class="old_price">{{ (product.current_price + (product.current_price * product.sale)) * 0.1 }}₸</span></p>
+                    <p><span class="new_price">{{ product.current_price }} ₸</span> <span v-if="product.sale" class="old_price">{{ product.price }}₸</span></p>
                   </div>
                 </div>
                 <div class="add_to_card">

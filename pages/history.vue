@@ -12,15 +12,15 @@
         <p>Активные заказы</p>
       </div>
       <div class="table_wrapper" v-if="orderData">
-        <table class="table table-bordered table-responsive-sm">
+        <table class="table table-bordered table-responsive">
           <thead>
             <tr>
-              <th scope="col" width="190px">Номер заказа</th>
-              <th scope="col" width="440px">Наименование</th>
-              <th scope="col" width="190px">Кол-во</th>
-              <th scope="col" width="190px">Цена</th>
-              <th scope="col" width="190px">Статус заказа</th>
-              <th scope="col" width="190px">Дата</th>
+              <th scope="col"><p style="width: 100px;">Номер заказа</p></th>
+              <th scope="col"><p style="width: 200px;">Наименование</p></th>
+              <th scope="col"><p style="width: 100px;">Кол-во</p></th>
+              <th scope="col"><p style="width: 100px;">Цена</p></th>
+              <th scope="col"><p style="width: 100px;">Статус заказа</p></th>
+              <th scope="col"><p style="width: 100px;">Дата</p></th>
             </tr>
           </thead>
           <tbody>

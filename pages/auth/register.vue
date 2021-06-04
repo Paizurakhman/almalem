@@ -24,10 +24,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily">Имя</span>
+                    <span class="necessarily custom_span">Имя</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
+                    <input class="custom_input" type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
                           || ($v.name.$dirty && !$v.name.minLength)}">
                     <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">Name must be at least 3 characters</span>
                     <span class="error" v-if="$v.name.$dirty && !$v.name.required">Name required</span>
@@ -37,10 +37,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily">Фамилия</span>
+                    <span class="necessarily custom_span">Фамилия</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="text" v-model="surname" :class="{ invalid:($v.surname.$dirty && !$v.surname.required)
+                    <input class="custom_input" type="text" v-model="surname" :class="{ invalid:($v.surname.$dirty && !$v.surname.required)
                           || ($v.surname.$dirty && !$v.surname.minLength)}">
                     <span class="error" v-if="$v.surname.$dirty && !$v.surname.minLength">Last name must be at least 3 characters</span>
                     <span class="error" v-if="$v.surname.$dirty && !$v.surname.required">Last name required</span>
@@ -50,10 +50,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily">Телефон</span>
+                    <span class="necessarily custom_span">Телефон</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <the-mask :mask="['+#(###) ###-##-##']" v-model="phone_number" :class="{ invalid:($v.phone_number.$dirty && !$v.phone_number.required)
+                    <the-mask class="custom_input" :mask="['+#(###) ###-##-##']" v-model="phone_number" :class="{ invalid:($v.phone_number.$dirty && !$v.phone_number.required)
                           || ($v.phone_number.$dirty && !$v.phone_number.minLength)}"/>
                     <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.minLength">Phone number must be at least 11 numbers</span>
                     <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.required">Phone number required</span>
@@ -64,10 +64,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily">Email</span>
+                    <span class="necessarily custom_span">Email</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
+                    <input class="custom_input" type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
                     <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
                     <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
@@ -81,10 +81,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily">Ваш пароль</span>
+                    <span class="necessarily custom_span">Ваш пароль</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="password" v-model="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
+                    <input class="custom_input" type="password" v-model="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
                           || ($v.password.$dirty && !$v.password.minLength)}">
                     <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
                     <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">Password must be at least 6 characters</span>
@@ -94,10 +94,10 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2 p_r_0">
-                    <span class="necessarily pr-0">Подтвердите пароль</span>
+                    <span class="necessarily pr-0 custom_span">Подтвердите пароль</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input type="password" v-model="confirm_password" :class="{invalid:($v.confirm_password.$dirty && !$v.confirm_password.required)
+                    <input class="custom_input" type="password" v-model="confirm_password" :class="{invalid:($v.confirm_password.$dirty && !$v.confirm_password.required)
                           || ($v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword)}">
                     <span class="error" v-if="$v.confirm_password.$dirty && !$v.confirm_password.required">Confirm password required</span>
                     <span class="error" v-if="$v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword">Confirm password must be identical.</span>

@@ -12,14 +12,14 @@
       <div v-if="favoriteData">
         <div v-if="favoriteData.products.length">
           <div class="table_wrapper">
-            <table class="table table-bordered table-responsive-sm">
+            <table class="table table-bordered table-responsive">
               <thead>
               <tr>
-                <th scope="col" width="190px">Картинка</th>
-                <th scope="col" width="440px">Название</th>
-                <th scope="col" width="190px">Наличие</th>
-                <th scope="col" width="190px">Цена за шт.</th>
-                <th scope="col" width="190px">Действие</th>
+                <th scope="col"><p style="width: 100px">Картинка</p></th>
+                <th scope="col"><p style="width: 200px">Название</p></th>
+                <th scope="col"><p style="width: 100px">Наличие</p></th>
+                <th scope="col"><p style="width: 100px">Цена за шт.</p></th>
+                <th scope="col"><p style="width: 150px">Действие</p></th>
               </tr>
               </thead>
               <tbody>
@@ -35,7 +35,7 @@
                 <td width="440px">{{ favorite.title }}</td>
                 <td width="190px">В наличии</td>
                 <td width="190px">
-                  <p class="t_price price">{{favorite.price}} ₸ <span v-if="favorite.sale" class="old_price">2400 ₸</span></p>
+                  <p class="t_price price">{{ favorite.current_price }}₸ <span v-if="favorite.sale" class="old_price">2400 ₸</span></p>
                 </td>
                 <td width="190px">
                   <div class="table_action">
