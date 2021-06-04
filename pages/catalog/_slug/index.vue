@@ -150,6 +150,7 @@ export default {
     },
     filterHandle(value) {
       this.obj['filter_id'] = value
+      this.obj['page'] = 1
       localStorage.setItem('object', JSON.stringify(this.obj))
       this.allProducts()
     }
