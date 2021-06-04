@@ -61,3 +61,12 @@
     margin-top: 20px;
   }
 }
+
+@media screen and (max-width: 576px){
+  .custom_input {
+    margin: 10px 0;
+  }
+  .v-select {
+    margin: 10px 0;
+  }
+}

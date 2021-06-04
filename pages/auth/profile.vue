@@ -288,10 +288,10 @@
                   </div>
                   <div class="inputs">
                     <div class="row">
-                      <div class="col-xl-4 col-lg-4">
+                      <div class="col-xl-4 col-lg-4 col-4">
                         <p>Дом</p>
                       </div>
-                      <div class="col-xl-3 col-lg-3">
+                      <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.house">
                       </div>
                       <div class="col-xl-2 col-lg-2">

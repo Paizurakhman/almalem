@@ -22,13 +22,13 @@
                       <p>Контактные данные</p>
                     </div>
                     <div class="row">
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <input class="custom_input" type="text" placeholder="Имя и фамилия" v-model="main_info.name">
                       </div>
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <the-mask class="custom_input" :mask="['+7(###) ###-####']" placeholder="Номер телефона" v-model="main_info.phone"/>
                       </div>
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <input class="custom_input" type="email" placeholder="E-mail" v-model="main_info.email">
                       </div>
                     </div>
@@ -39,17 +39,16 @@
                       <p>Адрес</p>
                     </div>
                     <div class="row" v-if="regions">
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <v-select v-model="address.region" :reduce="region_id => region_id.id" @input="getCity" :options="regions" label="title" placeholder="Регион"></v-select>
                       </div>
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <v-select v-model="address.city" :reduce="city_id => city_id.id" label="title" v-if="cities" placeholder="Город" :options="cities" :disabled="!address.region"></v-select>
                       </div>
-                      <div class="col-xl-4">
+                      <div class="col-xl-4 col-md-4">
                         <input class="custom_input" type="text" placeholder="Улица" v-model="address.street">
                       </div>
                     </div>
-                    <div class="row">
                       <div class="home_address">
                         <input class="custom_input" type="text" placeholder="Дом" v-model="address.house">
                         <input class="custom_input" type="text" placeholder="Корпус" v-model="address.building">
@@ -57,7 +56,6 @@
                         <input class="custom_input" type="text" placeholder="Этаж" v-model="address.floor">
                         <input class="custom_input" type="text" placeholder="Квартира" v-model="address.apartment">
                       </div>
-                    </div>
                     <div class="i_title">
                       <p>Комментарии к заказу</p>
                     </div>
@@ -70,19 +68,19 @@
                     <div class="address_card" v-if="cartData">
                       <div class="ordering_card" v-for="product in cartData.products" :key="product.id">
                         <div class="row">
-                          <div class="col-xl-3">
-                            <img :src="'http://cdn.astudiodigital.ru/' + product.images.image" alt="">
+                          <div class="col-xl-3 col-3">
+                            <img class="order" :src="'http://cdn.astudiodigital.ru/' + product.images.image" alt="">
                           </div>
-                          <div class="col-xl-5">
+                          <div class="col-xl-5 col-8">
                             <p>{{ product.title }}</p>
                           </div>
-                          <div class="col-xl-2">
+                          <div class="col-xl-2 col-3">
                             <div class="item_amount">
                               <p class="count">1 шт</p>
                               <p class="price">{{product.price}}₸</p>
                             </div>
                           </div>
-                          <div class="col-xl-2">
+                          <div class="col-xl-2 col-2">
                             <div class="table_wrapper">
                               <div class="table_action">
                                 <img @click="deleteCartProduct(product.id)" class="delete" src="~/assets/icon/clear.svg" alt="">
