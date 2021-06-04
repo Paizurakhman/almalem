@@ -35,7 +35,7 @@
                 <td width="440px">{{ favorite.title }}</td>
                 <td width="190px">В наличии</td>
                 <td width="190px">
-                  <p class="t_price price">{{favorite.price}} ₸ <span v-if="favorite.sale" class="old_price">2400 ₸</span></p>
+                  <p class="t_price price" v-if="favorite.current_price">{{favorite.current_price}} ₸ <span v-if="favorite.sale > 0" class="old_price">{{ favorite.current_price + (favorite.current_price * favorite.sale / 100) }} ₸</span></p>
                 </td>
                 <td width="190px">
                   <div class="table_action">

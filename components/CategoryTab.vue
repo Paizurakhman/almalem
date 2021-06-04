@@ -42,10 +42,10 @@
       <div class="category_title">
         <p class="b_500_16_text">Фильтр</p>
       </div>
-      <div class="checks">
-        <label class="checkbox_custom">
+      <div class="checks" v-for="filter in filters" :key="filter.id">
+        <label class="checkbox_custom"  v-for="item in filter.filter_items" :key="item.id">
           <input type="checkbox">
-          <span>Фильтр</span>
+          <span>{{ item.title }}</span>
         </label>
       </div>
     </div>
@@ -59,7 +59,7 @@ import VueRangeSlider from 'vue-range-component'
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
-  props: ['subcategories', 'range_from', 'range_to'],
+  props: ['subcategories', 'filters', 'range_from', 'range_to'],
   data() {
     return {
       value: [0, 1000000],

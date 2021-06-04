@@ -22,7 +22,7 @@
           </span>
         </div>
         <div class="main_img">
-          <div class="sale" v-if="product.sale">-{{product.sale}}%</div>
+          <div class="sale" v-if="product.sale > 0">-{{product.sale}}%</div>
           <v-lazy-image
             :src="this.$store.state.imageUrl + product.images.image"
 
@@ -30,7 +30,7 @@
         </div>
         <div class="product_card_bottom">
           <div class="price">
-            <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale" class="old_price">{{ product.current_price + (product.current_price * product.sale / 100) }} ₸</span></p>
+            <p><span class="new_price">{{ product.current_price}} ₸</span> <span v-if="product.sale > 0" class="old_price">{{ product.current_price + (product.current_price * product.sale / 100) }} ₸</span></p>
           </div>
           <div class="inline_img overlay">
             <span v-if="activeCart" :class="{activeCart: activeCart}">
@@ -73,7 +73,7 @@ export default {
       'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
-      this.ADD_TO_CART(id)
+      this.ADD_TO_CART({id:id, count: 1})
       this.activeCart = !this.activeCart
       this.CART_ACTION()
     },

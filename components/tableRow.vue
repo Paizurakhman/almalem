@@ -11,7 +11,7 @@
     <td width="440px">{{ product.title }}</td>
     <td width="190px">
       <div class="amount">
-        <input type="text" v-model="count" @change="counter(product.id)" />
+        <input type="number" v-model="count" @change="counter(product.id)" ref="inputVal"/>
         <div class="clear" @click="clearCount(product.id)">
           <img src="~/assets/icon/clear_red.svg" alt="" />
         </div>
@@ -19,7 +19,7 @@
     </td>
     <td width="190px">
       <p class="t_price price">
-        {{ product.price }} ₸ <span class="old_price">2400 ₸</span>
+        {{ product.price }} ₸ <span class="old_price" v-if="product.sale > 0">{{ product.price + (product.price * product.sale / 100) }} ₸</span>
       </p>
     </td>
     <td width="190px">
@@ -72,6 +72,7 @@ export default {
     totalPrice() {
       return this.product.price * this.count;
     },
+
     singleProdTotalPrice() {
       this.cart = JSON.parse(localStorage.getItem("cart"));
       let price = [];
@@ -100,6 +101,7 @@ export default {
         this.count = item.count
       }
     });
+
   },
 };
 </script>

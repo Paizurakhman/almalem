@@ -20,7 +20,7 @@ export const mutations = {
     setShowCatalog(state) {
         state.mobileShowCatalog = !state.mobileShowCatalog
     },
-    SET_CART(state, id) {
+    SET_CART(state, { id, count }) {
         let cartData = JSON.parse(localStorage.getItem('cart')) || null
         if (cartData !== null) {
             state.cart = cartData
@@ -31,7 +31,7 @@ export const mutations = {
             } else {
                 state.cart.push({
                     id: id,
-                    count: 1
+                    count: count
                 })
                 localStorage.setItem('cart', JSON.stringify(state.cart))
             }
@@ -85,8 +85,8 @@ export const actions = {
     showCatalogAction({ commit }) {
         commit('setShowCatalog')
     },
-    ADD_TO_CART({ commit }, id) {
-        commit('SET_CART', id)
+    ADD_TO_CART({ commit }, { id, count }) {
+        commit('SET_CART', { id, count })
     },
     ADD_FAVORITE({ commit }, product) {
         commit('SET_FAVORITE', product)

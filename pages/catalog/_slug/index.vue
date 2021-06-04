@@ -17,6 +17,7 @@
                 <category-tab
                   @change_price="changePrice"
                   :subcategories="productsData.subcategories"
+                  :filters="productsData.filters"
                   :range_from="$route.query.from"
                   :range_to="$route.query.to"
                 />
