@@ -273,14 +273,6 @@ nav {
   .w_mob_logo {
     width: 20%;
   }
-}
-@media screen and (max-width: 576px){
-  .w_mob {
-    width: 40%;
-  }
-  .w_mob_logo {
-    width: 35%;
-  }
   .fav_length {
     left: 50%;
   }
@@ -299,5 +291,13 @@ nav {
         color: #000;
       }
     }
+  }
+}
+@media screen and (max-width: 576px){
+  .w_mob {
+    width: 40%;
+  }
+  .w_mob_logo {
+    width: 35%;
   }
 }

@@ -38,6 +38,7 @@ export default {
     padding: 0 16px;
     position: absolute;
     right: 0;
+    z-index: 1;
     margin-top: 5px;
     background: white;
     .language_items {

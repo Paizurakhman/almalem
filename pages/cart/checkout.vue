@@ -277,6 +277,16 @@ export default {
       .then((res) => {
         this.regions = res.regions;
       });
+
+    if (localStorage.getItem('token')) {
+      await this.$axios.$post('user-profile?token=' + localStorage.getItem('token'))
+      .then(res => {
+        this.main_info.name = res.user.name
+        this.main_info.phone = res.user.phone
+        this.main_info.email = res.user.email
+        this.address.region = res.user.region
+      })
+    }
   },
   methods: {
     ...mapActions(["CART_ACTION"]),

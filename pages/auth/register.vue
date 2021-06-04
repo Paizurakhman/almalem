@@ -166,7 +166,7 @@ export default {
     },
     phone_number: {
       required,
-      minLength: minLength(11)
+      minLength: minLength(10)
     },
     email: {
       required,

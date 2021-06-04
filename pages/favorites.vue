@@ -76,7 +76,7 @@ export default {
       'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
-      this.ADD_TO_CART(id)
+      this.ADD_TO_CART({id: id, count: 1})
       this.CART_ACTION()
     },
     deleteFavorite (product) {

@@ -262,7 +262,15 @@
                         <p>Регион</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input class="custom_input" type="text" v-model="profileEdit.region">
+                        <v-select
+                          v-model="profileEdit.region"
+                          :reduce="(region_id) => region_id.id"
+                          @input="getCity"
+                          :options="regions"
+                          label="title"
+                          placeholder="Регион"
+                        ></v-select>
+<!--                        <input class="custom_input" type="text" v-model="profileEdit.region">-->
                       </div>
                     </div>
                   </div>
@@ -272,7 +280,16 @@
                         <p>Город</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input class="custom_input" type="text" v-model="profileEdit.city">
+                        <v-select
+                          v-model="profileEdit.city"
+                          :reduce="(city_id) => city_id.id"
+                          label="title"
+                          v-if="cities"
+                          placeholder="Город"
+                          :options="cities"
+                          :disabled="!profileEdit.region"
+                        ></v-select>
+<!--                        <input class="custom_input" type="text" v-model="profileEdit.city">-->
                       </div>
                     </div>
                   </div>
@@ -349,6 +366,8 @@ export default {
       edit_info: 'account',
       userData: null,
       password: '',
+      regions: null,
+      cities: null,
       confirm_password: '',
       profileEdit: {
         name: '',
@@ -384,9 +403,27 @@ export default {
       if (localStorage.getItem('token') === null) {
         this.$router.push({name: 'auth-login'})
       }
-    }
+    },
+    async getCity() {
+      this.profileEdit.city = "";
+      await this.$axios
+        .$get("get-city", {
+          params: {
+            lang: this.$store.state.lang,
+            region_id: this.profileEdit.region,
+          },
+        })
+        .then((res) => {
+          this.cities = res.cities;
+        });
+    },
   },
   async mounted() {
+    await this.$axios
+      .$get("get-region?lang=" + this.$store.state.lang)
+      .then((res) => {
+        this.regions = res.regions;
+      })
     await this.$axios.$post('user-profile?token=' + localStorage.getItem('token'))
     .then(res => {
       this.userData = res

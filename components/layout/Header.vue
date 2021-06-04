@@ -45,9 +45,11 @@
           </div>
         </div>
         <div class="header_center">
-          <div class="logo">
-            <img src="~/assets/logo.svg" alt="" @click="createCookies">
-          </div>
+          <nuxt-link to="/">
+            <div class="logo">
+              <img src="~/assets/logo.svg" alt="">
+            </div>
+          </nuxt-link>
           <layout-search />
           <div class="center_actions">
             <nuxt-link :to="{ name: 'favorites'}">
@@ -218,6 +220,27 @@ export default {
     $route(to, from) {
       this.token = localStorage.getItem('token')
       this.mobileNav = false
+
+      if (this.$cookies.get("token_time") !== null) {
+        let date = new Date() - new Date(this.$cookies.get("token_time"));
+        let minute = date / 60000;
+        if (minute > 25) {
+          this.$axios
+            .post('refresh', {
+              token: $cookies.get("userToken")
+            })
+            .then((response) => {
+              const userToken = response.data.token;
+              $cookies.set("userToken", userToken, 18000);
+              $cookies.set("token_time", new Date(), 18000);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }else{
+          // this.$router.push("/auth/profile");
+        }
+      }
     }
   },
 
@@ -233,10 +256,6 @@ export default {
     changeLanguage (value) {
       this.currentLang = value
       this.getLanguage = false
-    },
-    createCookies() {
-      this.$cookies.set('token', 'XAfifmckmaciife8dw6ef896w8fw', 360)
-      this.$cookies.set('token_time', new Date(), 360)
     },
     handleLanguage () {
       this.getLanguage = !this.getLanguage

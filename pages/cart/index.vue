@@ -32,7 +32,7 @@
 
         </table>
         <div class="t_action">
-          <button class="btn btn_silver">Продолжить покупки</button>
+          <nuxt-link to="/" class="btn btn_silver">Продолжить покупки</nuxt-link>
           <nuxt-link :to="{ name: 'cart-checkout' }" class="btn btn_silver">Купить</nuxt-link>
         </div>
       </div>

@@ -96,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+    this.hasFav = JSON.parse(localStorage.getItem('favorite'))?.products
 
     this.favId()
   }

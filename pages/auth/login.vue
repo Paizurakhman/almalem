@@ -106,6 +106,9 @@ export default {
           .then((res) => {
             localStorage.setItem('token', res.token)
 
+            this.$cookies.set('userToken', res.token, 18000)
+            this.$cookies.set('token_time', new Date(), 18000)
+
             this.$router.push({
               name: 'auth-profile'
             })
