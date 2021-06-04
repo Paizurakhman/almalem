@@ -44,7 +44,7 @@
       </div>
       <div class="checks" v-for="filter in filters" :key="filter.id">
         <label class="checkbox_custom"  v-for="item in filter.filter_items" :key="item.id">
-          <input type="checkbox">
+          <input @change="filterHandle" v-model="filteredValue" type="checkbox" :value="item.id">
           <span>{{ item.title }}</span>
         </label>
       </div>
@@ -65,6 +65,7 @@ export default {
       value: [0, 1000000],
       processStyle: '',
       bgStyle: '',
+      filteredValue: [],
       setting: {
         dotSize: 25,
         max: 1000000,
@@ -84,12 +85,25 @@ export default {
   methods: {
     changePrice () {
       this.$emit('change_price', this.value)
+    },
+    filterHandle () {
+      this.$emit('filter', this.filteredValue)
     }
   },
   mounted() {
     if (this.range_from && this.range_to) {
       this.value = [this.range_from, this.range_to]
     }
+    let filter = JSON.parse(localStorage.getItem('object'))?.filter_id
+
+    if (filter) {
+      for (const filter_id of filter) {
+        this.filteredValue.push(filter_id)
+      }
+    }
+    // this.filteredValue = [this.$route.query.filter_id]
+    // console.log(this.$route.query.filter_id)
+    // this.filteredValue.push(this.$route.query.filter_id)
   }
 }
 </script>
