@@ -26,7 +26,8 @@ export default {
         '~/assets/styles/main.scss',
         'vue-slick-carousel/dist/vue-slick-carousel.css',
         'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
-        '@invisiburu/vue-picker/dist/vue-picker.min.css'
+        '@invisiburu/vue-picker/dist/vue-picker.min.css',
+      'vue-select/src/scss/vue-select.scss'
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

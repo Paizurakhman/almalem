@@ -15,7 +15,7 @@
   }
   .inputs {
     margin: 20px 0;
-    span {
+    .custom_span {
       font-size: 14px;
       color: #757575;
       &::before {
@@ -23,7 +23,7 @@
         padding-left: 18px;
       }
     }
-    input {
+    .custom_input {
       width: 100%;
       padding: 10px 15px;
       border-radius: 5px;
