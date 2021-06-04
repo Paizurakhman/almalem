@@ -1,89 +1,145 @@
 .checkout_content {
-  .contacts_form {
-    .inputs {
-      .custom_span {
-        text-align: left;
-        &::before {
-          padding-left: 0;
+    .contacts_form {
+        .inputs {
+            .custom_span {
+                text-align: left;
+                &::before {
+                    padding-left: 0;
+                }
+            }
+            button {
+                text-align: left;
+                border-radius: 4px;
+            }
+            .input_title {
+                margin: 20px 0;
+                p {
+                    font-size: 24px;
+                    color: #3E444A;
+                }
+            }
+            .i_title {
+                p {
+                    color: #3E444A;
+                }
+            }
         }
-      }
-      button {
-        text-align: left;
-        border-radius: 4px;
-      }
-      .input_title {
-        margin: 20px 0;
-        p {
-          font-size: 24px;
-          color: #3E444A;
+        .vue-picker {
+            width: 100%;
+            .vue-picker__dropdown {
+                padding: 0;
+            }
         }
-      }
-      .i_title {
-        p {
-          color: #3E444A;
+        .home_address {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            input {
+                width: 19%;
+            }
         }
-      }
+        .card_footer {
+            text-align: right;
+            margin: 30px 0;
+        }
     }
-    .vue-picker {
-      width: 100%;
-      .vue-picker__dropdown {
-        padding: 0;
-      }
+    .address_card {
+        .ordering_card {
+            margin: 20px 0;
+            position: relative;
+            .row {
+                display: flex;
+                align-items: center;
+            }
+            .table_action {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+        img.order {
+            width: 100%;
+        }
+        p {
+            font-size: 14px;
+            color: #343434;
+            margin-bottom: 0;
+        }
+        .item_amount {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            p {
+                font-weight: 500;
+                color: #000;
+                margin: 10px 0;
+            }
+        }
+    }
+}
+
+.vs__selected {
+    white-space: nowrap;
+    width: 135px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 576px) {
+    .vs__selected {
+        white-space: normal;
+        width: 90%;
     }
     .home_address {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 20px 0;
+        flex-wrap: wrap;
+        input {
+            width: 48% !important;
+        }
     }
-    .card_footer {
-      text-align: right;
-      margin: 30px 0;
+    .address_card {
+        .item_amount {
+            margin-top: 20px;
+            flex-direction: inherit !important;
+        }
     }
-  }
-  .address_card {
-    .ordering_card {
-      margin: 20px 0;
-      .row {
-        display: flex;
-        align-items: center;
-      }
-    }
-    img.order {
-      width: 100%;
-    }
-    p {
-      font-size: 14px;
-      color: #343434;
-      margin-bottom: 0;
-    }
-    .item_amount {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      p {
-        font-weight: 500;
-        color: #000;
-        margin: 10px 0;
-      }
-    }
-  }
 }
-.vs__selected {
-  white-space: nowrap;
-  width: 135px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-@media screen and (max-width: 576px){
-  .vs__selected {
-    white-space: normal;
-    width: 90%;
-  }
-  .home_address {
-    flex-wrap: wrap;
-    input {
-      width: 45% !important;
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    .checkout_content {
+        .address_card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .ordering_card {
+                width: 48%;
+                .row {
+                    margin: 0;
+                }
+                .item_amount {
+                    margin-top: 25px;
+                    display: flex;
+                    flex-direction: inherit;
+                }
+            }
+        }
     }
-  }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 1024px) {
+    .checkout_content {
+        .address_card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .ordering_card {
+                width: 30%;
+                .item_amount {
+                    margin-top: 25px;
+                    display: flex;
+                    flex-direction: inherit;
+                }
+            }
+        }
+    }
 }
