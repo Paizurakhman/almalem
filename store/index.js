@@ -21,59 +21,57 @@ export const mutations = {
         state.mobileShowCatalog = !state.mobileShowCatalog
     },
     SET_CART(state, id) {
-      let cartData = JSON.parse(localStorage.getItem('cart')) || null
-      if (cartData !== null) {
-        state.cart = cartData
-        if (cartData.find(el => el.id === id)) {
-          localStorage.setItem('cart', JSON.stringify(cartData.filter(item => {
-            return item.id !== id
-          })))
-        }
-        else {
-          state.cart.push({
-            id: id,
-            count: 1
-          })
-          localStorage.setItem('cart', JSON.stringify(state.cart))
-        }
-      }
-      else {
-        state.cart.push({
-          id: id,
-          count: 1
-        })
-        localStorage.setItem('cart', JSON.stringify(state.cart))
-      }
-    },
-    SET_FAVORITE (state, product) {
-      let favorite = JSON.parse(localStorage.getItem('favorite')) || null
-      if (favorite !== null) {
-        state.favorites = favorite.products
-
-        if (favorite.products.find(el => el.id === product.id)) {
-          localStorage.setItem('favorite', JSON.stringify({
-            products: favorite.products.filter(val => {
-              return val.id !== product.id
+        let cartData = JSON.parse(localStorage.getItem('cart')) || null
+        if (cartData !== null) {
+            state.cart = cartData
+            if (cartData.find(el => el.id === id)) {
+                localStorage.setItem('cart', JSON.stringify(cartData.filter(item => {
+                    return item.id !== id
+                })))
+            } else {
+                state.cart.push({
+                    id: id,
+                    count: 1
+                })
+                localStorage.setItem('cart', JSON.stringify(state.cart))
+            }
+        } else {
+            state.cart.push({
+                id: id,
+                count: 1
             })
-          }))
-        }else  {
-          state.favorites.push(product)
-          localStorage.setItem('favorite', JSON.stringify({
-            products: state.favorites
-          }))
+            localStorage.setItem('cart', JSON.stringify(state.cart))
         }
-      }else {
-        state.favorites.push(product)
-        localStorage.setItem('favorite', JSON.stringify({
-          products: state.favorites
-        }))
-      }
     },
-    SET_CART_LENGTH (state) {
-        state.cartLength = JSON.parse(localStorage.getItem('cart')).length
+    SET_FAVORITE(state, product) {
+        let favorite = JSON.parse(localStorage.getItem('favorite')) || null
+        if (favorite !== null) {
+            state.favorites = favorite.products
+
+            if (favorite.products.find(el => el.id === product.id)) {
+                localStorage.setItem('favorite', JSON.stringify({
+                    products: favorite.products.filter(val => {
+                        return val.id !== product.id
+                    })
+                }))
+            } else {
+                state.favorites.push(product)
+                localStorage.setItem('favorite', JSON.stringify({
+                    products: state.favorites
+                }))
+            }
+        } else {
+            state.favorites.push(product)
+            localStorage.setItem('favorite', JSON.stringify({
+                products: state.favorites
+            }))
+        }
     },
-    SET_FAV_LENGTH (state) {
-      state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
+    SET_CART_LENGTH(state) {
+        state.cartLength = JSON.parse(localStorage.getItem('cart'))?.length
+    },
+    SET_FAV_LENGTH(state) {
+        state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
     }
 }
 
@@ -87,17 +85,17 @@ export const actions = {
     showCatalogAction({ commit }) {
         commit('setShowCatalog')
     },
-    ADD_TO_CART({commit}, id) {
-      commit('SET_CART', id)
+    ADD_TO_CART({ commit }, id) {
+        commit('SET_CART', id)
     },
-    ADD_FAVORITE ({commit}, product) {
-      commit('SET_FAVORITE', product)
+    ADD_FAVORITE({ commit }, product) {
+        commit('SET_FAVORITE', product)
     },
-    CART_ACTION ({commit}) {
-      commit('SET_CART_LENGTH')
+    CART_ACTION({ commit }) {
+        commit('SET_CART_LENGTH')
     },
-    FAV_LEN_ACTION ({commit}) {
-      commit('SET_FAV_LENGTH')
+    FAV_LEN_ACTION({ commit }) {
+        commit('SET_FAV_LENGTH')
     }
 }
 
@@ -108,13 +106,13 @@ export const getters = {
     getShowCatalog(state) {
         return state.mobileShowCatalog
     },
-    loggedIn () {
-      return localStorage.getItem('token') || null
+    loggedIn() {
+        return localStorage.getItem('token') || null
     },
-    getCartLen (state) {
-      return state.cartLength
+    getCartLen(state) {
+        return state.cartLength
     },
     GET_FAV_LEN(state) {
-      return state.favoriteLength
+        return state.favoriteLength
     }
 }
