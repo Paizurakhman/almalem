@@ -231,7 +231,7 @@ export default {
           })
           .then((res) => {
             this.cartData = res;
-             this.cart.filter((item, index) => {
+            this.cart.filter((item, index) => {
               this.cartData.products.forEach((element, index) => {
                 if (item.id === element.id) {
                   this.$set(
@@ -277,15 +277,14 @@ export default {
       .then((res) => {
         this.regions = res.regions;
       });
-
     if (localStorage.getItem('token')) {
       await this.$axios.$post('user-profile?token=' + localStorage.getItem('token'))
-      .then(res => {
-        this.main_info.name = res.user.name
-        this.main_info.phone = res.user.phone
-        this.main_info.email = res.user.email
-        this.address.region = res.user.region
-      })
+        .then(res => {
+          this.main_info.name = res.user.name
+          this.main_info.phone = res.user.phone
+          this.main_info.email = res.user.email
+          this.address.region = res.user.region
+        })
     }
   },
   methods: {
@@ -308,7 +307,6 @@ export default {
         return rm.id !== id;
       });
       localStorage.setItem("cart", JSON.stringify(this.cart));
-
       this.get_cart;
       this.CART_ACTION();
     },
@@ -330,4 +328,12 @@ export default {
 </script>
 
 <style lang="scss">
+  .checkout_content {
+    .vs__selected {
+      white-space: nowrap;
+      width: 135px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 </style>

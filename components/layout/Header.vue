@@ -233,6 +233,7 @@ export default {
               const userToken = response.data.token;
               $cookies.set("userToken", userToken, 18000);
               $cookies.set("token_time", new Date(), 18000);
+              localStorage.setItem('token', userToken)
             })
             .catch((error) => {
               console.log(error);
@@ -243,18 +244,26 @@ export default {
       }
     }
   },
-
   methods: {
     ...mapActions([
       'showAction',
       'CART_ACTION',
-      'FAV_LEN_ACTION'
+      'FAV_LEN_ACTION',
+      'LANG_ACTION'
     ]),
     mobileNavAction () {
       this.mobileNav = !this.mobileNav
     },
     changeLanguage (value) {
       this.currentLang = value
+      if (value.type === "Казахский") {
+        localStorage.setItem('lang', 'kz')
+        location.reload()
+      }
+      else {
+        localStorage.setItem('lang', 'ru')
+        location.reload()
+      }
       this.getLanguage = false
     },
     handleLanguage () {
@@ -271,7 +280,8 @@ export default {
     ...mapGetters([
       'getCartLen',
       'GET_FAV_LEN',
-      'getMobileNav'
+      'getMobileNav',
+      'GET_LANG'
     ]),
     currentLanguage() {
       return this.currentLang
@@ -280,13 +290,13 @@ export default {
   updated() {
     if (this.mobileNav) {
       document.body.style.overflowY = 'hidden'
-      console.log('hidden')
     }
     else  {
       document.body.style.overflowY = 'auto'
     }
   },
   mounted() {
+    this.LANG_ACTION()
     this.CART_ACTION()
     this.FAV_LEN_ACTION()
     this.token = localStorage.getItem('token')
@@ -303,6 +313,16 @@ export default {
       const c = new hideAction(vm.$refs['language'], e.target)
       vm.getLanguage = c.lan
     })
+
+    let lang = localStorage.getItem('lang')
+    if (lang) {
+      if (lang === 'ru') {
+        this.currentLang = this.lang[0]
+      }
+      else {
+        this.currentLang = this.lang[1]
+      }
+    }
   }
 }
 

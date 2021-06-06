@@ -13,7 +13,6 @@
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="category_tab_nav">
-              <no-ssr>
                 <category-tab
                   @change_price="changePrice"
                   @filter="filterHandle"
@@ -22,7 +21,6 @@
                   :range_from="$route.query.from"
                   :range_to="$route.query.to"
                 />
-              </no-ssr>
             </div>
           </div>
           <div class="col-xl-9 col-lg-9">
@@ -58,7 +56,6 @@
                 </div>
               </div>
               <div class="category_tab_nav d_none" v-if="mobileCategory">
-                <no-ssr>
                   <category-tab
                     @change_price="changePrice"
                     @filter="filterHandle"
@@ -67,7 +64,6 @@
                     :range_from="$route.query.from"
                     :range_to="$route.query.to"
                   />
-                </no-ssr>
               </div>
               <div class="product_card_item">
                 <div class="row" v-if="current === 'grid'">

@@ -20,7 +20,7 @@
               }"
               >
                 <div class="brand_item">
-                  <img :src="'http://cdn.astudiodigital.ru/' + brand.image" alt="">
+                  <v-lazy-image :src="'http://cdn.astudiodigital.ru/' + brand.image" alt=""/>
                   <p class="brand_text">{{ brand.title }}</p>
                 </div>
               </nuxt-link>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "brands",
   data () {
@@ -39,7 +41,13 @@ export default {
       brandData: null,
     }
   },
+  methods: {
+    ...mapActions([
+      'LANG_ACTION'
+    ])
+  },
   async mounted() {
+    this.LANG_ACTION()
     await this.$axios.get('/get-brands?lang=' + this.$store.state.lang)
     .then(res => {
       this.brandData = res.data

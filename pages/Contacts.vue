@@ -12,7 +12,7 @@
       <div class="card_title">
         <p>Наш адрес</p>
       </div>
-      <div class="address_card">
+      <div class="address_card" v-if="addressData">
         <div class="row">
           <div class="col-xl-4 col-lg-4">
             <div class="c_title">
@@ -50,24 +50,32 @@
             <div class="contact_info">
               <div class="c_title">
                 <p class="b_text">Телефон</p>
-                <p class="silver_text">+7 (707) 567-89-00</p>
+                <p class="silver_text">{{ addressData.addres.phone_number }}</p>
               </div>
               <div class="card_action mt-4">
                 <div class="social_networks">
                 <span class="mr-4">
-                  <img src="~/assets/icon/facebook_silver.svg" alt="">
+                  <a :href="addressData.addres.facebook" target="_blank"><img src="~/assets/icon/facebook_silver.svg" alt=""></a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/instagram_silver.svg" alt="">
+                    <a :href="addressData.addres.instagram" target="_blank">
+                     <img src="~/assets/icon/instagram_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/youtube_silver.svg" alt="">
+                    <a :href="addressData.addres.youtube" target="_blank">
+                      <img src="~/assets/icon/youtube_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/vk_silver.svg" alt="">
+                    <a :href="addressData.addres.vk" target="_blank">
+                      <img src="~/assets/icon/vk_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/odnoklassniki_silver.svg" alt="">
+                    <a :href="addressData.addres.odnoklassniki" target="_blank">
+                      <img src="~/assets/icon/odnoklassniki_silver.svg" alt="">
+                    </a>
                 </span>
                 </div>
               </div>
@@ -156,6 +164,7 @@ export default {
   name: "Contacts",
   data(){
     return {
+      addressData: null,
       isShowMap: false,
       name: '',
       phone: '',
@@ -198,7 +207,7 @@ export default {
     },
     phone: {
       required,
-      minLength: minLength(11)
+      minLength: minLength(10)
     },
     email: {
       required,
@@ -208,7 +217,7 @@ export default {
   async mounted() {
     await this.$axios.get('address?lang=' + this.$store.state.lang)
     .then(res => {
-      console.log(res.data);
+      this.addressData = res.data
     })
   }
 }

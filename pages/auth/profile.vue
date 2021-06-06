@@ -180,7 +180,10 @@
                           <p>Имя</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="text" v-model="profileEdit.name">
+                          <input class="custom_input" type="text" v-model="profileEdit.name" :class="{ invalid:($v.profileEdit.name.$dirty && !$v.profileEdit.name.required)
+                          || ($v.profileEdit.name.$dirty && !$v.profileEdit.name.minLength)}">
+                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.minLength">Name must be at least 3 characters</span>
+                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.required">Name required</span>
                         </div>
                       </div>
                     </div>
@@ -190,7 +193,10 @@
                           <p>Фамилия</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="text" v-model="profileEdit.first_name">
+                          <input class="custom_input" type="text" v-model="profileEdit.first_name" :class="{ invalid:($v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.required)
+                          || ($v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.minLength)}">
+                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.minLength">Last name must be at least 3 characters</span>
+                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.required">Last name required</span>
                         </div>
                       </div>
                     </div>
@@ -200,7 +206,10 @@
                           <p>Телефон</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone"/>
+                          <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone" :class="{ invalid:($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required)
+                          || ($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength)}"/>
+                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength">Phone number must be at least 11 numbers</span>
+                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required">Phone number required</span>
                         </div>
                       </div>
                     </div>
@@ -210,7 +219,10 @@
                           <p>Email</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="email" v-model="profileEdit.email">
+                          <input class="custom_input" type="email" v-model="profileEdit.email" :class="{ invalid:($v.profileEdit.email.$dirty && !$v.profileEdit.email.required)
+                          || ($v.profileEdit.email.$dirty && !$v.profileEdit.email.email)}">
+                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.email">You have entered an invalid email address!</span>
+                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.required">Email required</span>
                         </div>
                       </div>
                     </div>
@@ -270,7 +282,6 @@
                           label="title"
                           placeholder="Регион"
                         ></v-select>
-<!--                        <input class="custom_input" type="text" v-model="profileEdit.region">-->
                       </div>
                     </div>
                   </div>
@@ -289,7 +300,6 @@
                           :options="cities"
                           :disabled="!profileEdit.region"
                         ></v-select>
-<!--                        <input class="custom_input" type="text" v-model="profileEdit.city">-->
                       </div>
                     </div>
                   </div>
@@ -331,7 +341,7 @@
                         <p>Этаж</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input  class="custom_input"type="text" v-model="profileEdit.floor">
+                        <input class="custom_input"type="text" v-model="profileEdit.floor">
                       </div>
                     </div>
                   </div>
@@ -359,6 +369,8 @@
 </template>
 
 <script>
+import {email, minLength, required} from "vuelidate/lib/validators";
+
 export default {
   name: "profile",
   data() {
@@ -392,10 +404,14 @@ export default {
     },
     async updateProfile () {
       this.profileEdit.token = localStorage.getItem('token')
-      await this.$axios.$post('user-update', this.profileEdit)
-      .then(res => {
-        this.userData = res
-      })
+      this.$v.$touch();
+
+      if(!this.$v.$invalid) {
+        await this.$axios.$post('user-update', this.profileEdit)
+          .then(res => {
+            this.userData = res
+          })
+      }
     },
 
     logout(){
@@ -440,6 +456,26 @@ export default {
       this.profileEdit.floor = res.user.floor
       this.profileEdit.apartment = res.user.apartment
     })
+  },
+  validations: {
+    profileEdit: {
+      name: {
+        required,
+        minLength: minLength(3)
+      },
+      first_name: {
+        required,
+        minLength: minLength(3)
+      },
+      phone: {
+        required,
+        minLength: minLength(10)
+      },
+      email: {
+        required,
+        email
+      },
+    }
   }
 }
 </script>

@@ -15,20 +15,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
   name: "LanguageNav",
   props: ['language'],
   methods: {
-    ...mapActions([
-      'languageNavAction'
-    ]),
     langHandler(lang) {
-      this.languageNavAction()
       this.$emit('changeLang', lang)
     }
-  }
-
+  },
 }
 </script>
 

@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -128,9 +128,18 @@ export default {
   computed: {
     ...mapState([
       'showNav'
+    ]),
+    ...mapGetters([
+      'GET_LANG'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'LANG_ACTION'
     ])
   },
   async mounted() {
+    this.LANG_ACTION()
     await this.$axios.get('home-page?lang=' + this.$store.state.lang)
     .then(res => {
       this.homePageData = res.data

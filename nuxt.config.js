@@ -26,8 +26,7 @@ export default {
         '~/assets/styles/main.scss',
         'vue-slick-carousel/dist/vue-slick-carousel.css',
         'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
-        '@invisiburu/vue-picker/dist/vue-picker.min.css',
-      'vue-select/src/scss/vue-select.scss'
+        'vue-select/src/scss/vue-select.scss',
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -38,9 +37,11 @@ export default {
         '~/plugins/vue-cookies',
         '~/plugins/picker',
         '~/plugins/filter',
+        '~/plugins/localeLang',
         { src: '~/plugins/vue-pagination', mode: 'client'},
         '~/plugins/vue-validate',
         { src: '~/plugins/vue-lazy-load', mode: 'client'},
+        { src: '~/plugins/vue-range-slider', mode: 'client'},
         // '~/plugins/route',
         { src: '~/plugins/star-rating', mode: 'client'}
     ],

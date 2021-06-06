@@ -239,13 +239,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      "ADD_TO_CART",
+      "IN_CART_ACTION",
       "ADD_FAVORITE",
       "CART_ACTION",
       "FAV_LEN_ACTION",
+      'LANG_ACTION'
     ]),
     addToCart(id) {
-      this.ADD_TO_CART({id: id, count: this.count});
+      this.IN_CART_ACTION({id: id, count: this.count});
       this.CART_ACTION();
     },
     addFavorite(product) {
@@ -264,6 +265,7 @@ export default {
     },
   },
   async mounted() {
+    this.LANG_ACTION()
     this.hasFav = JSON.parse(localStorage.getItem("favorite"))?.products;
 
     await this.$axios

@@ -1,3 +1,4 @@
+
 <template>
   <div class="category_tab">
     <div class="category_content">
@@ -22,16 +23,14 @@
         <p class="b_500_16_text">Фильтр по цене</p>
       </div>
       <div class="range_slider">
-        <no-ssr>
-          <vue-range-slider
+          <range-slider
             v-bind="setting"
             :bg-style="bgStyle"
             :process-style="processStyle"
             v-model="value"
             :clickable="false"
             @drag-end="changePrice"
-          ></vue-range-slider>
-        </no-ssr>
+          ></range-slider>
       </div>
       <div class="range_price">
         <p>{{ value[0] }} ₸</p>
@@ -55,7 +54,6 @@
 <script>
 import 'vue-range-component/dist/vue-range-slider.css'
 import VueRangeSlider from 'vue-range-component'
-
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
@@ -95,19 +93,13 @@ export default {
       this.value = [this.range_from, this.range_to]
     }
     let filter = JSON.parse(localStorage.getItem('object'))?.filter_id
-
     if (filter) {
       for (const filter_id of filter) {
         this.filteredValue.push(filter_id)
       }
     }
-    // this.filteredValue = [this.$route.query.filter_id]
-    // console.log(this.$route.query.filter_id)
-    // this.filteredValue.push(this.$route.query.filter_id)
   }
 }
 </script>
-
 <style scoped>
-
 </style>

@@ -7,7 +7,7 @@ export const state = () => ({
     cart: [],
     favorites: [],
     cartLength: 0,
-    favoriteLength: 0
+    favoriteLength: 0,
 })
 
 export const mutations = {
@@ -67,11 +67,17 @@ export const mutations = {
             }))
         }
     },
+    SET_IN_CART (state, {id, count}) {
+
+    },
     SET_CART_LENGTH(state) {
         state.cartLength = JSON.parse(localStorage.getItem('cart'))?.length
     },
     SET_FAV_LENGTH(state) {
         state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
+    },
+    SET_LANG (state) {
+      state.lang = localStorage.getItem('lang')
     }
 }
 
@@ -96,6 +102,12 @@ export const actions = {
     },
     FAV_LEN_ACTION({ commit }) {
         commit('SET_FAV_LENGTH')
+    },
+    IN_CART_ACTION({commit}, { id, count }) {
+      commit('SET_IN_CART', { id, count })
+    },
+    LANG_ACTION ({commit}) {
+      commit('SET_LANG')
     }
 }
 
@@ -114,5 +126,8 @@ export const getters = {
     },
     GET_FAV_LEN(state) {
         return state.favoriteLength
+    },
+    GET_LANG (state) {
+      return state.lang
     }
 }
