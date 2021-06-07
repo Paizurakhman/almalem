@@ -77,7 +77,11 @@ export const mutations = {
         state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
     },
     SET_LANG (state) {
-      state.lang = localStorage.getItem('lang')
+      if(localStorage.getItem('lang')) {
+        state.lang = localStorage.getItem('lang')
+      }else {
+        state.lang = 'ru'
+      }
     }
 }
 

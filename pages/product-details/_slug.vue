@@ -23,6 +23,7 @@
                   ref="c1"
                   :asNavFor="$refs.c2"
                   :focusOnSelect="true"
+                  @beforeChange="syncSliders"
                 >
                   <div
                     v-for="(image, index) in detailsData.product.product_images"
@@ -40,6 +41,7 @@
                     :asNavFor="$refs.c1"
                     :slidesToShow="4"
                     :focusOnSelect="true"
+                    @beforeChange="syncSliders"
                   >
                     <div
                       v-for="(image, index) in detailsData.product
@@ -60,14 +62,12 @@
               </div>
               <div class="review_info">
                 <div class="star_rating">
-                  <no-ssr placeholder="Loading...">
-                    <star-rating
-                      v-model="rating"
-                      v-bind="settingRating"
-                      :read-only="true"
-                    >
-                    </star-rating>
-                  </no-ssr>
+                  <star-rating
+                    v-model="rating"
+                    v-bind="settingRating"
+                    :read-only="true"
+                  >
+                  </star-rating>
                 </div>
                 <div class="review">
                   <span>({{ detailsData.reviews.length }} отзывов)</span>
@@ -117,7 +117,7 @@
                         class="btn btn_main"
                         @click="addToCart(detailsData.product.id)"
                       >
-                        + Добавить в корзину
+                        + {{ locale[this.$store.state.lang].buttons.add_toCart }}
                       </button>
                     </div>
                   </div>
@@ -128,7 +128,7 @@
                   @click.stop.prevent="addFavorite(detailsData.product)"
                   :class="[activeFav ? 'fas fa-heart' : 'far fa-heart']"
                 ></i>
-                <span>Добавить в избранные</span>
+                <span>{{ locale[this.$store.state.lang].buttons.add_to_favorite }}</span>
               </div>
               <div class="product_card_bottom t_none">
                 <div class="row">
@@ -179,11 +179,12 @@
 
 <script>
 import { mapActions } from "vuex";
-
+import {locale} from "../../middleware/localeLang";
 export default {
   name: "slug",
   data() {
     return {
+      locale: locale,
       slug: this.$route.params.slug,
       imgUrl: this.$store.state.imageUrl,
       detailsData: null,
@@ -245,6 +246,10 @@ export default {
       "FAV_LEN_ACTION",
       'LANG_ACTION'
     ]),
+    syncSliders(currentPosition, nextPosition) {
+      this.$refs.c1.next()
+      this.$refs.c2.next()
+    },
     addToCart(id) {
       this.IN_CART_ACTION({id: id, count: this.count});
       this.CART_ACTION();

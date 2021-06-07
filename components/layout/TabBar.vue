@@ -32,7 +32,7 @@
             <div class="m_margin">
               <div class="tab_bar_text" v-if="products">
                 <p v-if="products.data.length">Показано с {{ products.from}} по {{products.to}} из {{products.total}} ({{products.current_page}} страниц)</p>
-                <p v-else>Нет продуктов</p>
+                <p v-else>{{ locale[this.$store.state.lang].contentTitle.no_products}}</p>
               </div>
             </div>
           </div>
@@ -40,11 +40,11 @@
       <div class="col-xl-6 col-md-6 m_margin">
         <div class="tab_bar_filter">
           <div class="tab_bar_filter_item">
-            <p>Сортировать:</p>
+            <p>{{ locale[this.$store.state.lang].contentTitle.sort}}</p>
             <select name="sort" class="sort_action" v-model="sortVal">
-              <option value="">По умолчанию</option>
-              <option value="ASC"> По возрастанию цены</option>
-              <option value="DESC"> По убыванию цены</option>
+              <option value="">{{ locale[this.$store.state.lang].sort_by_price.default}}</option>
+              <option value="ASC">{{ locale[this.$store.state.lang].sort_by_price.asc}}</option>
+              <option value="DESC">{{ locale[this.$store.state.lang].sort_by_price.desc}}</option>
             </select>
           </div>
           </div>
@@ -54,12 +54,15 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 export default {
   name: "TabBar",
   props: ['current', 'products', 'sortValue'],
   data() {
     return {
-      sortVal: this.sortValue || ''
+      sortVal: this.sortValue || '',
+      locale: locale
     }
   },
   methods: {

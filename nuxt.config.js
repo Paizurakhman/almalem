@@ -37,7 +37,6 @@ export default {
         '~/plugins/vue-cookies',
         '~/plugins/picker',
         '~/plugins/filter',
-        '~/plugins/localeLang',
         { src: '~/plugins/vue-pagination', mode: 'client'},
         '~/plugins/vue-validate',
         { src: '~/plugins/vue-lazy-load', mode: 'client'},
@@ -57,7 +56,6 @@ export default {
         // https://go.nuxtjs.dev/axios
         '@nuxtjs/axios',
     ],
-
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
       baseURL: 'http://back.astudiodigital.ru/api/'

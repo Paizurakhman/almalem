@@ -9,7 +9,7 @@
         <nuxt-link to="checkout">Оформление заказа</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Оформление заказа</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.checkoutText }}</p>
       </div>
       <div class="checkout_content" v-if="regions">
         <div class="contacts_form">
@@ -19,14 +19,14 @@
                 <div class="row">
                   <div class="col-xl-7">
                     <div class="input_title">
-                      <p>Контактные данные</p>
+                      <p>{{ locale[this.$store.state.lang].contentTitle.contactDates }}</p>
                     </div>
                     <div class="row">
                       <div class="col-xl-4 col-md-4">
                         <input
                           class="custom_input"
                           type="text"
-                          placeholder="Имя и фамилия"
+                          :placeholder="locale[this.$store.state.lang].form.nameAndSurname"
                           v-model="main_info.name"
                         />
                       </div>
@@ -34,7 +34,7 @@
                         <the-mask
                           class="custom_input"
                           :mask="['+7(###) ###-####']"
-                          placeholder="Номер телефона"
+                          :placeholder="locale[this.$store.state.lang].form.phoneNumber"
                           v-model="main_info.phone"
                         />
                       </div>
@@ -48,10 +48,10 @@
                       </div>
                     </div>
                     <div class="input_title">
-                      <p>Доставка</p>
+                      <p>{{ locale[this.$store.state.lang].contentTitle.deliveryAddress }}</p>
                     </div>
                     <div class="i_title">
-                      <p>Адрес</p>
+                      <p>{{ locale[this.$store.state.lang].contentTitle.addressText }}</p>
                     </div>
                     <div class="row" v-if="regions">
                       <div class="col-xl-4 col-md-4">
@@ -61,7 +61,7 @@
                           @input="getCity"
                           :options="regions"
                           label="title"
-                          placeholder="Регион"
+                          :placeholder="locale[this.$store.state.lang].address.region"
                         ></v-select>
                       </div>
                       <div class="col-xl-4 col-md-4">
@@ -70,7 +70,7 @@
                           :reduce="(city_id) => city_id.id"
                           label="title"
                           v-if="cities"
-                          placeholder="Город"
+                          :placeholder="locale[this.$store.state.lang].address.city"
                           :options="cities"
                           :disabled="!address.region"
                         ></v-select>
@@ -79,7 +79,7 @@
                         <input
                           class="custom_input"
                           type="text"
-                          placeholder="Улица"
+                          :placeholder="locale[this.$store.state.lang].address.street"
                           v-model="address.street"
                         />
                       </div>
@@ -88,45 +88,45 @@
                       <input
                         class="custom_input"
                         type="text"
-                        placeholder="Дом"
+                        :placeholder="locale[this.$store.state.lang].address.house"
                         v-model="address.house"
                       />
                       <input
                         class="custom_input"
                         type="text"
-                        placeholder="Корпус"
+                        :placeholder="locale[this.$store.state.lang].address.corps"
                         v-model="address.building"
                       />
                       <input
                         class="custom_input"
                         type="text"
-                        placeholder="Подъезд"
+                        :placeholder="locale[this.$store.state.lang].address.entrance"
                         v-model="address.entrance"
                       />
                       <input
                         class="custom_input"
                         type="text"
-                        placeholder="Этаж"
+                        :placeholder="locale[this.$store.state.lang].address.floor"
                         v-model="address.floor"
                       />
                       <input
                         class="custom_input"
                         type="text"
-                        placeholder="Квартира"
+                        :placeholder="locale[this.$store.state.lang].address.apartment"
                         v-model="address.apartment"
                       />
                     </div>
                     <div class="i_title">
-                      <p>Комментарии к заказу</p>
+                      <p>{{ locale[this.$store.state.lang].contentTitle.commentText }}</p>
                     </div>
                     <textarea
-                      placeholder="Комментарии"
+                      :placeholder="locale[this.$store.state.lang].contentTitle.comments"
                       v-model="main_info.comment"
                     ></textarea>
                   </div>
                   <div class="col-xl-5">
                     <div class="input_title">
-                      <p>Ваш заказ</p>
+                      <p>{{ locale[this.$store.state.lang].contentTitle.yourOrder }}</p>
                     </div>
                     <div class="address_card" v-if="cartData">
                       <div
@@ -150,7 +150,7 @@
                           </div>
                           <div class="col-xl-2 col-12 position-static">
                             <div class="item_amount">
-                              <p class="count">{{ product.count }} шт</p>
+                              <p class="count">{{ product.count }} {{ locale[GET_LANG].contentTitle.amount }}</p>
                               <p class="price">{{ product.price }}₸</p>
                             </div>
                           </div>
@@ -171,10 +171,10 @@
                     </div>
                     <div class="card_footer">
                       <div class="sum">
-                        <p>Итого: <span class="b_text">{{ totalPrice }} ₸</span></p>
+                        <p>{{ locale[this.$store.state.lang].contentTitle.amountText }}: <span class="b_text">{{ totalPrice }} ₸</span></p>
                       </div>
                       <div class="action">
-                        <button class="btn btn_main">Перейти к оплате</button>
+                        <button class="btn btn_main">{{ locale[this.$store.state.lang].buttons.pay}}</button>
                       </div>
                     </div>
                   </div>
@@ -189,12 +189,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import {locale} from "../../middleware/localeLang";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "checkout",
   data() {
     return {
       cartData: null,
+      locale: locale,
       cart: null,
       regions: null,
       cities: null,
@@ -218,6 +220,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'GET_LANG'
+    ]),
     get_cart() {
       if (this.cart.length) {
         this.$axios
@@ -319,7 +324,6 @@ export default {
           address: this.address,
         })
         .then((res) => {
-          // window.location.href = res.url
           window.open(res.url, "_self");
         });
     },

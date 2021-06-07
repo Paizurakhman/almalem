@@ -7,7 +7,7 @@
         <nuxt-link to="/brands">Бренды</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Бренды</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.brands }}</p>
       </div>
       <div class="brands_content" v-if="brandData">
         <div class="row">
@@ -32,12 +32,15 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 import {mapActions} from "vuex";
 
 export default {
   name: "brands",
   data () {
     return {
+      locale: locale,
       brandData: null,
     }
   },

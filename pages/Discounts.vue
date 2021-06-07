@@ -7,7 +7,7 @@
         <nuxt-link to="/discounts">Скидки</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Скидки</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.sale }}</p>
       </div>
       <div class="tab_content">
         <layout-tabBar @viewMode="current = $event" :current="current" :products="saleData.products"/>
@@ -31,12 +31,15 @@
 </template>
 
 <script>
+import { locale } from "../middleware/localeLang";
+
 export default {
   name: "Discounts",
   data() {
     return {
+      locale: locale,
       current: 'grid',
-      saleData: null
+      saleData: null,
     }
   },
   async mounted() {

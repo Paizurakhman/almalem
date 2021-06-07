@@ -20,7 +20,7 @@
                 <h1>Качественные детали для вашего автомобиля</h1>
               </div>
               <div class="banner_action">
-                <button class="btn btn_main">Купить сейчас</button>
+                <button class="btn btn_main">{{ locale[this.$store.state.lang].buttons.buy_now}}</button>
               </div>
             </div>
           </div>
@@ -64,13 +64,13 @@
         </div>
       </div>
       <div class="bestsellers_content">
-        <layout-slider :title="'Бестселлеры'" :products="homePageData.products.best"/>
+        <layout-slider :title="locale[this.$store.state.lang].contentTitle.bestseller" :products="homePageData.products.best"/>
       </div>
     </div>
     <other-categories :other="homePageData.categories.other"/>
     <div class="container">
       <div class="sales_content">
-        <layout-slider :title="'Скидки'" :products="homePageData.products.sale"/>
+        <layout-slider :title="locale[this.$store.state.lang].contentTitle.sale" :products="homePageData.products.sale"/>
       </div>
       <div class="company_content">
         <div class="company_logos" v-for="company in companies" :key="company.id">
@@ -89,17 +89,19 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
         </div>
-        <button class="btn btn_white">Подробнее</button>
+        <button class="btn btn_white">{{ locale[this.$store.state.lang].buttons.more}}</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   data() {
     return {
+      locale: locale,
       companies: [
         {
           id: 1,

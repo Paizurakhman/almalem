@@ -3,7 +3,7 @@
     <form>
       <input
         type="text"
-        placeholder="Поиск по товарам"
+        :placeholder="locale[this.$store.state.lang].header.searchText"
         v-model="search"
         @input="handleSearch"
       >
@@ -26,12 +26,15 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 export default {
   name: "Search",
   data() {
     return {
       search: '',
-      searchData: null
+      searchData: null,
+      locale: locale
     }
   },
   methods: {

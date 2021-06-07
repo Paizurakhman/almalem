@@ -7,7 +7,7 @@
         <nuxt-link to="/catalog">Каталог</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Каталог</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.catalog }}</p>
       </div>
       <div class="catalog_content" v-if="productsData">
         <div class="row">
@@ -52,7 +52,7 @@
                   :sortValue="$route.query.order_by"
                 />
                 <div class="tab_action d_none">
-                  <button @click="showCategory" class="btn btn_outline">Фильтры</button>
+                  <button @click="showCategory" class="btn btn_outline">{{ locale[this.$store.state.lang].buttons.filters}}</button>
                 </div>
               </div>
               <div class="category_tab_nav d_none" v-if="mobileCategory">
@@ -97,10 +97,12 @@
 </template>
 
 <script>
+import {locale} from "../../../middleware/localeLang";
 export default {
   name: "slug",
   data(){
     return {
+      locale: locale,
       page: 1,
       current: 'grid',
       mobileCategory: false,
