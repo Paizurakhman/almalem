@@ -1,4 +1,4 @@
-.slider-dot {
+.slider-dot-handle {
   background: #59367C !important;
 }
 .slider-dot::before {
@@ -13,6 +13,5 @@
   background: #ffffff;
 }
 .slider-tooltip-wrap, .slider-tooltip-top {
-  display: none !important;
   visibility: hidden !important;
 }

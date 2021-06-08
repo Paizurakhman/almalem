@@ -11,15 +11,15 @@
           <div class="col-xl-6 col-lg-6 m_b">
             <div class="address_card">
               <div class="card_title">
-                <p>Новый клиент</p>
+                <p>{{ locale[this.$store.state.lang].contentTitle.newClient }}</p>
               </div>
               <div class="c_title">
-                <p class="b_text">Регистрация</p>
+                <p class="b_text">{{ locale[this.$store.state.lang].header.registerText }}</p>
                 <p class="silver_text">Lorem ipsum dolor sit amet,
                   consectetur adipiscing elit. Ut felis magna tristique non ipsum donec.
                   Proin aenean sed placerat ut.</p>
               </div>
-              <nuxt-link :to="{name: 'auth-register'}" class="btn btn_silver">Продолжить</nuxt-link>
+              <nuxt-link :to="{name: 'auth-register'}" class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue }}</nuxt-link>
             </div>
           </div>
 
@@ -27,10 +27,10 @@
             <form @submit.prevent="handleLogin">
               <div class="address_card">
                 <div class="card_title">
-                  <p>У меня есть аккаунт</p>
+                  <p>{{ locale[this.$store.state.lang].contentTitle.hasAnAccount }}</p>
                 </div>
                 <div class="c_title">
-                  <p class="b_text">Логин</p>
+                  <p class="b_text">{{ locale[this.$store.state.lang].header.loginText }}</p>
                   <div class="contacts_form">
 
                     <div class="form">
@@ -43,7 +43,7 @@
                           <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
                         </div>
                         <div class="inputs">
-                          <span>Пароль</span>
+                          <span>{{ locale[this.$store.state.lang].contentTitle.passwordText }}</span>
                           <input class="custom_input" type="password" v-model.trim="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
                           || ($v.password.$dirty && !$v.password.minLength)}">
                           <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
@@ -57,10 +57,10 @@
                 <div class="action_auth">
                   <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6 o_2">
-                      <button class="btn btn_silver" >Продолжить</button>
+                      <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue }}</button>
                     </div>
                     <div class="col-xl-6 col-lg-6 t_a_r_m o_1 m_b_30">
-                      <nuxt-link to="/auth/forgot-password">Не помню логин или пароль</nuxt-link>
+                      <nuxt-link to="/auth/forgot-password">{{ locale[this.$store.state.lang].buttons.forgot }}</nuxt-link>
                     </div>
                   </div>
                 </div>
@@ -74,11 +74,14 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 import { email, minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: "login",
   data() {
     return {
+      locale: locale,
       email: '',
       password: '',
       error: null
@@ -105,6 +108,9 @@ export default {
         })
           .then((res) => {
             localStorage.setItem('token', res.token)
+
+            this.$cookies.set('userToken', res.token, 18000)
+            this.$cookies.set('token_time', new Date(), 18000)
 
             this.$router.push({
               name: 'auth-profile'

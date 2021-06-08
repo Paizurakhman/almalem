@@ -19,19 +19,17 @@
     </div>
     <div class="category_content">
       <div class="category_title">
-        <p class="b_500_16_text">Фильтр по цене</p>
+        <p class="b_500_16_text">{{ locale[this.$store.state.lang].contentTitle.filter_by_price }}</p>
       </div>
       <div class="range_slider">
-        <no-ssr>
-          <vue-range-slider
+          <range-slider
             v-bind="setting"
             :bg-style="bgStyle"
             :process-style="processStyle"
             v-model="value"
             :clickable="false"
             @drag-end="changePrice"
-          ></vue-range-slider>
-        </no-ssr>
+          ></range-slider>
       </div>
       <div class="range_price">
         <p>{{ value[0] }} ₸</p>
@@ -40,7 +38,7 @@
     </div>
     <div class="category_content">
       <div class="category_title">
-        <p class="b_500_16_text">Фильтр</p>
+        <p class="b_500_16_text">{{ locale[this.$store.state.lang].contentTitle.filter}}</p>
       </div>
       <div class="checks" v-for="filter in filters" :key="filter.id">
         <label class="checkbox_custom"  v-for="item in filter.filter_items" :key="item.id">
@@ -53,15 +51,17 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
+
 import 'vue-range-component/dist/vue-range-slider.css'
 import VueRangeSlider from 'vue-range-component'
-
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
   props: ['subcategories', 'filters', 'range_from', 'range_to'],
   data() {
     return {
+      locale: locale,
       value: [0, 1000000],
       processStyle: '',
       bgStyle: '',
@@ -81,6 +81,8 @@ export default {
     this.processStyle = {
       backgroundColor: '#59367C'
     }
+    VueRangeSlider.methods.handleKeyup = ()=> console.log;
+    VueRangeSlider.methods.handleKeydown = ()=> console.log;
   },
   methods: {
     changePrice () {
@@ -95,19 +97,13 @@ export default {
       this.value = [this.range_from, this.range_to]
     }
     let filter = JSON.parse(localStorage.getItem('object'))?.filter_id
-
     if (filter) {
       for (const filter_id of filter) {
         this.filteredValue.push(filter_id)
       }
     }
-    // this.filteredValue = [this.$route.query.filter_id]
-    // console.log(this.$route.query.filter_id)
-    // this.filteredValue.push(this.$route.query.filter_id)
   }
 }
 </script>
-
 <style scoped>
-
 </style>

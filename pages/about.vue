@@ -4,7 +4,7 @@
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/about">О компании</nuxt-link>
+        <nuxt-link to="/about">{{ locale[this.$store.state.lang].contentTitle.about}}</nuxt-link>
       </div>
       <div class="p_title">
         <p>{{ companyData.company.title }}</p>
@@ -17,14 +17,23 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
+import {mapActions} from "vuex";
 export default {
   name: "about",
   data() {
     return {
+      locale: locale,
       companyData: null
     }
   },
+  methods: {
+    ...mapActions([
+      'LANG_ACTION'
+    ])
+  },
   async mounted() {
+    this.LANG_ACTION()
     await this.$axios.get('get-company?lang=' + this.$store.state.lang)
     .then(res => {
       this.companyData = res.data

@@ -2,7 +2,7 @@
   <div class="other_categories">
     <div class="container">
       <div class="page_title">
-        <p>Другие категории</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.otherCategory }}</p>
       </div>
       <div class="other_categories_content">
         <div class="row">
@@ -31,9 +31,9 @@
                         }
                       }">
                     <div class="watch_now">
-                      
-                        <p>Смотреть сейчас</p>
-                    
+
+                        <p>{{ locale[GET_LANG].buttons.view_now }}</p>
+
                       <div class="arrow">
                         <img src="~/assets/icon/main/arrow.svg" alt="">
                       </div>
@@ -51,9 +51,21 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
+import { mapGetters } from 'vuex'
 export default {
   name: "otherCategories",
-  props: ['other']
+  props: ['other'],
+  data() {
+    return {
+      locale: locale
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'GET_LANG'
+    ])
+  }
 }
 </script>
 

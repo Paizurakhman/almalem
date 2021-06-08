@@ -6,14 +6,14 @@
         @click="tabDescription('opisanie')"
         :class="{ activeDesc: current === 'opisanie' }"
       >
-        Описание
+        {{ locale[this.$store.state.lang].buttons.description }}
       </button>
       <button
         class="btn_tab"
         @click="tabDescription('otziv')"
         :class="{ activeDesc: current === 'otziv' }"
       >
-        Отзывы ({{reviews.length}})
+        {{ locale[this.$store.state.lang].buttons.review }} ({{reviews.length}})
       </button>
     </div>
     <div class="description_text" v-if="current === 'opisanie'">
@@ -45,16 +45,16 @@
       </div>
       <div class="contacts_form">
         <div class="contacts_title">
-          <p>Оставить отзыв</p>
+          <p>{{ locale[this.$store.state.lang].contentTitle.postReview }}</p>
         </div>
         <div class="form">
           <form @submit.prevent="sendReview">
             <div class="inputs">
-              <span class="necessarily custom_span">Имя</span>
+              <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.nameText }}</span>
               <input class="custom_input" type="text" v-model="name">
             </div>
             <div class="inputs">
-              <span class="necessarily custom_span">Ваш отзыв</span>
+              <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.review }}</span>
               <textarea v-model="review_text"></textarea>
             </div>
             <div>
@@ -66,7 +66,7 @@
               </div>
             </div>
             <div class="contacts_action">
-              <button class="btn btn_silver">Продолжить</button>
+              <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue }}</button>
             </div>
           </form>
         </div>
@@ -76,11 +76,14 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
+
 export default {
   name: "Description",
   props: ['description', 'reviews', 'product_id'],
   data() {
     return {
+      locale: locale,
       rating: 0,
       currId: 1,
       current: 'opisanie',

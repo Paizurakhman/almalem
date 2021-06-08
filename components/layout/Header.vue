@@ -24,10 +24,10 @@
             <div class="my_account">
               <nuxt-link to="/auth/profile" v-if="token">
                 <img src="~/assets/icon/main/user.svg" alt=""
-                ><span> Мой аккаунт</span></nuxt-link>
+                ><span> {{locale[this.$store.state.lang].header.myAccount}}</span></nuxt-link>
               <div class="auth_action" v-if="!token">
-                <nuxt-link to="/auth/login">Войти</nuxt-link> /
-                <nuxt-link to="/auth/register">Регистрация</nuxt-link>
+                <nuxt-link to="/auth/login">{{ locale[this.$store.state.lang].header.loginText}}</nuxt-link> /
+                <nuxt-link to="/auth/register">{{ locale[this.$store.state.lang].header.registerText }}</nuxt-link>
               </div>
             </div>
             <div class="language">
@@ -45,22 +45,24 @@
           </div>
         </div>
         <div class="header_center">
-          <div class="logo">
-            <img src="~/assets/logo.svg" alt="" @click="createCookies">
-          </div>
+          <nuxt-link to="/">
+            <div class="logo">
+              <img src="~/assets/logo.svg" alt="">
+            </div>
+          </nuxt-link>
           <layout-search />
           <div class="center_actions">
             <nuxt-link :to="{ name: 'favorites'}">
               <div class="like">
                   <img src="~/assets/icon/main/heart.svg" alt="">
-                  <p>Избранное</p>
+                  <p>{{ locale[this.$store.state.lang].header.likeText}}</p>
                   <div class="fav_length" v-if="GET_FAV_LEN">{{ GET_FAV_LEN }}</div>
               </div>
             </nuxt-link>
             <nuxt-link :to="{ name: 'cart'}">
               <div class="basket">
                   <img src="~/assets/icon/main/basket.svg" alt="">
-                  <p>Корзина</p>
+                  <p>{{ locale[this.$store.state.lang].header.cartText }}</p>
                   <div class="cart_length" v-if="getCartLen">{{ getCartLen }}</div>
               </div>
             </nuxt-link>
@@ -86,8 +88,8 @@
                   <img src="~/assets/icon/main/arrow.svg" alt="">
                 </div>
                 <div class="my_account" v-else>
-                  <nuxt-link to="/auth/login">Войти</nuxt-link> <span> /</span>
-                  <nuxt-link to="/auth/register">Регистрация</nuxt-link>
+                  <nuxt-link to="/auth/login">{{ locale[this.$store.state.lang].header.loginText}}</nuxt-link> <span> /</span>
+                  <nuxt-link to="/auth/register">{{ locale[this.$store.state.lang].header.registerText}}</nuxt-link>
                 </div>
                 <div class="language">
                   <div
@@ -159,31 +161,31 @@
         <div class="links">
           <ul>
             <li>
-              <nuxt-link to="/">ГЛАВНАЯ</nuxt-link>
+              <nuxt-link to="/">{{ locale[this.$store.state.lang].links.main}}</nuxt-link>
             </li>
             <li>
               <div class="drop_down" @click="showAction">
-                <span>КАТАЛОГ ТОВАРОВ</span>
+                <span>{{ locale[this.$store.state.lang].links.catalog }}</span>
                 <img :class="{ active_dropdown: showNav}" src="~/assets/icon/main/black_arrow.svg" alt="">
               </div>
             </li>
             <li>
-              <nuxt-link to="/oplata-i-dostavka">ОПЛАТА И ДОСТАВКА</nuxt-link>
+              <nuxt-link to="/oplata-i-dostavka">{{ locale[this.$store.state.lang].links.oplata}}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/new-products">НОВИНКИ</nuxt-link>
+              <nuxt-link to="/new-products">{{ locale[this.$store.state.lang].links.news }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/discounts">СКИДКИ</nuxt-link>
+              <nuxt-link to="/discounts">{{ locale[this.$store.state.lang].links.sales }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/brands">БРЕНДЫ</nuxt-link>
+              <nuxt-link to="/brands">{{ locale[this.$store.state.lang].links.brands}}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/about">О КОМПАНИИ</nuxt-link>
+              <nuxt-link to="/about">{{ locale[this.$store.state.lang].links.about}}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/contacts">КОНТАКТЫ</nuxt-link>
+              <nuxt-link to="/contacts">{{ locale[this.$store.state.lang].links.contacts}}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -198,6 +200,7 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
 import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: "Header",
@@ -211,32 +214,58 @@ export default {
       token: null,
       searchWrapper: false,
       mobileNav: false,
-
+      locale: locale
     }
   },
   watch: {
     $route(to, from) {
       this.token = localStorage.getItem('token')
       this.mobileNav = false
+
+      if (this.$cookies.get("token_time") !== null) {
+        let date = new Date() - new Date(this.$cookies.get("token_time"));
+        let minute = date / 60000;
+        if (minute > 25) {
+          this.$axios
+            .post('refresh', {
+              token: $cookies.get("userToken")
+            })
+            .then((response) => {
+              const userToken = response.data.token;
+              $cookies.set("userToken", userToken, 18000);
+              $cookies.set("token_time", new Date(), 18000);
+              localStorage.setItem('token', userToken)
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }else{
+          // this.$router.push("/auth/profile");
+        }
+      }
     }
   },
-
   methods: {
     ...mapActions([
       'showAction',
       'CART_ACTION',
-      'FAV_LEN_ACTION'
+      'FAV_LEN_ACTION',
+      'LANG_ACTION'
     ]),
     mobileNavAction () {
       this.mobileNav = !this.mobileNav
     },
     changeLanguage (value) {
       this.currentLang = value
+      if (value.type === "Казахский") {
+        localStorage.setItem('lang', 'kz')
+        location.reload()
+      }
+      else {
+        localStorage.setItem('lang', 'ru')
+        location.reload()
+      }
       this.getLanguage = false
-    },
-    createCookies() {
-      this.$cookies.set('token', 'XAfifmckmaciife8dw6ef896w8fw', 360)
-      this.$cookies.set('token_time', new Date(), 360)
     },
     handleLanguage () {
       this.getLanguage = !this.getLanguage
@@ -252,7 +281,8 @@ export default {
     ...mapGetters([
       'getCartLen',
       'GET_FAV_LEN',
-      'getMobileNav'
+      'getMobileNav',
+      'GET_LANG'
     ]),
     currentLanguage() {
       return this.currentLang
@@ -261,13 +291,13 @@ export default {
   updated() {
     if (this.mobileNav) {
       document.body.style.overflowY = 'hidden'
-      console.log('hidden')
     }
     else  {
       document.body.style.overflowY = 'auto'
     }
   },
   mounted() {
+    this.LANG_ACTION()
     this.CART_ACTION()
     this.FAV_LEN_ACTION()
     this.token = localStorage.getItem('token')
@@ -284,6 +314,16 @@ export default {
       const c = new hideAction(vm.$refs['language'], e.target)
       vm.getLanguage = c.lan
     })
+
+    let lang = localStorage.getItem('lang')
+    if (lang) {
+      if (lang === 'ru') {
+        this.currentLang = this.lang[0]
+      }
+      else {
+        this.currentLang = this.lang[1]
+      }
+    }
   }
 }
 

@@ -7,17 +7,17 @@
         <nuxt-link to="/cart">Корзина</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Корзина</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.cart }}</p>
       </div>
       <div class="table_wrapper" v-if="cartData">
         <table class="table table-bordered table-responsive">
           <thead>
             <tr>
-              <th scope="col"><p style="width: 100px">Картинка</p></th>
-              <th scope="col"><p style="width: 200px">Название</p></th>
-              <th scope="col"><p style="width: 120px">Количество</p></th>
-              <th scope="col"><p style="width: 150px">Цена за шт.</p></th>
-              <th scope="col"><p style="width: 150px">Общая цена</p></th>
+              <th scope="col"><p style="width: 100px">{{ locale[this.$store.state.lang].tableCart.imageText}}</p></th>
+              <th scope="col"><p style="width: 200px">{{ locale[this.$store.state.lang].tableCart.name }}</p></th>
+              <th scope="col"><p style="width: 120px">{{ locale[this.$store.state.lang].tableCart.amount }}</p></th>
+              <th scope="col"><p style="width: 150px">{{ locale[this.$store.state.lang].tableCart.priceByCount }}</p></th>
+              <th scope="col"><p style="width: 150px">{{ locale[this.$store.state.lang].tableCart.amountPrice }}</p></th>
             </tr>
           </thead>
           <tbody>
@@ -32,8 +32,8 @@
 
         </table>
         <div class="t_action">
-          <button class="btn btn_silver">Продолжить покупки</button>
-          <nuxt-link :to="{ name: 'cart-checkout' }" class="btn btn_silver">Купить</nuxt-link>
+          <nuxt-link to="/" class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue_purchase }}</nuxt-link>
+          <nuxt-link :to="{ name: 'cart-checkout' }" class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.buy }}</nuxt-link>
         </div>
       </div>
       <div v-else>Корзина пуста</div>
@@ -43,6 +43,7 @@
 
 <script>
 
+import {locale} from "../../middleware/localeLang";
 import TableRow from "../../components/tableRow";
 import { mapActions } from 'vuex'
 export default {
@@ -52,6 +53,7 @@ export default {
     return {
       cartData: null,
       cart: null,
+      locale: locale
     }
   },
   computed: {
@@ -74,6 +76,7 @@ export default {
     }
   },
   async mounted() {
+    this.LANG_ACTION()
     this.cart = JSON.parse(localStorage.getItem('cart'))
     if (this.cart) {
       this.get_cart
@@ -81,7 +84,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'CART_ACTION'
+      'CART_ACTION',
+      'LANG_ACTION'
     ]),
     deleteCartProduct (id) {
       this.cart = this.cart.filter(rm => {

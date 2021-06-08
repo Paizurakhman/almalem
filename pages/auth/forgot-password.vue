@@ -11,13 +11,13 @@
       <form @submit.prevent="resetPassword">
         <div class="address_card">
           <div class="card_title">
-            <p>Восстановление аккаунта</p>
+            <p>{{ locale[this.$store.state.lang].contentTitle.forgotPasswordText }}</p>
           </div>
 
           <div class="contacts_form">
             <div class="form">
               <div class="inputs">
-                <p>Адрес эл.почты</p>
+                <p>{{ locale[this.$store.state.lang].form.addressEmail }}</p>
                 <input class="custom_input" type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
                 <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="action_auth">
-            <button class="btn btn_silver">Продолжить</button>
+            <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue }}</button>
           </div>
         </div>
       </form>
@@ -37,14 +37,17 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 import {required, email} from 'vuelidate/lib/validators'
 export default {
   name: "forgot-password",
   data() {
     return {
+      locale: locale,
       email: '',
       success: null,
-      error: null
+      error: null,
     }
   },
   methods: {

@@ -7,7 +7,7 @@
         <nuxt-link to="/brands">Бренды</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Бренды</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.brands }}</p>
       </div>
       <div class="brands_content" v-if="brandData">
         <div class="row">
@@ -20,7 +20,7 @@
               }"
               >
                 <div class="brand_item">
-                  <img :src="'http://cdn.astudiodigital.ru/' + brand.image" alt="">
+                  <v-lazy-image :src="'http://cdn.astudiodigital.ru/' + brand.image" alt=""/>
                   <p class="brand_text">{{ brand.title }}</p>
                 </div>
               </nuxt-link>
@@ -32,14 +32,25 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
+import {mapActions} from "vuex";
+
 export default {
   name: "brands",
   data () {
     return {
+      locale: locale,
       brandData: null,
     }
   },
+  methods: {
+    ...mapActions([
+      'LANG_ACTION'
+    ])
+  },
   async mounted() {
+    this.LANG_ACTION()
     await this.$axios.get('/get-brands?lang=' + this.$store.state.lang)
     .then(res => {
       this.brandData = res.data

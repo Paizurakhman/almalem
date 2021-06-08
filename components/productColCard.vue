@@ -47,7 +47,7 @@
                   </div>
                 </div>
                 <div class="add_to_card">
-                  <button class="btn btn_main" @click.stop.prevent="addToCart(product.id)">Добавить в корзину</button>
+                  <button class="btn btn_main" @click.stop.prevent="addToCart(product.id)">{{ locale[this.$store.state.lang].buttons.add_toCart }}</button>
                 </div>
               </div>
             </div>
@@ -59,12 +59,14 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import {mapActions} from "vuex";
 export default {
   name: "productColCard",
   props: ['product'],
   data() {
     return {
+      locale: locale,
       hasFav: null,
       activeFav: false
     }
@@ -77,7 +79,7 @@ export default {
       'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
-      this.ADD_TO_CART(id)
+      this.ADD_TO_CART({id: id, count: 1})
       this.CART_ACTION()
     },
     addFavorite (product) {
@@ -96,7 +98,7 @@ export default {
     }
   },
   mounted() {
-    this.hasFav = JSON.parse(localStorage.getItem('favorite')).products
+    this.hasFav = JSON.parse(localStorage.getItem('favorite'))?.products
 
     this.favId()
   }

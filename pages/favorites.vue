@@ -7,7 +7,7 @@
         <nuxt-link to="/favorites">Избранное</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Мои избранные товары</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.my_like}}</p>
       </div>
       <div v-if="favoriteData">
         <div v-if="favoriteData.products.length">
@@ -15,11 +15,11 @@
             <table class="table table-bordered table-responsive">
               <thead>
               <tr>
-                <th scope="col"><p style="width: 100px">Картинка</p></th>
-                <th scope="col"><p style="width: 200px">Название</p></th>
-                <th scope="col"><p style="width: 100px">Наличие</p></th>
-                <th scope="col"><p style="width: 100px">Цена за шт.</p></th>
-                <th scope="col"><p style="width: 150px">Действие</p></th>
+                <th scope="col"><p style="width: 100px">{{ locale[this.$store.state.lang].tableLike.imageText}}</p></th>
+                <th scope="col"><p style="width: 200px">{{ locale[this.$store.state.lang].tableLike.name}}</p></th>
+                <th scope="col"><p style="width: 100px">{{ locale[this.$store.state.lang].tableLike.availability}}</p></th>
+                <th scope="col"><p style="width: 100px">{{ locale[this.$store.state.lang].tableLike.priceByCount}}</p></th>
+                <th scope="col"><p style="width: 150px">{{ locale[this.$store.state.lang].tableLike.action}}</p></th>
               </tr>
               </thead>
               <tbody>
@@ -49,7 +49,7 @@
           </div>
           <div class="contacts_form">
             <div class="contacts_action">
-              <button class="btn btn_silver">Вперед</button>
+              <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.forward}}</button>
             </div>
           </div>
         </div>
@@ -61,12 +61,14 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import {mapActions} from "vuex";
 export default {
   name: "favorites",
   data() {
     return {
-      favoriteData: null
+      favoriteData: null,
+      locale: locale
     }
   },
   methods: {
@@ -76,7 +78,7 @@ export default {
       'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
-      this.ADD_TO_CART(id)
+      this.ADD_TO_CART({id: id, count: 1})
       this.CART_ACTION()
     },
     deleteFavorite (product) {

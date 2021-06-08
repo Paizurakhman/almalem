@@ -7,24 +7,24 @@
         <nuxt-link to="/auth/register">Регистрация</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Регистрация пользователя</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.registerText }}</p>
       </div>
       <div class="card_title">
-        <p>Если у вас уже есть учетная запись у нас, пожалуйста, войдите на страницу <b>
-          <nuxt-link :to="{ name: 'auth-login' }">входа.</nuxt-link>
+        <p>{{ locale[this.$store.state.lang].contentTitle.hasUser }} <b>
+          <nuxt-link :to="{ name: 'auth-login' }">{{ locale[this.$store.state.lang].buttons.loginText }}</nuxt-link>
         </b></p>
       </div>
       <div class="register_content">
         <div class="contacts_form">
           <div class="contacts_title">
-            <p>Личные данные</p>
+            <p>{{ locale[this.$store.state.lang].contentTitle.personalData }}</p>
           </div>
           <div class="form">
             <form @submit.prevent="register">
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily custom_span">Имя</span>
+                    <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.nameText }}</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
@@ -37,7 +37,7 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily custom_span">Фамилия</span>
+                    <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.surnameText }}</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="text" v-model="surname" :class="{ invalid:($v.surname.$dirty && !$v.surname.required)
@@ -76,12 +76,12 @@
                 </div>
               </div>
               <div class="contacts_title">
-                <p>Пароль</p>
+                <p>{{ locale[this.$store.state.lang].form.passwordText }}</p>
               </div>
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2">
-                    <span class="necessarily custom_span">Ваш пароль</span>
+                    <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.yourPasswordText }}</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="password" v-model="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
@@ -94,7 +94,7 @@
               <div class="inputs">
                 <div class="row">
                   <div class="col-xl-2 col-lg-2 p_r_0">
-                    <span class="necessarily pr-0 custom_span">Подтвердите пароль</span>
+                    <span class="necessarily pr-0 custom_span">{{ locale[this.$store.state.lang].form.repeatPassword }}</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="password" v-model="confirm_password" :class="{invalid:($v.confirm_password.$dirty && !$v.confirm_password.required)
@@ -105,7 +105,7 @@
                 </div>
               </div>
               <div class="contacts_action">
-                <button class="btn btn_silver">Отправить</button>
+                <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.send }}</button>
               </div>
             </form>
           </div>
@@ -116,11 +116,14 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 import { email, minLength, required, sameAs } from 'vuelidate/lib/validators'
 export default {
   name: "register",
   data () {
     return {
+      locale: locale,
       name: '',
       surname: '',
       phone_number: '',
@@ -166,7 +169,7 @@ export default {
     },
     phone_number: {
       required,
-      minLength: minLength(11)
+      minLength: minLength(10)
     },
     email: {
       required,

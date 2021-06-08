@@ -7,7 +7,7 @@
         <nuxt-link to="/discounts">Новинки</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Новинки</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.news }}</p>
       </div>
 <!--      <div class="tab_content">-->
 <!--        <layout-tabBar @viewMode="current = $event" :current="current" :products="newProducts.products"/>-->
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import productCard from "@/components/productCard";
 import productColCard from "@/components/productColCard";
 export default {
@@ -35,6 +36,7 @@ export default {
   components: { productCard, productColCard },
   data() {
     return {
+      locale: locale,
       current: 'grid',
       newProducts: null,
     }

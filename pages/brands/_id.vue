@@ -9,7 +9,7 @@
         <nuxt-link to="/brands">{{ innerData.brands.title }}</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Бренды</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.brands }}</p>
       </div>
       <div class="inner_brand_content">
         <div class="inner_brand_wrapper">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="container">
-      <p class="bolder_text">Товары компании</p>
+      <p class="bolder_text">{{ locale[this.$store.state.lang].contentTitle.company_products }}</p>
       <div class="sales_content">
         <div class="row">
           <div class="col-xl-3 col-lg-3" v-for="product in innerData.products.data" :key="product.id">
@@ -49,10 +49,13 @@
 </template>
 
 <script>
+import {locale} from "../../middleware/localeLang";
+
 export default {
     name: 'id',
     data() {
         return {
+          locale: locale,
           page: 1,
           id: this.$route.params.id,
           innerData: null

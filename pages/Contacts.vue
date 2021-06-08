@@ -7,12 +7,12 @@
         <nuxt-link to="/contacts">Контакты</nuxt-link>
       </div>
       <div class="p_title">
-        <p>Свяжитесь с нами</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.contact_us}}</p>
       </div>
       <div class="card_title">
-        <p>Наш адрес</p>
+        <p>{{ locale[this.$store.state.lang].contentTitle.our_address}}</p>
       </div>
-      <div class="address_card">
+      <div class="address_card" v-if="addressData">
         <div class="row">
           <div class="col-xl-4 col-lg-4">
             <div class="c_title">
@@ -26,7 +26,7 @@
                 @click="showMap"
               >
                 <span><img src="~/assets/icon/location.svg" alt=""></span>
-                <span>Смотреть на карте</span>
+                <span>{{ locale[this.$store.state.lang].buttons.view_in_map}}</span>
               </button>
 
               <div
@@ -50,24 +50,32 @@
             <div class="contact_info">
               <div class="c_title">
                 <p class="b_text">Телефон</p>
-                <p class="silver_text">+7 (707) 567-89-00</p>
+                <p class="silver_text">{{ addressData.addres.phone_number }}</p>
               </div>
               <div class="card_action mt-4">
                 <div class="social_networks">
                 <span class="mr-4">
-                  <img src="~/assets/icon/facebook_silver.svg" alt="">
+                  <a :href="addressData.addres.facebook" target="_blank"><img src="~/assets/icon/facebook_silver.svg" alt=""></a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/instagram_silver.svg" alt="">
+                    <a :href="addressData.addres.instagram" target="_blank">
+                     <img src="~/assets/icon/instagram_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/youtube_silver.svg" alt="">
+                    <a :href="addressData.addres.youtube" target="_blank">
+                      <img src="~/assets/icon/youtube_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/vk_silver.svg" alt="">
+                    <a :href="addressData.addres.vk" target="_blank">
+                      <img src="~/assets/icon/vk_silver.svg" alt="">
+                    </a>
                 </span>
                   <span class="mr-4">
-                  <img src="~/assets/icon/odnoklassniki_silver.svg" alt="">
+                    <a :href="addressData.addres.odnoklassniki" target="_blank">
+                      <img src="~/assets/icon/odnoklassniki_silver.svg" alt="">
+                    </a>
                 </span>
                 </div>
               </div>
@@ -77,14 +85,14 @@
       </div>
       <div class="contacts_form">
         <div class="contacts_title">
-          <p>Свяжитесь с нами</p>
+          <p>{{ locale[this.$store.state.lang].contentTitle.contact_us}}</p>
         </div>
         <div class="form">
           <form @submit.prevent="sendContact">
             <div class="inputs">
               <div class="row">
                 <div class="col-xl-2 col-lg-2">
-                  <span class="necessarily custom_span">Имя</span>
+                  <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.nameText }}</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
                   <input class="custom_input" type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
@@ -133,7 +141,7 @@
             <div class="inputs">
               <div class="row">
                 <div class="col-xl-2 col-lg-2">
-                  <span class="custom_span">Сообщение</span>
+                  <span class="custom_span">{{ locale[this.$store.state.lang].form.messageText}}</span>
                 </div>
                 <div class="col-xl-10 col-lg-10">
                   <textarea v-model="message"></textarea>
@@ -141,7 +149,7 @@
               </div>
             </div>
             <div class="contacts_action">
-              <button class="btn btn_silver">Отправить</button>
+              <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.send}}</button>
             </div>
           </form>
         </div>
@@ -151,11 +159,14 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import { email, minLength, required } from 'vuelidate/lib/validators'
 export default {
   name: "Contacts",
   data(){
     return {
+      locale: locale,
+      addressData: null,
       isShowMap: false,
       name: '',
       phone: '',
@@ -198,7 +209,7 @@ export default {
     },
     phone: {
       required,
-      minLength: minLength(11)
+      minLength: minLength(10)
     },
     email: {
       required,
@@ -208,7 +219,7 @@ export default {
   async mounted() {
     await this.$axios.get('address?lang=' + this.$store.state.lang)
     .then(res => {
-      console.log(res.data);
+      this.addressData = res.data
     })
   }
 }

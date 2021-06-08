@@ -11,21 +11,21 @@
       <form @submit.prevent="resetPassword">
         <div class="address_card">
           <div class="card_title">
-            <p>Восстановление</p>
+            <p>{{ locale[this.$store.state.lang].contentTitle.resetText}}</p>
           </div>
 
           <div class="contacts_form">
             <div class="form">
               <div class="inputs">
-                <p>Новый пароль</p>
-                <input type="password" v-model="new_password" :class="{ invalid:($v.new_password.$dirty && !$v.new_password.required)
+                <p>{{ locale[this.$store.state.lang].form.newPasswordText}}</p>
+                <input class="custom_input" type="password" v-model="new_password" :class="{ invalid:($v.new_password.$dirty && !$v.new_password.required)
                           || ($v.new_password.$dirty && !$v.new_password.minLength)}">
                 <span class="error" v-if="$v.new_password.$dirty && !$v.new_password.required">Password required</span>
                 <span class="error" v-if="$v.new_password.$dirty && !$v.new_password.minLength">Password must be at least 6 characters</span>
               </div>
               <div class="inputs">
-                <p>Подтвердите новый пароль</p>
-                <input type="password" v-model="repeat_password" :class="{ invalid:($v.repeat_password.$dirty && !$v.repeat_password.required)
+                <p>{{ locale[this.$store.state.lang].form.confirmNewPassword}}</p>
+                <input class="custom_input" type="password" v-model="repeat_password" :class="{ invalid:($v.repeat_password.$dirty && !$v.repeat_password.required)
                           || ($v.repeat_password.$dirty && !$v.repeat_password.sameAsPassword)}">
                 <span class="error" v-if="$v.repeat_password.$dirty && !$v.repeat_password.required">Confirm password required</span>
                 <span class="error" v-if="$v.repeat_password.$dirty && !$v.repeat_password.sameAsPassword">Confirm password must be identical.</span>
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="action_auth">
-            <button class="btn btn_silver">Продолжить</button>
+            <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue}}</button>
           </div>
         </div>
       </form>
@@ -44,11 +44,13 @@
 </template>
 
 <script>
+import {locale} from "../middleware/localeLang";
 import { required, sameAs, minLength } from 'vuelidate/lib/validators'
 export default {
   name: "reset",
   data() {
     return {
+      locale: locale,
       new_password: '',
       repeat_password: ''
     }
