@@ -20,8 +20,8 @@
                 <p>{{ locale[this.$store.state.lang].form.addressEmail }}</p>
                 <input class="custom_input" type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
-                <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
-                <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
+                <span class="error" v-if="$v.email.$dirty && !$v.email.email">{{locale[this.$store.state.lang].errors.emailField }}</span>
+                <span class="error" v-if="$v.email.$dirty && !$v.email.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
               </div>
               <p class="error" v-if="error">{{error}}</p>
               <p v-if="success" class="t_green">Письмо со ссылкой для восстановления пароля выслано на <b>{{email}}</b></p>

@@ -47,7 +47,8 @@
                   </div>
                 </div>
                 <div class="add_to_card">
-                  <button class="btn btn_main" @click.stop.prevent="addToCart(product.id)">{{ locale[this.$store.state.lang].buttons.add_toCart }}</button>
+                  <button v-if="!inCart" class="btn btn_main" @click.stop.prevent="addToCart(product.id)">{{ locale[this.$store.state.lang].buttons.add_toCart }}</button>
+                  <button @click.stop.prevent="" v-if="inCart" class="btn btn_main">{{ locale[this.$store.state.lang].buttons.inCart }}</button>
                 </div>
               </div>
             </div>
@@ -68,19 +69,21 @@ export default {
     return {
       locale: locale,
       hasFav: null,
-      activeFav: false
+      activeFav: false,
+      inCart: false
     }
   },
   methods: {
     ...mapActions([
-      'ADD_TO_CART',
+      'IN_CART_ACTION',
       'ADD_FAVORITE',
       'CART_ACTION',
       'FAV_LEN_ACTION'
     ]),
     addToCart (id) {
-      this.ADD_TO_CART({id: id, count: 1})
+      this.IN_CART_ACTION({id: id, count: 1})
       this.CART_ACTION()
+      this.inCart = true
     },
     addFavorite (product) {
       this.ADD_FAVORITE(product)
@@ -95,12 +98,23 @@ export default {
           }
         })
       }
-    }
+    },
+    cartId () {
+      if (this.hasCart) {
+        this.hasCart.filter(val => {
+          if (val.id === this.product.id) {
+            this.inCart = true
+          }
+        })
+      }
+    },
   },
   mounted() {
     this.hasFav = JSON.parse(localStorage.getItem('favorite'))?.products
+    this.hasCart = JSON.parse(localStorage.getItem('cart')) || null
 
     this.favId()
+    this.cartId()
   }
 }
 </script>

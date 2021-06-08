@@ -99,7 +99,9 @@ let locale = {
             forgot: 'Не помню логин или пароль',
             loginText: 'входа.',
             start: 'Начать',
-            pay: 'Перейти к оплате'
+            pay: 'Перейти к оплате',
+            addedCart: 'Добавлена',
+            inCart: 'В корзине'
         },
         sort_by_price: {
             default: 'По умолчанию',
@@ -153,6 +155,20 @@ let locale = {
             apartment: 'Квартира',
             entrance: 'Подъезд',
             floor: 'Этаж'
+        },
+        message: {
+          myOrder: 'Нет заказов'
+        },
+        errors: {
+          requiredField: 'Это обязательное поле',
+          // nameRequired: 'Имя обязательно',
+          nameLength: 'Имя должно быть не менее 3-х символов',
+          // surnameRequired: 'Фамилия обязательно',
+          surnameLength: 'Фамилия должна быть не менее 3-х символов',
+          phoneLength: 'В номере телефона должно быть не менее 11 цифр',
+          emailField: 'Вы ввели неверный адрес электронной почты!',
+          passwordLength: 'Пароль должен быть не менее 6 символов',
+          confirmPasswordField: 'Пароли не совпадают'
         }
     },
     kz: {
@@ -241,7 +257,7 @@ let locale = {
             more: 'Толығырақ',
             view_in_map: 'Картадан қарау',
             send: 'Жіберу',
-            continue_purchase: 'Сатып алуды жалғастыру',
+            continue_purchase: 'Жалғастыру',
             buy: 'Сатып алу',
             forward: 'Алға',
             logout: 'Шығу',
@@ -255,7 +271,9 @@ let locale = {
             forgot: 'Логин мен пароль есімде жоқ',
             loginText: 'кіру.',
             start: 'Бастау',
-            pay: 'Төлемге өту'
+            pay: 'Төлемге өту',
+            addedCart: 'Себетке қосылды',
+            inCart: 'Себетте'
         },
         sort_by_price: {
             default: 'Әдепкі бойынша',
@@ -305,10 +323,24 @@ let locale = {
             city: 'Қала',
             street: 'Көше',
             house: 'Үй',
-            corps: 'Тұрғын үй',
+            corps: 'Корпус',
             apartment: 'Квартира',
             entrance: 'Подъезд',
             floor: 'Қабат'
+        },
+        message: {
+          myOrder: 'Ешқандай тапсырыстар жоқ'
+        },
+        errors: {
+          requiredField: 'Бұл міндетті жол',
+          // nameRequired: 'Имя обязательно',
+          nameLength: 'Аты кемінде 3 таңбадан тұруы керек',
+          // surnameRequired: 'Фамилия обязательно',
+          surnameLength: 'Тегі кемінде 3 таңбадан тұруы керек',
+          phoneLength: 'Телефон нөмірі 11 ден кем болмауы керек',
+          emailField: 'Сіз электрондық поштаны дұрыс енгізбедіңіз!',
+          passwordLength: 'Құпия сөз кемінде 6 таңбадан тұруы керек',
+          confirmPasswordField: 'Құпия сөздер сәйкес келмейді'
         }
     }
 }

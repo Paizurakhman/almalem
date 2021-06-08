@@ -41,12 +41,11 @@
     }
     .card_footer {
       text-align: right;
-      margin: 30px 0;
+      margin-top: 30px;
     }
   }
   .address_card {
     .ordering_card {
-      margin: 20px 0;
       position: relative;
       .row {
         display: flex;
@@ -95,8 +94,12 @@
       margin-top: 20px;
       flex-direction: inherit !important;
     }
+    .card_text {
+      width: 80%;
+    }
   }
 }
+
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {
   .checkout_content {
@@ -105,12 +108,10 @@
       flex-wrap: wrap;
       justify-content: space-between;
       .ordering_card {
-        width: 48%;
         .row {
           margin: 0;
         }
         .item_amount {
-          margin-top: 25px;
           display: flex;
           flex-direction: inherit;
         }
@@ -126,7 +127,6 @@
       flex-wrap: wrap;
       justify-content: space-between;
       .ordering_card {
-        width: 30%;
         .item_amount {
           margin-top: 25px;
           display: flex;

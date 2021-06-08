@@ -29,8 +29,8 @@
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="text" v-model="name" :class="{ invalid:($v.name.$dirty && !$v.name.required)
                           || ($v.name.$dirty && !$v.name.minLength)}">
-                    <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">Name must be at least 3 characters</span>
-                    <span class="error" v-if="$v.name.$dirty && !$v.name.required">Name required</span>
+                    <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">{{locale[this.$store.state.lang].errors.nameLength }}</span>
+                    <span class="error" v-if="$v.name.$dirty && !$v.name.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                   </div>
                 </div>
               </div>
@@ -42,8 +42,8 @@
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="text" v-model="surname" :class="{ invalid:($v.surname.$dirty && !$v.surname.required)
                           || ($v.surname.$dirty && !$v.surname.minLength)}">
-                    <span class="error" v-if="$v.surname.$dirty && !$v.surname.minLength">Last name must be at least 3 characters</span>
-                    <span class="error" v-if="$v.surname.$dirty && !$v.surname.required">Last name required</span>
+                    <span class="error" v-if="$v.surname.$dirty && !$v.surname.minLength">{{locale[this.$store.state.lang].errors.surnameLength }}</span>
+                    <span class="error" v-if="$v.surname.$dirty && !$v.surname.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                   </div>
                 </div>
               </div>
@@ -55,8 +55,8 @@
                   <div class="col-xl-10 col-lg-10">
                     <the-mask class="custom_input" :masked="true" :mask="['+7(###) ###-##-##']" v-model="phone_number" :class="{ invalid:($v.phone_number.$dirty && !$v.phone_number.required)
                           || ($v.phone_number.$dirty && !$v.phone_number.minLength)}"/>
-                    <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.minLength">Phone number must be at least 11 numbers</span>
-                    <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.required">Phone number required</span>
+                    <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.minLength">{{locale[this.$store.state.lang].errors.phoneLength }}</span>
+                    <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                     <span class="error" v-if="error_password">{{ error_password}}</span>
                   </div>
                 </div>
@@ -69,8 +69,8 @@
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="email" v-model="email" :class="{ invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
-                    <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
-                    <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
+                    <span class="error" v-if="$v.email.$dirty && !$v.email.email">{{locale[this.$store.state.lang].errors.emailField }}</span>
+                    <span class="error" v-if="$v.email.$dirty && !$v.email.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                     <span class="error" v-if="error_email">{{ error_email}}</span>
                   </div>
                 </div>
@@ -86,8 +86,8 @@
                   <div class="col-xl-10 col-lg-10">
                     <input class="custom_input" type="password" v-model="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
                           || ($v.password.$dirty && !$v.password.minLength)}">
-                    <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
-                    <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">Password must be at least 6 characters</span>
+                    <span class="error" v-if="$v.password.$dirty && !$v.password.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
+                    <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">{{locale[this.$store.state.lang].errors.passwordLength }}</span>
                   </div>
                 </div>
               </div>
@@ -97,10 +97,8 @@
                     <span class="necessarily pr-0 custom_span">{{ locale[this.$store.state.lang].form.repeatPassword }}</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <input class="custom_input" type="password" v-model="confirm_password" :class="{invalid:($v.confirm_password.$dirty && !$v.confirm_password.required)
-                          || ($v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword)}">
-                    <span class="error" v-if="$v.confirm_password.$dirty && !$v.confirm_password.required">Confirm password required</span>
-                    <span class="error" v-if="$v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword">Confirm password must be identical.</span>
+                    <input class="custom_input" type="password" v-model="confirm_password" :class="{invalid: ($v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword)}">
+                    <span class="error" v-if="$v.confirm_password.$dirty && !$v.confirm_password.sameAsPassword">{{locale[this.$store.state.lang].errors.confirmPasswordField }}</span>
                   </div>
                 </div>
               </div>
@@ -169,7 +167,7 @@ export default {
     },
     phone_number: {
       required,
-      minLength: minLength(10)
+      minLength: minLength(17)
     },
     email: {
       required,
@@ -180,7 +178,6 @@ export default {
       minLength: minLength(6)
     },
     confirm_password: {
-      required,
       sameAsPassword: sameAs('password')
     }
   }

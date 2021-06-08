@@ -39,15 +39,15 @@
                           <span>E-mail</span>
                           <input class="custom_input" type="email" v-model="email" :class="{invalid:($v.email.$dirty && !$v.email.required)
                           || ($v.email.$dirty && !$v.email.email)}">
-                          <span class="error" v-if="$v.email.$dirty && !$v.email.email">You have entered an invalid email address!</span>
-                          <span class="error" v-if="$v.email.$dirty && !$v.email.required">Email required</span>
+                          <span class="error" v-if="$v.email.$dirty && !$v.email.email">{{locale[this.$store.state.lang].errors.emailField }}</span>
+                          <span class="error" v-if="$v.email.$dirty && !$v.email.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                         </div>
                         <div class="inputs">
                           <span>{{ locale[this.$store.state.lang].contentTitle.passwordText }}</span>
                           <input class="custom_input" type="password" v-model.trim="password" :class="{invalid:($v.password.$dirty && !$v.password.required)
                           || ($v.password.$dirty && !$v.password.minLength)}">
-                          <span class="error" v-if="$v.password.$dirty && !$v.password.required">Password required</span>
-                          <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">Password must be at least 6 characters</span>
+                          <span class="error" v-if="$v.password.$dirty && !$v.password.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
+                          <span class="error" v-if="$v.password.$dirty && !$v.password.minLength">{{locale[this.$store.state.lang].errors.passwordLength }}</span>
                         </div>
                         <p class="error" v-if="error">{{ error }}</p>
                       </form>

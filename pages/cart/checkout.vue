@@ -17,7 +17,7 @@
             <form @submit.prevent="handleBuy">
               <div class="inputs">
                 <div class="row">
-                  <div class="col-xl-7">
+                  <div class="col-xl-7 col-lg-7">
                     <div class="input_title">
                       <p>
                         {{
@@ -145,7 +145,7 @@
                       v-model="main_info.comment"
                     ></textarea>
                   </div>
-                  <div class="col-xl-5">
+                  <div class="col-xl-5 col-lg-5">
                     <div class="input_title">
                       <p>{{ locale[this.$store.state.lang].contentTitle.yourOrder }}
                       </p>
@@ -168,7 +168,7 @@
                             />
                           </div>
                           <div class="col-xl-5 col-8 position-static">
-                            <p>{{ product.title }}</p>
+                            <p class="card_text">{{ product.title }}</p>
                           </div>
                           <div class="col-xl-2 col-12 position-static">
                             <div class="item_amount">

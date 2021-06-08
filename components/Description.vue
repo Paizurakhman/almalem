@@ -51,11 +51,15 @@
           <form @submit.prevent="sendReview">
             <div class="inputs">
               <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.nameText }}</span>
-              <input class="custom_input" type="text" v-model="name">
+              <input class="custom_input" type="text" v-model="name" :class="{invalid:($v.name.$dirty && !$v.name.required)
+                          || ($v.name.$dirty && !$v.name.minLength)}">
+              <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">length</span>
+              <span class="error" v-if="$v.name.$dirty && !$v.name.required">required</span>
             </div>
             <div class="inputs">
               <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.review }}</span>
-              <textarea v-model="review_text"></textarea>
+              <textarea v-model="review_text" :class="{invalid:($v.review_text.$dirty && !$v.review_text.required)}"></textarea>
+              <span class="error" v-if="$v.review_text.$dirty && !$v.review_text.required">required</span>
             </div>
             <div>
               <div class="inputs">
@@ -77,7 +81,7 @@
 
 <script>
 import {locale} from "../middleware/localeLang";
-
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   name: "Description",
   props: ['description', 'reviews', 'product_id'],
@@ -106,18 +110,30 @@ export default {
       this.current = by
     },
     async sendReview () {
-      await this.$axios.post('review', {
-        name: this.name,
-        review: this.review_text,
-        rating: this.rating,
-        product_id: this.product_id
-      })
-      .then(res => {
-        this.reviews = res.data.reviews
-        this.name = ''
-        this.review_text = ''
-        this.rating = 0
-      })
+      this.$v.$touch();
+      if(!this.$v.$invalid) {
+        await this.$axios.post('review', {
+          name: this.name,
+          review: this.review_text,
+          rating: this.rating,
+          product_id: this.product_id
+        })
+          .then(res => {
+            this.reviews = res.data.reviews
+            this.name = ''
+            this.review_text = ''
+            this.rating = 0
+          })
+      }
+    }
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(3)
+    },
+    review_text: {
+      required
     }
   }
 }

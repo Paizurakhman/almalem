@@ -182,8 +182,8 @@
                         <div class="col-xl-8 col-lg-8">
                           <input class="custom_input" type="text" v-model="profileEdit.name" :class="{ invalid:($v.profileEdit.name.$dirty && !$v.profileEdit.name.required)
                           || ($v.profileEdit.name.$dirty && !$v.profileEdit.name.minLength)}">
-                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.minLength">Name must be at least 3 characters</span>
-                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.required">Name required</span>
+                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.minLength">{{locale[this.$store.state.lang].errors.nameLength }}</span>
+                          <span class="error" v-if="$v.profileEdit.name.$dirty && !$v.profileEdit.name.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                         </div>
                       </div>
                     </div>
@@ -195,8 +195,8 @@
                         <div class="col-xl-8 col-lg-8">
                           <input class="custom_input" type="text" v-model="profileEdit.first_name" :class="{ invalid:($v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.required)
                           || ($v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.minLength)}">
-                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.minLength">Last name must be at least 3 characters</span>
-                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.required">Last name required</span>
+                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.minLength">{{locale[this.$store.state.lang].errors.surnameLength }}</span>
+                          <span class="error" v-if="$v.profileEdit.first_name.$dirty && !$v.profileEdit.first_name.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                         </div>
                       </div>
                     </div>
@@ -208,8 +208,8 @@
                         <div class="col-xl-8 col-lg-8">
                           <the-mask :masked="true" class="custom_input" :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone" :class="{ invalid:($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required)
                           || ($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength)}"/>
-                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength">Phone number must be at least 11 numbers</span>
-                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required">Phone number required</span>
+                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength">{{locale[this.$store.state.lang].errors.phoneLength }}</span>
+                          <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                         </div>
                       </div>
                     </div>
@@ -221,8 +221,8 @@
                         <div class="col-xl-8 col-lg-8">
                           <input class="custom_input" type="email" v-model="profileEdit.email" :class="{ invalid:($v.profileEdit.email.$dirty && !$v.profileEdit.email.required)
                           || ($v.profileEdit.email.$dirty && !$v.profileEdit.email.email)}">
-                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.email">You have entered an invalid email address!</span>
-                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.required">Email required</span>
+                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.email">{{locale[this.$store.state.lang].errors.emailField }}</span>
+                          <span class="error" v-if="$v.profileEdit.email.$dirty && !$v.profileEdit.email.required">{{locale[this.$store.state.lang].errors.requiredField }}</span>
                         </div>
                       </div>
                     </div>
@@ -235,7 +235,8 @@
                           <p>{{ locale[this.$store.state.lang].form.oldPassword }}</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="password" v-model="password">
+                          <input class="custom_input" type="password" v-model="old_password">
+                          <span class="error" v-if="error">{{ error }}</span>
                         </div>
                       </div>
                     </div>
@@ -255,7 +256,7 @@
                           <p>{{ locale[this.$store.state.lang].form.confirmNewPassword }}</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="password" v-model="confirm_password">
+                          <input class="custom_input" type="password" v-model="password_confirmation">
                         </div>
                       </div>
                     </div>
@@ -326,7 +327,7 @@
                         <p>{{ locale[this.$store.state.lang].address.floor }}</p>
                       </div>
                       <div class="col-xl-3 col-lg-3">
-                        <input class="custom_input"type="text" v-model="profileEdit.floor">
+                        <input class="custom_input" type="text" v-model="profileEdit.floor">
                       </div>
                     </div>
                   </div>
@@ -365,8 +366,10 @@ export default {
       locale: locale,
       edit_info: 'account',
       userData: null,
+      old_password: '',
+      error: '',
       password: '',
-      confirm_password: '',
+      password_confirmation: '',
       profileEdit: {
         name: '',
         first_name: '',
@@ -388,11 +391,35 @@ export default {
     handleClick(by) {
       this.edit_info = by
     },
+    mustEqualPassword() {
+      console.log(this.password === this.password_confirmation)
+      return this.password === this.password_confirmation
+    },
+    requiredPassword () {
+      console.log(this.password)
+      return this.password
+    },
     async updateProfile () {
       this.profileEdit.token = localStorage.getItem('token')
       this.$v.$touch();
-
       if(!this.$v.$invalid) {
+        if (this.old_password) {
+          if(this.mustEqualPassword() && this.requiredPassword()) {
+            await this.$axios.$post('password-update?token=' + localStorage.getItem('token'), {
+              password: this.password,
+              password_confirmation: this.password_confirmation,
+              old_password: this.old_password
+            })
+              .then(res => {
+                this.password = ''
+                this.password_confirmation = ''
+                this.old_password = ''
+                this.error = ''
+              }).catch(err => {
+                this.error = err.response.data.message
+              })
+          }
+        }
         await this.$axios.$post('user-update', this.profileEdit)
           .then(res => {
             this.userData = res
@@ -437,13 +464,23 @@ export default {
       },
       phone: {
         required,
-        minLength: minLength(10)
+        minLength: minLength(17)
       },
       email: {
         required,
         email
       },
-    }
+    },
+    // password: {
+    //   required,
+    //   minLength: minLength(6)
+    // },
+    // password_confirmation: {
+    //   sameAsPassword: sameAs('password')
+    // },
+    // old_password: {
+    //   required,
+    // }
   }
 }
 </script>

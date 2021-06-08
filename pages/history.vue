@@ -12,8 +12,9 @@
         <p>{{ locale[this.$store.state.lang].contentTitle.activeOrder}}</p>
       </div>
       <div class="table_wrapper" v-if="orderData">
-        <table class="table table-bordered table-responsive">
-          <thead>
+        <div v-if="orderData.orders.length">
+          <table class="table table-bordered table-responsive">
+            <thead>
             <tr>
               <th scope="col"><p style="width: 100px;">{{ locale[this.$store.state.lang].tableMyOrders.orderId}}</p></th>
               <th scope="col"><p style="width: 200px;">{{ locale[this.$store.state.lang].tableMyOrders.name}}</p></th>
@@ -21,24 +22,28 @@
               <th scope="col"><p style="width: 100px;">{{ locale[this.$store.state.lang].tableMyOrders.statusOrder}}</p></th>
               <th scope="col"><p style="width: 100px;">{{ locale[this.$store.state.lang].tableMyOrders.dataOrder}}</p></th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr height="100px" v-for="(order, index) in orderData.orders">
-              <td>orderId</td>
+              <td>{{ order.id }}</td>
               <td width="550px" >
                 <div class="my_order_name">
                   <img :src="'http://cdn.astudiodigital.ru/' + order.products[0].image.image" alt="">
                   <p>{{order.products[0].title}}</p>
                 </div>
               </td>
-              <td width="190px">{{ order.products[0].price }} ₸</td>
+              <td width="190px">{{ totalPrice }} ₸</td>
               <td width="190px">{{ order.type_status }}</td>
               <td width="190px">
                 <p>{{ new Date(order.created_at).getDate() }}/{{ new Date(order.created_at).getMonth() }}/{{ new Date(order.created_at).getFullYear() }}</p>
               </td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
+        <div v-else>
+          {{ locale[this.$store.state.lang].message.myOrder }}
+        </div>
       </div>
     </div>
   </div>
@@ -56,11 +61,18 @@ export default {
   },
   computed: {
     totalPrice() {
+      let price = [];
       this.orderData.orders.filter(el => {
-        console.log(el.products.reduce((sum,elem) => {
-          return sum.price + elem.price
-        }))
+        el.products.forEach(val => {
+          price.push(val.price)
+        })
       })
+      if (price.length) {
+        price = price.reduce((sum, end) => {
+          return sum + end
+        })
+      }
+      return price
     }
   },
   async mounted() {

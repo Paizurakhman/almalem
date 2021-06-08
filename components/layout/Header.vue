@@ -84,8 +84,8 @@
               <div class="top_actions">
                 <div class="my_account" v-if="token">
                   <nuxt-link to="/auth/profile">
-                    <img src="~/assets/icon/main/user.svg" alt=""></nuxt-link>
-                  <img src="~/assets/icon/main/arrow.svg" alt="">
+                    <img src="~/assets/icon/main/user.svg" alt="">
+                  </nuxt-link>
                 </div>
                 <div class="my_account" v-else>
                   <nuxt-link to="/auth/login">{{ locale[this.$store.state.lang].header.loginText}}</nuxt-link> <span> /</span>
@@ -222,10 +222,11 @@ export default {
       this.token = localStorage.getItem('token')
       this.mobileNav = false
 
-      if (this.$cookies.get("token_time") !== null) {
+      if (this.$cookies.get("token_time")) {
         let date = new Date() - new Date(this.$cookies.get("token_time"));
         let minute = date / 60000;
-        if (minute > 25) {
+        console.log(minute)
+        if (minute > 25 && minute < 30) {
           this.$axios
             .post('refresh', {
               token: $cookies.get("userToken")
@@ -239,8 +240,8 @@ export default {
             .catch((error) => {
               console.log(error);
             });
-        }else{
-          // this.$router.push("/auth/profile");
+        }if (minute > 30){
+          localStorage.removeItem('token')
         }
       }
     }

@@ -109,16 +109,21 @@
                     <p>Кол-во</p>
                   </div>
                   <div class="col-xl-3 col-lg-3 col-md-3 col-5">
-                    <input type="number" value="1" v-model="count" />
+                    <input type="number" value="1" v-model="count" :disabled="success"/>
                   </div>
                   <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="action_cart">
                       <button
                         class="btn btn_main"
+                        v-if="!success"
                         @click="addToCart(detailsData.product.id)"
                       >
                         + {{ locale[this.$store.state.lang].buttons.add_toCart }}
                       </button>
+                      <button
+                        class="btn btn_main"
+                        v-if="success"
+                      >✔ {{ locale[this.$store.state.lang].buttons.addedCart}}</button>
                     </div>
                   </div>
                 </div>
@@ -191,6 +196,7 @@ export default {
       rating: null,
       hasFav: null,
       activeFav: false,
+      success: false,
       count: 1,
       settingRating: {
         "star-size": 15,
@@ -250,8 +256,10 @@ export default {
       this.$nextTick(this.$forceUpdate)
     },
     addToCart(id) {
-      this.IN_CART_ACTION({id: id, count: this.count});
+      this.IN_CART_ACTION({id: id, count: Number(this.count)});
       this.CART_ACTION();
+      this.success = true
+      setTimeout(() => this.success = false, 2000)
     },
     addFavorite(product) {
       this.ADD_FAVORITE(product);
@@ -287,7 +295,7 @@ export default {
         this.count = 1
       }
     }
-  }
+  },
 };
 </script>
 
