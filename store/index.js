@@ -72,7 +72,6 @@ export const mutations = {
         if (cartData !== null) {
             state.cart = cartData
             if (cartData.find(el => el.id === id)) {
-                console.log('!!!!!')
                 localStorage.getItem('cart', JSON.stringify(cartData.filter(item => {
                    if(item.id === id){
                        item.count = count

@@ -206,7 +206,7 @@
                           <p>Телефон</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" v-model="profileEdit.phone" :class="{ invalid:($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required)
+                          <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" :masked="true" v-model="profileEdit.phone" :class="{ invalid:($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required)
                           || ($v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength)}"/>
                           <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.minLength">Phone number must be at least 11 numbers</span>
                           <span class="error" v-if="$v.profileEdit.phone.$dirty && !$v.profileEdit.phone.required">Phone number required</span>
