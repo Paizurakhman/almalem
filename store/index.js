@@ -68,7 +68,32 @@ export const mutations = {
         }
     },
     SET_IN_CART(state, { id, count }) {
-
+        let cartData = JSON.parse(localStorage.getItem('cart')) || null
+        if (cartData !== null) {
+            state.cart = cartData
+            if (cartData.find(el => el.id === id)) {
+                console.log('!!!!!')
+                localStorage.getItem('cart', JSON.stringify(cartData.filter(item => {
+                   if(item.id === id){
+                       item.count = count
+                       localStorage.setItem('cart', JSON.stringify(state.cart))
+                   }
+                //    localStorage.setItem('cart', JSON.stringify(state.cart))
+                })))
+            } else {
+                state.cart.push({
+                    id: id,
+                    count: count
+                })
+                localStorage.setItem('cart', JSON.stringify(state.cart))
+            }
+        } else {
+            state.cart.push({
+                id: id,
+                count: 1
+            })
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        }
     },
     SET_CART_LENGTH(state) {
         state.cartLength = JSON.parse(localStorage.getItem('cart'))?.length
