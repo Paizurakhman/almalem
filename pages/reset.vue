@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="action_auth">
-            <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue}}</button>
+            <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.continue }}</button>
           </div>
         </div>
       </form>

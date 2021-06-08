@@ -40,6 +40,7 @@
                       <div class="col-xl-4 col-md-4">
                         <the-mask
                           class="custom_input"
+                          :masked="true"
                           :mask="['+7(###) ###-####']"
                           :placeholder="
                             locale[this.$store.state.lang].form.phoneNumber
@@ -74,29 +75,10 @@
                     </div>
                     <div class="row" v-if="regions">
                       <div class="col-xl-4 col-md-4">
-                        <v-select
-                          v-model="address.region"
-                          :reduce="(region_id) => region_id.id"
-                          @input="getCity"
-                          :options="regions"
-                          label="title"
-                          :placeholder="
-                            locale[this.$store.state.lang].address.region
-                          "
-                        ></v-select>
+                        <input v-model="address.region" class="custom_input" type="text" :placeholder="locale[this.$store.state.lang].address.region">
                       </div>
                       <div class="col-xl-4 col-md-4">
-                        <v-select
-                          v-model="address.city"
-                          :reduce="(city_id) => city_id.id"
-                          label="title"
-                          v-if="cities"
-                          :placeholder="
-                            locale[this.$store.state.lang].address.city
-                          "
-                          :options="cities"
-                          :disabled="!address.region"
-                        ></v-select>
+                        <input v-model="address.city" class="custom_input" type="text" :placeholder="locale[this.$store.state.lang].address.city">
                       </div>
                       <div class="col-xl-4 col-md-4">
                         <input
@@ -153,10 +135,7 @@
                     </div>
                     <div class="i_title">
                       <p>
-                        {{
-                          locale[this.$store.state.lang].contentTitle
-                            .commentText
-                        }}
+                        {{locale[this.$store.state.lang].contentTitle.commentText }}
                       </p>
                     </div>
                     <textarea
@@ -168,10 +147,7 @@
                   </div>
                   <div class="col-xl-5">
                     <div class="input_title">
-                      <p>
-                        {{
-                          locale[this.$store.state.lang].contentTitle.yourOrder
-                        }}
+                      <p>{{ locale[this.$store.state.lang].contentTitle.yourOrder }}
                       </p>
                     </div>
                     <div class="address_card" v-if="cartData">
@@ -318,7 +294,6 @@ export default {
       if (this.cartData) {
         this.cartData.products.filter((item, i) => {
           for (let i of JSON.parse(localStorage.getItem("cart"))) {
-            console.log(item);
             if (item.id === i.id) {
               result.push(item.price * item.count);
             }
@@ -351,24 +326,18 @@ export default {
           this.main_info.phone = res.user.phone;
           this.main_info.email = res.user.email;
           this.address.region = res.user.region;
+          this.address.city = res.user.city
+          this.address.street= res.user.street
+          this.address.house = res.user.house
+          this.address.building = res.user.building
+          this.address.entrance = res.user.entrance
+          this.address.floor = res.user.floor
+          this.address.apartment = res.user.apartment
         });
     }
   },
   methods: {
     ...mapActions(["CART_ACTION"]),
-    async getCity() {
-      this.address.city = "";
-      await this.$axios
-        .$get("get-city", {
-          params: {
-            lang: this.$store.state.lang,
-            region_id: this.address.region,
-          },
-        })
-        .then((res) => {
-          this.cities = res.cities;
-        });
-    },
     deleteCartProduct(id) {
       this.cart = this.cart.filter((rm) => {
         return rm.id !== id;

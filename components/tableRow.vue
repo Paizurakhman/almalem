@@ -56,7 +56,7 @@ export default {
 
       localStorageCart.filter((item, index) => {
         if (item.id === id) {
-          localStorageCart[index].count = this.count;
+          localStorageCart[index].count = Number(this.count);
         }
       });
 

@@ -33,7 +33,7 @@
                   </div>
                 </VueSlickCarousel>
               </div>
-              <div class="container_slider">
+              <div class="container_slider" v-if="detailsData.product.product_images.length > 1">
                 <div class="detail_carousel">
                   <VueSlickCarousel
                     v-bind="settings"
@@ -247,8 +247,7 @@ export default {
       'LANG_ACTION'
     ]),
     syncSliders(currentPosition, nextPosition) {
-      this.$refs.c1.next()
-      this.$refs.c2.next()
+      this.$nextTick(this.$forceUpdate)
     },
     addToCart(id) {
       this.IN_CART_ACTION({id: id, count: this.count});

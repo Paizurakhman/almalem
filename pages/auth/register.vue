@@ -53,7 +53,7 @@
                     <span class="necessarily custom_span">Телефон</span>
                   </div>
                   <div class="col-xl-10 col-lg-10">
-                    <the-mask class="custom_input" :mask="['+7(###) ###-##-##']" v-model="phone_number" :class="{ invalid:($v.phone_number.$dirty && !$v.phone_number.required)
+                    <the-mask class="custom_input" :masked="true" :mask="['+7(###) ###-##-##']" v-model="phone_number" :class="{ invalid:($v.phone_number.$dirty && !$v.phone_number.required)
                           || ($v.phone_number.$dirty && !$v.phone_number.minLength)}"/>
                     <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.minLength">Phone number must be at least 11 numbers</span>
                     <span class="error" v-if="$v.phone_number.$dirty && !$v.phone_number.required">Phone number required</span>
