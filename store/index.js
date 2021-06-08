@@ -67,7 +67,7 @@ export const mutations = {
             }))
         }
     },
-    SET_IN_CART (state, {id, count}) {
+    SET_IN_CART(state, { id, count }) {
 
     },
     SET_CART_LENGTH(state) {
@@ -76,12 +76,12 @@ export const mutations = {
     SET_FAV_LENGTH(state) {
         state.favoriteLength = JSON.parse(localStorage.getItem('favorite'))?.products.length
     },
-    SET_LANG (state) {
-      if(localStorage.getItem('lang')) {
-        state.lang = localStorage.getItem('lang')
-      }else {
-        state.lang = 'ru'
-      }
+    SET_LANG(state) {
+        if (localStorage.getItem('lang')) {
+            state.lang = localStorage.getItem('lang')
+        } else {
+            state.lang = 'ru'
+        }
     }
 }
 
@@ -107,11 +107,11 @@ export const actions = {
     FAV_LEN_ACTION({ commit }) {
         commit('SET_FAV_LENGTH')
     },
-    IN_CART_ACTION({commit}, { id, count }) {
-      commit('SET_IN_CART', { id, count })
+    IN_CART_ACTION({ commit }, { id, count }) {
+        commit('SET_IN_CART', { id, count })
     },
-    LANG_ACTION ({commit}) {
-      commit('SET_LANG')
+    LANG_ACTION({ commit }) {
+        commit('SET_LANG')
     }
 }
 
@@ -131,7 +131,7 @@ export const getters = {
     GET_FAV_LEN(state) {
         return state.favoriteLength
     },
-    GET_LANG (state) {
-      return state.lang
+    GET_LANG(state) {
+        return state.lang
     }
 }
