@@ -165,10 +165,10 @@
           <button class="btn btn_silver" @click="logout">{{ locale[this.$store.state.lang].buttons.logout }}</button>
         </div>
       </div>
-      <div class="login_content" v-if="edit_info === 'edit'">
+      <div class="login_content update" v-if="edit_info === 'edit'">
         <form @submit.prevent="updateProfile">
           <div class="row">
-            <div class="col-xl-6 col-lg-6">
+            <div class="col-xl-6 col-lg-6 col-md-6">
               <div class="contacts_form">
                 <div class="contacts_title">
                   <p>{{ locale[this.$store.state.lang].contentTitle.personalData }}</p>
@@ -246,7 +246,9 @@
                         <p>{{ locale[this.$store.state.lang].form.newPasswordText }}</p>
                       </div>
                       <div class="col-xl-8 col-lg-8">
-                        <input class="custom_input" type="password" v-model="password">
+                        <input class="custom_input" type="password" v-model="password" @input="myValidate" :class="{invalid: passwordError || passwordLenError}">
+                        <span class="error" v-if="passwordError">{{locale[this.$store.state.lang].errors.requiredField }}</span>
+                        <span class="error" v-if="passwordLenError">{{locale[this.$store.state.lang].errors.passwordLength }}</span>
                       </div>
                     </div>
                   </div>
@@ -256,14 +258,15 @@
                           <p>{{ locale[this.$store.state.lang].form.confirmNewPassword }}</p>
                         </div>
                         <div class="col-xl-8 col-lg-8">
-                          <input class="custom_input" type="password" v-model="password_confirmation">
+                          <input class="custom_input" type="password" v-model="password_confirmation" @input="myValidate" :class="{invalid: sameAsError}">
+                          <span class="error" v-if="sameAsError">{{locale[this.$store.state.lang].errors.confirmPasswordField }}</span>
                         </div>
                       </div>
                     </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-6 col-lg-6">
+            <div class="col-xl-6 col-lg-6 col-md-6">
               <div class="contacts_form">
                 <div class="contacts_title">
                   <p>{{ locale[this.$store.state.lang].contentTitle.deliveryAddress }}</p>
@@ -301,42 +304,42 @@
                   </div>
                   <div class="inputs">
                     <div class="row">
-                      <div class="col-xl-4 col-lg-4 col-4">
+                      <div class="col-xl-4 col-lg-4 col-3">
                         <p>{{ locale[this.$store.state.lang].address.house }}</p>
                       </div>
                       <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.house">
                       </div>
-                      <div class="col-xl-2 col-lg-2">
+                      <div class="col-xl-2 col-lg-2 col-3">
                         <p>{{ locale[this.$store.state.lang].address.entrance }}</p>
                       </div>
-                      <div class="col-xl-3 col-lg-3">
+                      <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.entrance">
                       </div>
                     </div>
                   </div>
                   <div class="inputs">
                     <div class="row">
-                      <div class="col-xl-4 col-lg-4">
+                      <div class="col-xl-4 col-lg-4 col-3">
                         <p>{{ locale[this.$store.state.lang].address.corps }}</p>
                       </div>
-                      <div class="col-xl-3 col-lg-3">
+                      <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.building">
                       </div>
-                      <div class="col-xl-2 col-lg-2">
+                      <div class="col-xl-2 col-lg-2 col-3">
                         <p>{{ locale[this.$store.state.lang].address.floor }}</p>
                       </div>
-                      <div class="col-xl-3 col-lg-3">
+                      <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.floor">
                       </div>
                     </div>
                   </div>
                   <div class="inputs">
                     <div class="row">
-                      <div class="col-xl-4 col-lg-4 p_r_0">
+                      <div class="col-xl-4 col-lg-4 p_r_0 col-3">
                         <p>{{ locale[this.$store.state.lang].address.apartment }}</p>
                       </div>
-                      <div class="col-xl-3 col-lg-3">
+                      <div class="col-xl-3 col-lg-3 col-3">
                         <input class="custom_input" type="text" v-model="profileEdit.apartment">
                       </div>
                     </div>
@@ -367,6 +370,10 @@ export default {
       edit_info: 'account',
       userData: null,
       old_password: '',
+      passwordError: false,
+      passwordLenError: false,
+      sameAsError: false,
+      my_validate: false,
       error: '',
       password: '',
       password_confirmation: '',
@@ -395,9 +402,6 @@ export default {
       return this.password === this.password_confirmation
     },
     requiredPassword () {
-      if (!this.password) {
-        console.log('required')
-      }
       return this.password
     },
     async updateProfile () {
@@ -420,9 +424,13 @@ export default {
                 this.password_confirmation = ''
                 this.old_password = ''
                 this.error = ''
+                this.my_validate = false
               }).catch(err => {
                 this.error = err.response.data.message
               })
+          }else {
+            this.my_validate = true
+            this.myValidate()
           }
         }
         else {
@@ -430,6 +438,28 @@ export default {
             .then(res => {
               this.userData = res
             })
+        }
+      }
+    },
+
+    myValidate () {
+      if (this.my_validate) {
+        if (this.requiredPassword()) {
+          this.passwordError = false
+        }else if (!this.requiredPassword()) {
+          this.passwordError = true
+        }if (this.mustEqualPassword()) {
+          this.sameAsError = false
+        }else if (!this.mustEqualPassword()) {
+          this.sameAsError = true
+        }if (this.password.length < 6) {
+          if (this.password) {
+            this.passwordLenError = true
+          }else {
+            this.passwordLenError = false
+          }
+        }else if (this.password.length >= 6) {
+          this.passwordLenError = false
         }
       }
     },
@@ -478,16 +508,6 @@ export default {
         email
       },
     },
-    // password: {
-    //   required,
-    //   minLength: minLength(6)
-    // },
-    // password_confirmation: {
-    //   sameAsPassword: sameAs('password')
-    // },
-    // old_password: {
-    //   required,
-    // }
   }
 }
 </script>
