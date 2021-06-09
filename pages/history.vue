@@ -28,7 +28,7 @@
               <td>{{ order.id }}</td>
               <td width="550px" >
                 <div class="my_order_name">
-                  <img :src="'http://cdn.astudiodigital.ru/' + order.products[0].image.image" alt="">
+                  <img :src="'http://cdn.test-vip.kz/' + order.products[0].image.image" alt="">
                   <p>{{order.products[0].title}}</p>
                 </div>
               </td>

@@ -169,7 +169,10 @@ let locale = {
           emailField: 'Вы ввели неверный адрес электронной почты!',
           passwordLength: 'Пароль должен быть не менее 6 символов',
           confirmPasswordField: 'Пароли не совпадают'
-        }
+        },
+      breadCrumbs: {
+          main: 'Главная'
+      }
     },
     kz: {
         header: {

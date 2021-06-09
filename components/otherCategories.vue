@@ -11,7 +11,7 @@
               <div class="row align-items-center h-100">
                 <div class="col-xl-5 col-lg-5 col-5">
                   <div class="categories_img" v-if="o.image">
-                    <img :src="'http://cdn.astudiodigital.ru/' + o.image" alt="">
+                    <img :src="'http://cdn.test-vip.kz/' + o.image" alt="">
                   </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-7 h-100">

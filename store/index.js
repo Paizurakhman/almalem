@@ -3,7 +3,7 @@ export const state = () => ({
     mobileNav: false,
     mobileShowCatalog: false,
     lang: 'ru',
-    imageUrl: 'http://cdn.astudiodigital.ru/',
+    imageUrl: 'http://cdn.test-vip.kz/',
     cart: [],
     favorites: [],
     cartLength: 0,

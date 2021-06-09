@@ -58,7 +58,7 @@ export default {
     ],
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
-      baseURL: 'http://back.astudiodigital.ru/api/'
+      baseURL: 'http://back.test-vip.kz/api/'
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

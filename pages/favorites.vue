@@ -26,10 +26,10 @@
               <tr height="100px" v-for="favorite in favoriteData.products" :key="favorite.id">
                 <th scope="row" width="190px">
                   <div class="table_img" v-if="favorite.images">
-                    <img :src="'http://cdn.astudiodigital.ru/' + favorite.images.image" alt="">
+                    <img :src="'http://cdn.test-vip.kz/' + favorite.images.image" alt="">
                   </div>
                   <div class="table_img" v-else>
-                    <img :src="'http://cdn.astudiodigital.ru/' + favorite.product_images[0].image" alt="">
+                    <img :src="'http://cdn.test-vip.kz/' + favorite.product_images[0].image" alt="">
                   </div>
                 </th>
                 <td width="440px">{{ favorite.title }}</td>

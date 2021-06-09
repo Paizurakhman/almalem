@@ -161,7 +161,7 @@
                             <img
                               class="order"
                               :src="
-                                'http://cdn.astudiodigital.ru/' +
+                                'http://cdn.test-vip.kz/' +
                                 product.images.image
                               "
                               alt=""

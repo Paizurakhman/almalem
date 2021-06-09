@@ -225,7 +225,6 @@ export default {
       if (this.$cookies.get("token_time")) {
         let date = new Date() - new Date(this.$cookies.get("token_time"));
         let minute = date / 60000;
-        console.log(minute)
         if (minute > 25 && minute < 30) {
           this.$axios
             .post('refresh', {
@@ -243,6 +242,8 @@ export default {
         }if (minute > 30){
           localStorage.removeItem('token')
         }
+      }else {
+        localStorage.removeItem('token')
       }
     }
   },

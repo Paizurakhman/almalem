@@ -392,11 +392,12 @@ export default {
       this.edit_info = by
     },
     mustEqualPassword() {
-      console.log(this.password === this.password_confirmation)
       return this.password === this.password_confirmation
     },
     requiredPassword () {
-      console.log(this.password)
+      if (!this.password) {
+        console.log('required')
+      }
       return this.password
     },
     async updateProfile () {
@@ -405,6 +406,10 @@ export default {
       if(!this.$v.$invalid) {
         if (this.old_password) {
           if(this.mustEqualPassword() && this.requiredPassword()) {
+            await this.$axios.$post('user-update', this.profileEdit)
+              .then(res => {
+                this.userData = res
+              })
             await this.$axios.$post('password-update?token=' + localStorage.getItem('token'), {
               password: this.password,
               password_confirmation: this.password_confirmation,
@@ -420,10 +425,12 @@ export default {
               })
           }
         }
-        await this.$axios.$post('user-update', this.profileEdit)
-          .then(res => {
-            this.userData = res
-          })
+        else {
+          await this.$axios.$post('user-update', this.profileEdit)
+            .then(res => {
+              this.userData = res
+            })
+        }
       }
     },
 

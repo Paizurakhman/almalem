@@ -3,7 +3,7 @@
     <th scope="row" width="190px">
       <div class="table_img">
         <img
-          :src="'http://cdn.astudiodigital.ru/' + product.images.image"
+          :src="'http://cdn.test-vip.kz/' + product.images.image"
           alt=""
         />
       </div>
