@@ -1,5 +1,9 @@
 <template>
-  <div class="profile p_page" v-if="userData">
+  <div class="profile" v-if="userData">
+    <transition name="notification">
+      <div class="notification" v-if="message">{{message}}</div>
+    </transition>
+    <div class="p_page">
     <div class="container">
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
@@ -18,7 +22,7 @@
       </div>
       <div class="login_content" v-if="edit_info === 'account'">
         <div class="row">
-          <div class="col-xl-6 col-lg-6">
+          <div class="col-xl-6 col-lg-6 col-md-6">
             <div class="contacts_form">
               <div class="contacts_title">
                 <p>{{ locale[this.$store.state.lang].contentTitle.personalData }}</p>
@@ -67,7 +71,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-6 col-lg-6">
+          <div class="col-xl-6 col-lg-6 col-md-6">
             <div class="contacts_form">
               <div class="contacts_title">
                 <p>{{ locale[this.$store.state.lang].contentTitle.deliveryAddress }}</p>
@@ -354,6 +358,7 @@
         </form>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -374,6 +379,7 @@ export default {
       passwordLenError: false,
       sameAsError: false,
       my_validate: false,
+      message: '',
       error: '',
       password: '',
       password_confirmation: '',
@@ -413,6 +419,7 @@ export default {
             await this.$axios.$post('user-update', this.profileEdit)
               .then(res => {
                 this.userData = res
+                this.message = res.message
               })
             await this.$axios.$post('password-update?token=' + localStorage.getItem('token'), {
               password: this.password,
@@ -437,9 +444,11 @@ export default {
           await this.$axios.$post('user-update', this.profileEdit)
             .then(res => {
               this.userData = res
+              this.message = res.message
             })
         }
       }
+      setTimeout(() => this.message = '', 3000)
     },
 
     myValidate () {

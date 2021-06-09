@@ -6,7 +6,7 @@
       </div>
       <div class="other_categories_content">
         <div class="row">
-          <div class="col-xl-4 col-lg-4 border_color" v-for="o in other" :key="o.id">
+          <div class="col-xl-4 col-lg-4 col-md-6 border_color" v-for="o in other" :key="o.id">
             <div class="categories_card h-100">
               <div class="row align-items-center h-100">
                 <div class="col-xl-5 col-lg-5 col-5">

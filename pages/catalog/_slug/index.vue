@@ -67,7 +67,7 @@
               </div>
               <div class="product_card_item">
                 <div class="row" v-if="current === 'grid'">
-                  <div class="col-xl-4 col-lg-4 col-md-4" v-for="product in productsData.products.data" :key="product.id">
+                  <div class="col-xl-4 col-lg-4 col-md-6" v-for="product in productsData.products.data" :key="product.id">
                     <product-card class="product_item" :product="product"></product-card>
                   </div>
                 </div>

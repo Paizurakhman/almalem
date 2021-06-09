@@ -1,9 +1,19 @@
 .notification {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 0;
   text-align: center;
   z-index: 100;
   background: #60cf10;
   color: #ffffff;
+  padding: 12px;
+}
+
+.notification-enter,
+.notification-leave-to {
+  transform: translateY(-100px);
+}
+.notification-enter-active,
+.notification-leave-active {
+  transition: all 0.3s ease;
 }

@@ -53,13 +53,13 @@
               <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.nameText }}</span>
               <input class="custom_input" type="text" v-model="name" :class="{invalid:($v.name.$dirty && !$v.name.required)
                           || ($v.name.$dirty && !$v.name.minLength)}">
-              <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">length</span>
-              <span class="error" v-if="$v.name.$dirty && !$v.name.required">required</span>
+              <span class="error" v-if="$v.name.$dirty && !$v.name.minLength">{{ locale[this.$store.state.lang].errors.nameLength }}</span>
+              <span class="error" v-if="$v.name.$dirty && !$v.name.required">{{ locale[this.$store.state.lang].errors.requiredField }}</span>
             </div>
             <div class="inputs">
               <span class="necessarily custom_span">{{ locale[this.$store.state.lang].form.review }}</span>
               <textarea v-model="review_text" :class="{invalid:($v.review_text.$dirty && !$v.review_text.required)}"></textarea>
-              <span class="error" v-if="$v.review_text.$dirty && !$v.review_text.required">required</span>
+              <span class="error" v-if="$v.review_text.$dirty && !$v.review_text.required">{{ locale[this.$store.state.lang].errors.requiredField }}</span>
             </div>
             <div>
               <div class="inputs">
@@ -123,6 +123,7 @@ export default {
             this.name = ''
             this.review_text = ''
             this.rating = 0
+            this.$v.$reset();
           })
       }
     }

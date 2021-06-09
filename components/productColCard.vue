@@ -8,7 +8,7 @@
     <div class="product_card">
       <div class="row align-items-center position-relative">
         <div class="col-xl-3 col-lg-4">
-          <div class="main_img">
+          <div class="col_main_img">
             <div class="sale" v-if="product.sale">-{{product.sale}}</div>
             <v-lazy-image :src="this.$store.state.imageUrl + product.images.image" alt="" />
           </div>

@@ -122,7 +122,9 @@
                     <img @click="mobileNavAction" src="~/assets/icon/burger_icon.svg" alt="">
                   </div>
                   <div class="logo">
-                    <img src="~/assets/logo.svg" alt="">
+                    <nuxt-link to="/">
+                      <img src="~/assets/logo.svg" alt="">
+                    </nuxt-link>
                   </div>
                 </div>
                 <div class="col_6 w_mob">

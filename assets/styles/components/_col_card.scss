@@ -24,6 +24,15 @@
             height: 200px;
         }
     }
+    .col_main_img {
+      position: relative;
+      margin: 20px 0;
+      img {
+        object-fit: contain;
+        width: 90%;
+        height: 200px;
+      }
+    }
     &:hover {
         .overlay {
             visibility: visible;
@@ -110,6 +119,16 @@
             margin: 0;
         }
     }
+}
+
+@media screen and (max-width: 768px){
+  .col_main_img {
+    text-align: center;
+    img {
+      max-width: 80% !important;
+      height: auto !important;
+    }
+  }
 }
 
 @media screen and (max-width: 576px) {
