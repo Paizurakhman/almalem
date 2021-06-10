@@ -25,7 +25,6 @@
           <div class="sale" v-if="product.sale > 0">-{{product.sale}}%</div>
           <v-lazy-image
             :src="this.$store.state.imageUrl + product.images.image"
-
           />
         </div>
         <div class="product_card_bottom">
@@ -39,7 +38,7 @@
                 src="~/assets/icon/white_basket.svg"
               >
             </span>
-            <span v-else>
+            <span class="not_active" v-else>
               <img
                 @click.stop.prevent="addToCart(product.id)"
                 src="~/assets/icon/black_basket.svg"
@@ -111,6 +110,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .not_active:hover {
+    border-radius: 30px;
+    background: rgba(158, 158, 158, 0.5);
+    transition: all 0.5s ease;
+  }
 </style>

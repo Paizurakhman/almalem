@@ -74,7 +74,7 @@
                   <div class="footer_text">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                   </div>
-                  <nuxt-link :to="{ name: 'auth-profile'}" class="btn btn_main">{{ locale[this.$store.state.lang].buttons.view}}</nuxt-link>
+                  <nuxt-link v-ripple.mouseover.900 :to="{ name: 'auth-profile'}" class="btn btn_main">{{ locale[this.$store.state.lang].buttons.view}}</nuxt-link>
                 </div>
                 <div class="account" v-else>
                   <div class="footer_info">
@@ -83,7 +83,7 @@
                   <div class="footer_text">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                   </div>
-                  <nuxt-link :to="{ name: 'auth-register'}" class="btn btn_main">{{ locale[this.$store.state.lang].buttons.start }}</nuxt-link>
+                  <nuxt-link v-ripple.mouseover.900 :to="{ name: 'auth-register'}" class="btn btn_main">{{ locale[this.$store.state.lang].buttons.start }}</nuxt-link>
                 </div>
               </div>
             </div>

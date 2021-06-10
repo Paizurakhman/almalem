@@ -29,7 +29,6 @@ export default {
 <style lang="scss" scoped>
   .language_nav {
     max-width: 150px;
-    padding: 0 16px;
     position: absolute;
     right: 0;
     z-index: 1;
@@ -38,8 +37,11 @@ export default {
     .language_items {
       display: flex;
       align-items: center;
-      margin: 16px 0;
       cursor: pointer;
+      padding: 10px;
+      &:hover {
+        background: rgba(193, 190, 190, 0.5);
+      }
       p {
         color: #000000;
         margin-bottom: 0;

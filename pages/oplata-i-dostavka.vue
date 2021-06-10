@@ -24,6 +24,11 @@ export default {
       deliveryData: null
     }
   },
+  head() {
+    return {
+      title: 'Доставка и оплата | almalem'
+    }
+  },
   async mounted() {
     await this.$axios.get('get-delivery?lang=' + this.$store.state.lang)
     .then(res => {

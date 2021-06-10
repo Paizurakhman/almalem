@@ -7,7 +7,7 @@
         v-model="search"
         @input="handleSearch"
       >
-      <button>
+      <button v-ripple.mouseover.900>
         <span><img src="~/assets/icon/main/search.svg" alt=""></span>
       </button>
     </form>

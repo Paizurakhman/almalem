@@ -4,7 +4,7 @@ export default {
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'almalem',
+        title: 'Almalem',
         htmlAttrs: {
             lang: 'en'
         },
@@ -42,7 +42,8 @@ export default {
         { src: '~/plugins/vue-lazy-load', mode: 'client'},
         { src: '~/plugins/vue-range-slider', mode: 'client'},
         // '~/plugins/route',
-        { src: '~/plugins/star-rating', mode: 'client'}
+        { src: '~/plugins/star-rating', mode: 'client'},
+        { src: '~/plugins/vue-ripple', mode: 'client'}
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

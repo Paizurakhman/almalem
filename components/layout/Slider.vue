@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "Slider",
   props: ['title', 'products'],
@@ -31,18 +30,17 @@ export default {
       "dots": false,
       "arrows": false,
       "infinite": true,
-      "speed": 500,
       "slidesToShow": 4,
+      "focusOnSelect": false,
       "slidesToScroll": 1,
       "initialSlide": 0,
       "responsive": [
         {
           "breakpoint": 1027,
           "settings": {
-            "slidesToShow": 4,
+            "slidesToShow": 3,
             "slidesToScroll": 1,
             "infinite": true,
-            arrows: false
           }
         },
         {
@@ -50,13 +48,11 @@ export default {
           "settings": {
             "slidesToShow": 2,
             "slidesToScroll": 1,
-            arrows: false
           }
         },
         {
           "breakpoint": 480,
           "settings": {
-            arrows: false,
             "slidesToShow": 1,
             "slidesToScroll": 1
           }

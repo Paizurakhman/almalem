@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="category_content">
+    <div class="category_content" v-if="(max !== min) && max && min">
       <div class="category_title">
         <p class="b_500_16_text">{{ locale[this.$store.state.lang].contentTitle.filter_by_price }}</p>
       </div>
@@ -29,6 +29,8 @@
             v-model="value"
             :clickable="false"
             @drag-end="changePrice"
+            :max="max"
+            :min="min"
           ></range-slider>
       </div>
       <div class="range_price">
@@ -58,17 +60,16 @@ import VueRangeSlider from 'vue-range-component'
 export default {
   name: "CategoryTab",
   components: {VueRangeSlider},
-  props: ['subcategories', 'filters', 'range_from', 'range_to'],
+  props: ['subcategories', 'filters', 'range_from', 'range_to', 'max', 'min'],
   data() {
     return {
       locale: locale,
-      value: [0, 1000000],
+      value: [this.min, this.max],
       processStyle: '',
       bgStyle: '',
       filteredValue: [],
       setting: {
         dotSize: 25,
-        max: 1000000,
         step: 100
       }
     }

@@ -19,7 +19,7 @@
                 }
               }"
               >
-                <div class="brand_item">
+                <div v-ripple.mouseover="'rgba(66,66,66,0.1)'" class="brand_item">
                   <v-lazy-image :src="'http://cdn.test-vip.kz/' + brand.image" alt=""/>
                   <p class="brand_text">{{ brand.title }}</p>
                 </div>

@@ -1,15 +1,17 @@
 <template>
-  <div class="catalog p_page">
+  <div class="catalog p_page" v-if="productsData">
     <div class="container">
       <div class="page_links">
         <nuxt-link to="/">Главная</nuxt-link>
+        <img src="~/assets/icon/arrow_silver.svg" alt="" v-if="productsData.category_parent">
+        <nuxt-link :to="{ name: 'catalog-slug', params: {slug: productsData.category_parent.slug}}" v-if="productsData.category_parent">{{ productsData.category_parent.title }}</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="">
-        <nuxt-link to="/catalog">Каталог</nuxt-link>
+        <nuxt-link to="/catalog">{{ productsData.category.title }}</nuxt-link>
       </div>
       <div class="p_title">
-        <p>{{ locale[this.$store.state.lang].contentTitle.catalog }}</p>
+        <p>{{ productsData.category.title }}</p>
       </div>
-      <div class="catalog_content" v-if="productsData">
+      <div class="catalog_content">
         <div class="row">
           <div class="col-xl-3 col-lg-3 m_none">
             <div class="category_tab_nav">
@@ -20,6 +22,8 @@
                   :filters="productsData.filters"
                   :range_from="$route.query.from"
                   :range_to="$route.query.to"
+                  :max="productsData.max"
+                  :min="productsData.min"
                 />
             </div>
           </div>
@@ -30,15 +34,15 @@
                   <div class="col-xl-8 col-lg-10 t_index">
                     <div class="catalog_text">
                       <div class="catalog_text_title">
-                        <p>Lorem ipsum</p>
+                        <p>{{ productsData.category.title }}</p>
                       </div>
-                      <p>Sit amet</p>
+                      <p>{{ productsData.banners[0].title}}</p>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                   </div>
                   <div class="col-xl-4 col-lg-2 i_index">
                     <div class="catalog_main_img">
-                      <img src="~/assets/img/banner_img.png" alt="">
+                      <img :src="$store.state.imageUrl + productsData.banners[0].image" alt="">
                     </div>
                   </div>
                 </div>
@@ -63,7 +67,9 @@
                     :filters="productsData.filters"
                     :range_from="$route.query.from"
                     :range_to="$route.query.to"
-                  />
+                    :max="productsData.max"
+                    :min="productsData.min"
+                    />
               </div>
               <div class="product_card_item">
                 <div class="row" v-if="current === 'grid'">
@@ -116,7 +122,7 @@ export default {
       if (Object.keys(this.obj).length > 0) {
         this.$router.push({ query: this.obj })
       }
-      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug, {
+      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&page=category', {
         params: this.obj
       })
         .then(res => {

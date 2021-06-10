@@ -15,6 +15,7 @@
         "v-lazy-image": "^1.4.0",
         "vue-cookies": "^1.7.4",
         "vue-range-component": "github:xwpongithub/vue-range-slider",
+        "vue-ripple-directive": "^2.0.1",
         "vue-select": "^3.11.2",
         "vue-slick-carousel": "^1.0.6",
         "vue-star-rating": "^1.7.0",

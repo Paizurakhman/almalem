@@ -39,7 +39,14 @@
                 </td>
                 <td width="190px">
                   <div class="table_action">
-                    <img @click="addToCart(favorite.id)" class="basket_table" src="~/assets/icon/main/basket.svg" alt="img">
+                    <div
+                      v-ripple
+                      v-ripple.mouseover.900
+                      class="basket_table"
+                      @click="addToCart(favorite.id)"
+                    >
+                      <img src="~/assets/icon/white_basket.svg" alt="">
+                    </div>
                     <img class="delete" @click="deleteFavorite(favorite)" src="~/assets/icon/clear.svg" alt="">
                   </div>
                 </td>
@@ -47,11 +54,11 @@
               </tbody>
             </table>
           </div>
-          <div class="contacts_form">
-            <div class="contacts_action">
-              <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.forward}}</button>
-            </div>
-          </div>
+<!--          <div class="contacts_form">-->
+<!--            <div class="contacts_action">-->
+<!--              <button class="btn btn_silver">{{ locale[this.$store.state.lang].buttons.forward}}</button>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <div v-else>No favorite products</div>
       </div>
@@ -68,7 +75,7 @@ export default {
   data() {
     return {
       favoriteData: null,
-      locale: locale
+      locale: locale,
     }
   },
   methods: {
@@ -89,7 +96,7 @@ export default {
       }))
       this.favoriteData = JSON.parse(localStorage.getItem('favorite'))
       this.FAV_LEN_ACTION()
-    }
+    },
   },
   mounted() {
     let data = JSON.parse(localStorage.getItem('favorite'))

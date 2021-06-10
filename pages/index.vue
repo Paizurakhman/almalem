@@ -16,11 +16,11 @@
                 <v-lazy-image :src="this.$store.state.imageUrl + homePageData.banners[0].image" alt="banner" />
               </div>
               <div class="banner_text">
-                <h1>- Гидравлика</h1>
+                <h1>- {{ homePageData.banners[0].title }}</h1>
                 <h1>Качественные детали для вашего автомобиля</h1>
               </div>
               <div class="banner_action">
-                <button class="btn btn_main">{{ locale[this.$store.state.lang].buttons.buy_now}}</button>
+                <button v-ripple.mouseover.900 class="btn btn_main">{{ locale[this.$store.state.lang].buttons.buy_now}}</button>
               </div>
             </div>
           </div>
@@ -142,7 +142,12 @@ export default {
   },
   async mounted() {
     this.LANG_ACTION()
-    await this.$axios.get('home-page?lang=' + this.$store.state.lang)
+    await this.$axios.get('home-page', {
+      params: {
+        lang: this.$store.state.lang,
+        page: 'main'
+      }
+    })
     .then(res => {
       this.homePageData = res.data
     })

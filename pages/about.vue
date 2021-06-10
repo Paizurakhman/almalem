@@ -32,6 +32,11 @@ export default {
       'LANG_ACTION'
     ])
   },
+  head() {
+    return {
+      title: 'О компании | almalem'
+    }
+  },
   async mounted() {
     this.LANG_ACTION()
     await this.$axios.get('get-company?lang=' + this.$store.state.lang)

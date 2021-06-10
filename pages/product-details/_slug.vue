@@ -9,10 +9,10 @@
             name: 'catalog-slug',
             params: { slug: detailsData.category_parent.slug },
           }"
-          >Каталог</nuxt-link
+          >{{detailsData.category_parent.title}}</nuxt-link
         >
         <img src="~/assets/icon/arrow_silver.svg" alt="" />
-        <nuxt-link to="/catalog">Detail</nuxt-link>
+        <nuxt-link to="/catalog">{{ detailsData.product.artikul }}</nuxt-link>
       </div>
       <div class="detail_content">
         <div class="row">
@@ -33,13 +33,11 @@
                   </div>
                 </VueSlickCarousel>
               </div>
-              <div class="container_slider" v-if="detailsData.product.product_images.length > 1">
-                <div class="detail_carousel">
+                <div class="detail_carousel" v-if="detailsData.product.product_images.length > 1">
                   <VueSlickCarousel
                     v-bind="settings"
                     ref="c2"
                     :asNavFor="$refs.c1"
-                    :slidesToShow="4"
                     :focusOnSelect="true"
                     @beforeChange="syncSliders"
                   >
@@ -51,7 +49,6 @@
                       <img :src="imgUrl + image.image" alt="" />
                     </div>
                   </VueSlickCarousel>
-                </div>
               </div>
             </div>
           </div>
@@ -114,6 +111,7 @@
                   <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="action_cart">
                       <button
+                        v-ripple.mouseover.900
                         class="btn btn_main"
                         v-if="!success"
                         @click="addToCart(detailsData.product.id)"
@@ -211,7 +209,6 @@ export default {
       settings: {
         dots: false,
         arrows: true,
-        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
@@ -221,7 +218,6 @@ export default {
             settings: {
               slidesToShow: 4,
               slidesToScroll: 1,
-              arrows: true,
             },
           },
           {
@@ -229,7 +225,6 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
-              arrows: true,
             },
           },
           {
