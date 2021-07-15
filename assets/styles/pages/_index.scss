@@ -1,21 +1,17 @@
 .main_content {
-  min-height: 600px;
   margin-bottom: 60px;
   .banner_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 20px;
     height: 100%;
     position: relative;
-    .banner_image {
-      height: 100%;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 40vh;
+    background-position: center;
     .banner_text {
-      position: absolute;
-      top: 10%;
-      left: 5%;
-      max-width: 500px;
       h1 {
         font-size: 48px;
         &:first-child {
@@ -25,9 +21,6 @@
       }
     }
     .banner_action {
-      position: absolute;
-      bottom: 15%;
-      left: 5%;
     }
   }
 }
@@ -154,7 +147,7 @@
   .main_content .banner_content .banner_text {
     max-width: 250px;
     h1 {
-      font-size: 16px;
+      font-size: 22px;
     }
   }
 }

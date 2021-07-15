@@ -6,10 +6,10 @@
         <img src="~/assets/icon/arrow_silver.svg" alt="" />
         <nuxt-link :to="{ name: 'auth-profile' }">Аккаунт</nuxt-link>
         <img src="~/assets/icon/arrow_silver.svg" alt="" />
-        <nuxt-link :to="{ name: 'history' }">Активные заказы</nuxt-link>
+        <nuxt-link :to="{ name: 'history' }">{{ locale[$store.state.lang].contentTitle.activeOrder}}</nuxt-link>
       </div>
       <div class="p_title">
-        <p>{{ locale[this.$store.state.lang].contentTitle.activeOrder}}</p>
+        <p>{{ locale[$store.state.lang].contentTitle.activeOrder}}</p>
       </div>
       <div class="table_wrapper" v-if="orderData">
         <div v-if="orderData.orders.length">

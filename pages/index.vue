@@ -10,11 +10,10 @@
             </div>
           </div>
           <div class="col-xl-9 col-lg-9">
-            <div class="banner_content">
-              <div class="banner_image">
-<!--                <img src="~/assets/img/banner_image.png" alt="banner">-->
-                <v-lazy-image :src="this.$store.state.imageUrl + homePageData.banners[0].image" alt="banner" />
-              </div>
+            <div
+              class="banner_content"
+              :style="'background-image: url(' + $store.state.imageUrl + homePageData.banners[0].image + ')'"
+            >
               <div class="banner_text">
                 <h1>- {{ homePageData.banners[0].title }}</h1>
                 <h1>Качественные детали для вашего автомобиля</h1>

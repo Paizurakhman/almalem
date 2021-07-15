@@ -242,6 +242,8 @@ export default {
               console.log(error);
             });
         }if (minute > 30){
+          $cookies.remove('token_time')
+          $cookies.remove('userToken')
           localStorage.removeItem('token')
         }
       }else {
