@@ -26,6 +26,8 @@
   margin-bottom: 50px;
   .catalog_text {
     padding: 40px 60px;
+    position: relative;
+    z-index: 2;
     p{
       &:nth-child(2) {
         font-size: 24px;
@@ -36,14 +38,14 @@
       }
     }
   }
-  img {
-    right: 30%;
-    position: absolute;
-    width: 120%;
+  .catalog_main_img {
     height: 100%;
-    //object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
-
 }
 .range_price {
   display: flex;
@@ -55,7 +57,4 @@
     font-size: 18px;
     font-weight: 500;
   }
-}
-.checks {
-
 }
