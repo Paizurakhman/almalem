@@ -36,13 +36,13 @@
                       <div class="catalog_text_title">
                         <p>{{ productsData.category.title }}</p>
                       </div>
-                      <p>{{ productsData.banners[0].title}}</p>
+<!--                      <p>{{ productsData.banners[0].title}}</p>-->
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                   </div>
                   <div class="col-xl-4 col-lg-2 i_index">
                     <div class="catalog_main_img">
-                      <img :src="$store.state.imageUrl + productsData.banners[0].image" alt="">
+<!--                      <img :src="$store.state.imageUrl + productsData.banners[0].image" alt="">-->
                     </div>
                   </div>
                 </div>
@@ -118,22 +118,29 @@ export default {
     }
   },
   methods: {
-    async allProducts () {
+    allProducts () {
       if (Object.keys(this.obj).length > 0) {
         this.$router.push({ query: this.obj })
       }
-      await this.$axios.get('get-products?lang=' + this.$store.state.lang + '&slug=' + this.slug + '&page=category', {
-        params: this.obj
+      this.$axios.$get('get-products', {
+        params: {
+          ...this.obj,
+          lang:this.$store.state.lang,
+          slug: this.slug,
+          page: this.page
+        }
       })
         .then(res => {
-          this.productsData = res.data
-          this.page = res.data.products.current_page
+          console.log(res)
+          this.productsData = res
+          this.page = res.products.current_page
         })
     },
     showCategory () {
       this.mobileCategory = !this.mobileCategory
     },
     async myCallback (currentPage) {
+      console.log(currentPage)
       this.obj['page'] = currentPage
       localStorage.setItem('object', JSON.stringify(this.obj))
       this.allProducts()
